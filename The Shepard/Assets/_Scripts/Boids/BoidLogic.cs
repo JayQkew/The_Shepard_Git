@@ -25,8 +25,8 @@ public class BoidLogic : MonoBehaviour
         surroundingBoids = sur_boids.ToArray();
     }
 
-    private void OnDrawGizmos()
-    {
-        Gizmos.DrawWireSphere(transform.position, influence_r);
-    }
+    //private void OnDrawGizmos()
+    //{
+    //    Gizmos.DrawWireSphere(transform.position, influence_r);
+    //}
 }
