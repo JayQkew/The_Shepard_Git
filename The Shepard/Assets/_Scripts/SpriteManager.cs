@@ -15,7 +15,8 @@ public class SpriteManager : MonoBehaviour
     {
         foreach (var sprite in sprites)
         {
-            sprite.transform.SetPositionAndRotation(sprite.transform.position, Quaternion.Euler(Camera.main.transform.rotation.x, sprite.transform.rotation.y, sprite.transform.rotation.z));
+            Quaternion q = Quaternion.Euler(Camera.main.transform.rotation.x, sprite.transform.rotation.y, sprite.transform.rotation.z);
+            sprite.transform.SetPositionAndRotation(sprite.transform.position, q);
         }
     }
 
