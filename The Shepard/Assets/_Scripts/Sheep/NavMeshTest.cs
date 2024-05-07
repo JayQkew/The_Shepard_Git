@@ -5,7 +5,6 @@ using UnityEngine.AI;
 
 public class NavMeshTest : MonoBehaviour
 {
-    private NavMeshAgent sheep;
     public float forceMultiplier = 1;
     public Vector3 destination;
     private Vector3 destinationNorm;
@@ -14,13 +13,11 @@ public class NavMeshTest : MonoBehaviour
 
     private void Awake()
     {
-        sheep = GetComponent<NavMeshAgent>();
         rb = GetComponent<Rigidbody>();
     }
 
     private void Update()
     {
-        sheep.updateRotation = false;
         if (Input.GetMouseButtonDown(0))
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);

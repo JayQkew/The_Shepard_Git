@@ -258,10 +258,10 @@ public class PlayerController_Old : MonoBehaviour
         return sur_boids.ToArray();
     }
 
-    private void OnDrawGizmos()
-    {
-        Gizmos.DrawWireSphere(transform.position, Mathf.Clamp(influence_r + (rb.velocity.magnitude * 0.5f), influence_rMin, influence_rMax));
-    }
+    //private void OnDrawGizmos()
+    //{
+    //    Gizmos.DrawWireSphere(transform.position, Mathf.Clamp(influence_r + (rb.velocity.magnitude * 0.5f), influence_rMin, influence_rMax));
+    //}
 
     private void OnCollisionEnter(Collision collision)
     {
