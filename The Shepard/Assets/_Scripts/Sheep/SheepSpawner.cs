@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class SheepSpawner : MonoBehaviour
 {
+    public static SheepSpawner Instance { get; private set; }
+
     [Header("Spawn Matrix")]
     public GameObject point;
     public Vector2 matrixMetrics;
@@ -20,12 +22,13 @@ public class SheepSpawner : MonoBehaviour
 
     private void Awake()
     {
+        Instance = this;
         activeSheep = GameObject.FindGameObjectsWithTag("sheep");
     }
     private void Start()
     {
-        Gen_SpawnMatrix();
-        SpawnSheepHerd();
+        //Gen_SpawnMatrix();
+        //SpawnSheepHerd();
         //SpawnSheep();
     }
 
@@ -43,7 +46,7 @@ public class SheepSpawner : MonoBehaviour
 
     #region Matrix
 
-    private void Gen_SpawnMatrix()
+    public void Gen_SpawnMatrix()
     {
         sheepSpawnPoints.Clear();
         CreateMatrix();
