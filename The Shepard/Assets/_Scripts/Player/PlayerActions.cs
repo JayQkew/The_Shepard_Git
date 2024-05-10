@@ -5,19 +5,24 @@ using UnityEngine;
 
 public class PlayerActions : MonoBehaviour
 {
-    public GameObject[] bark1_affectedAgents;
-    public GameObject[] bark2_affectedAgents;
 
+    [Header("Bark 1")]
+    public GameObject[] bark1_affectedAgents;
     [SerializeField]
     private float bark1_r;
     [SerializeField]
     private float bark1_strength;
 
+    [Header("Bark 2")]
+    public GameObject[] bark2_affectedAgents;
+    [SerializeField]
+    private float bark2_strength;
     [SerializeField]
     private GameObject boxPivot;
     [SerializeField]
     private Transform box;
 
+    [Space(10)]
     [SerializeField]
     private LayerMask effectedAgents;
     [SerializeField]
@@ -30,6 +35,22 @@ public class PlayerActions : MonoBehaviour
         Bark1_AoE();
         Bark2_AoE();
     }
+
+    #region Bark 1
+    public void Bark1()
+    {
+        foreach (GameObject agent in bark1_affectedAgents)
+        {
+            Vector3 force = Bark1_Force(agent.transform.position) * bark1_strength;
+            agent.GetComponent<Rigidbody>().AddForce(force, ForceMode.Impulse);
+        }
+    }
+    private Vector3 Bark1_Force(Vector3 target)
+    {
+        Vector3 dir = target - transform.position;
+        Vector3 forceNorm = Vector3.ClampMagnitude(dir, 1);
+        return forceNorm;
+    }
     private void Bark1_AoE()
     {
         RaycastHit[] hit = Physics.SphereCastAll(transform.position, bark1_r, Vector3.up, 0, effectedAgents);
@@ -41,6 +62,27 @@ public class PlayerActions : MonoBehaviour
         }
 
         bark1_affectedAgents = sur_agents.ToArray();
+    }
+
+    #endregion
+
+    #region Bark 2
+    public void Bark2()
+    {
+        foreach (GameObject agent in bark2_affectedAgents)
+        {
+            agent.GetComponent<Rigidbody>().AddForce(Bark2_Force() * bark2_strength, ForceMode.Impulse);
+        }
+    }
+
+    private Vector3 Bark2_Force()
+    {
+        Vector3 mousePos = Input.mousePosition;
+        Vector3 playerPos = Camera.main.WorldToScreenPoint(transform.position);
+        Vector3 direction = mousePos - playerPos;
+        Vector3 worldDir = new Vector3(direction.x, 0, direction.y);
+        
+        return Vector3.ClampMagnitude(worldDir, 1);
     }
 
     private void Bark2_AoE()
@@ -68,6 +110,7 @@ public class PlayerActions : MonoBehaviour
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         boxPivot.transform.rotation = Quaternion.Euler(new Vector3(0, -angle, 0));
     }
+    #endregion
 
     private void OnDrawGizmos()
     {

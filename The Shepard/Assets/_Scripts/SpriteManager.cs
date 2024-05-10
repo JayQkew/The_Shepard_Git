@@ -1,17 +1,25 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class SpriteManager : MonoBehaviour
 {
+    public static SpriteManager Instance { get; private set; }
     public GameObject[] sprites;
+
+    private void Awake()
+    {
+        Instance = this;
+    }
 
     private void Start()
     {
         sprites = GameObject.FindGameObjectsWithTag("GUI_Sprites");
+        SetSpriteRotation();
     }
 
-    private void Update()
+    public void SetSpriteRotation()
     {
         foreach (var sprite in sprites)
         {
@@ -20,5 +28,12 @@ public class SpriteManager : MonoBehaviour
         }
     }
 
+    public void SpriteUpdate(GameObject subject)
+    {
+        List<GameObject> newSprites = sprites.ToList();
+        newSprites.Add(subject.transform.GetChild(0).gameObject);
+        sprites = newSprites.ToArray();
+        SetSpriteRotation();
+    }
 
 }

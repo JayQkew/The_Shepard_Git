@@ -4,15 +4,16 @@ using UnityEngine;
 
 public class SheepBehaviour : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    private Rigidbody rb;
+    public float speedLimit;
+
+    private void Start()
     {
-        
+        rb = GetComponent<Rigidbody>();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        
+        rb.velocity = Vector3.ClampMagnitude(rb.velocity, speedLimit);
     }
 }

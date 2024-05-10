@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 3839492056520922888}
   - component: {fileID: 4651586030302311570}
   - component: {fileID: 8874801221532679563}
-  - component: {fileID: 8569112238240903029}
+  - component: {fileID: 1714984266542149112}
   m_Layer: 6
   m_Name: Sheep
   m_TagString: sheep
@@ -153,7 +153,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   surroundingBoids: []
---- !u!114 &8569112238240903029
+--- !u!114 &1714984266542149112
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -162,13 +162,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 7749666498480161004}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a60432caa4364504a85e8a12ed3b3d04, type: 3}
+  m_Script: {fileID: 11500000, guid: 58d6160827993cd4aa11e3956998ae1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  forceMultiplier: 1
-  destination: {x: 0, y: 0, z: 0}
-  moveToDest: 0
-  rb: {fileID: 0}
+  speedLimit: 7.5
 --- !u!1 &8465007571931611342
 GameObject:
   m_ObjectHideFlags: 0
@@ -194,7 +191,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8465007571931611342}
   m_LocalRotation: {x: 0.13052616, y: 0, z: 0, w: 0.9914449}
-  m_LocalPosition: {x: 0, y: -0.1, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -242,7 +239,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 639935582, guid: 2f84e4e7f66b11b459c2517b7816818a, type: 3}
+  m_Sprite: {fileID: 1932771206, guid: 9a73c43e1bdc89b4782cc25961dd61b6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
