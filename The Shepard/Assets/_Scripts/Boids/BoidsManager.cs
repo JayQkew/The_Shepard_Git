@@ -18,7 +18,7 @@ public class BoidsManager : MonoBehaviour
 
     private void Start()
     {
-        boids = GameObject.FindGameObjectsWithTag("sheep").ToList();
+        //boids = GameObject.FindGameObjectsWithTag("sheep").ToList();
     }
 
     private void FixedUpdate()
@@ -102,4 +102,13 @@ public class BoidsManager : MonoBehaviour
     }
 
     #endregion
+
+    public void AddToBoids(GameObject[] agents)
+    {
+        foreach (GameObject agent in agents)
+        {
+            if (!boids.Contains(agent)) boids.Add(agent);
+        }
+    }
+
 }

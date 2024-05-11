@@ -43,7 +43,11 @@ public class PlayerActions : MonoBehaviour
         {
             Vector3 force = Bark1_Force(agent.transform.position) * bark1_strength;
             agent.GetComponent<Rigidbody>().AddForce(force, ForceMode.Impulse);
+            agent.GetComponent<SheepBehaviour>().inAura = true;
+            agent.GetComponent<SheepBehaviour>().startled = true;
         }
+
+        BoidsManager.Instance.AddToBoids(bark1_affectedAgents);
     }
     private Vector3 Bark1_Force(Vector3 target)
     {
@@ -72,7 +76,11 @@ public class PlayerActions : MonoBehaviour
         foreach (GameObject agent in bark2_affectedAgents)
         {
             agent.GetComponent<Rigidbody>().AddForce(Bark2_Force() * bark2_strength, ForceMode.Impulse);
+            agent.GetComponent<SheepBehaviour>().inAura = true;
+            agent.GetComponent<SheepBehaviour>().startled = true;
         }
+
+        BoidsManager.Instance.AddToBoids(bark2_affectedAgents);
     }
 
     private Vector3 Bark2_Force()

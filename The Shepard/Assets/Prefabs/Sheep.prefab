@@ -165,7 +165,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58d6160827993cd4aa11e3956998ae1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rb: {fileID: 0}
   speedLimit: 7.5
+  state: 0
+  inAura: 0
+  startled: 0
+  nextState: 0
+  waitTime: 3
+  currentWaitTime: 0
+  grazeTime: 2
+  currnetGrazeTime: 0
+  roamTime: 3
+  currentRoamTime: 0
+  roamDirection: {x: 0, y: 0, z: 0}
+  walkCoolDown: 3
+  walkCurrentTime: 0
+  runCoolDown: 3
+  runCurrentTime: 0
 --- !u!1 &8465007571931611342
 GameObject:
   m_ObjectHideFlags: 0

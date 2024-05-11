@@ -7,8 +7,7 @@ public class GameMorningState : GameBaseState
     public override void EnterState(GameManager manager)
     {
         Debug.Log("Morning");
-        SheepSpawner.Instance.Gen_SpawnMatrix();
-        SheepSpawner.Instance.SpawnSheepHerd();
+        SheepSpawner.Instance.Init_Herd();
     }
 
     public override void UpdateState(GameManager manager)

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class SheepSpawner : MonoBehaviour
@@ -8,16 +9,18 @@ public class SheepSpawner : MonoBehaviour
     public static SheepSpawner Instance { get; private set; }
 
     [Header("Spawn Matrix")]
+    public bool destroyAfterUse;
     public GameObject point;
     public Vector2 matrixMetrics;
     public Vector2 matrixDistance = new Vector2(1, 1);
     public List<Vector3> sheepSpawnPoints = new List<Vector3>();
+    public Transform[] points;
 
     [Header("Sheep")]
     public GameObject p_sheep;
     public Transform sheepParent;
     public GameObject[] activeSheep;
-    public GameObject[] spawnedSheep; // same length as the sheep spawns
+    public bool[] spawnedSheep; // same length as the sheep spawns
 
 
     private void Awake()
@@ -36,12 +39,26 @@ public class SheepSpawner : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.M))
         {
-            SpawnSheepHerd();
+            Init_Herd();
         }
         if (Input.GetKeyDown(KeyCode.N))
         {
-            AddSheep(1);
+            Init_Sheep();
         }
+    }
+
+    public void Init_Herd()
+    {
+        if (destroyAfterUse) Gen_SpawnMatrix();
+        SpawnSheepHerd();
+        if (destroyAfterUse) DestroyMatrix();
+    }
+
+    public void Init_Sheep()
+    {
+        if (destroyAfterUse) Gen_SpawnMatrix();
+        AddSheep(1);
+        if (destroyAfterUse) DestroyMatrix();
     }
 
     #region Matrix
@@ -82,11 +99,23 @@ public class SheepSpawner : MonoBehaviour
 
     private void Init_Spawners()
     {
+        List<Transform> spawners = new List<Transform>();
         foreach (Vector3 spawnPoint in sheepSpawnPoints)
         {
             GameObject initSpawn = Instantiate(point, Vector3.zero, Quaternion.identity, transform);
             initSpawn.transform.localPosition = spawnPoint;
+            spawners.Add(initSpawn.transform);
         }
+        points = spawners.ToArray();
+    }
+
+    private void DestroyMatrix()
+    {
+        for (int i = 0; i < points.Length; i++)
+        {
+            Destroy(points[i].gameObject);
+        }
+        
     }
 
     #endregion
@@ -111,20 +140,22 @@ public class SheepSpawner : MonoBehaviour
     }
     public void SpawnSheepHerd()
     {
-        spawnedSheep = new GameObject[sheepSpawnPoints.Count];
+
+        spawnedSheep = new bool[sheepSpawnPoints.Count];
 
         foreach (GameObject sheep in activeSheep)
         {
             FindPos(sheep);
         }
+
     }
     private bool FindPos(GameObject sheep)
     {
-        int x = Random.Range(0, sheepSpawnPoints.Count -1);
-        if (spawnedSheep[x] == null)
+        int x = Random.Range(0, points.Length -1);
+        if (!spawnedSheep[x])
         {
-            sheep.transform.position = sheepSpawnPoints[x];
-            spawnedSheep[x] = sheep;
+            sheep.transform.position = points[x].position;
+            spawnedSheep[x] = true;
             return true;
         }
         else

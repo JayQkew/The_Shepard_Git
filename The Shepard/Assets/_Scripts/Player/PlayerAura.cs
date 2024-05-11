@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerAura : MonoBehaviour
 {
+    public static PlayerAura Instance { get; private set; }
     private PlayerMovement PlayerMovement;
 
     public GameObject[] affectedAgents;
@@ -25,6 +26,7 @@ public class PlayerAura : MonoBehaviour
 
     private void Awake()
     {
+        Instance = this;
         PlayerMovement = GetComponent<PlayerMovement>();
     }
 
@@ -82,10 +84,17 @@ public class PlayerAura : MonoBehaviour
 
         for (int i = 0; i < hit.Length; i++)
         {
-            if (hit[i].transform.gameObject != gameObject) sur_agents.Add(hit[i].transform.gameObject);
+            if (hit[i].transform.gameObject != gameObject)
+            {
+                hit[i].transform.GetComponent<SheepBehaviour>().inAura = true;
+                sur_agents.Add(hit[i].transform.gameObject);
+            }
         }
 
         affectedAgents = sur_agents.ToArray();
+
+
+        BoidsManager.Instance.AddToBoids(affectedAgents);
     }
 
     private void OnDrawGizmos()
