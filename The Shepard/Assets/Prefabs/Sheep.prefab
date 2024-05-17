@@ -166,22 +166,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 0}
-  speedLimit: 7.5
+  currentLimit: 0
+  walkLimit: 7.5
+  runLimit: 11
   state: 0
   inAura: 0
   startled: 0
   nextState: 0
-  waitTime: 3
-  currentWaitTime: 0
+  currentTime: 0
+  idleTime: 3
   grazeTime: 2
-  currnetGrazeTime: 0
   roamTime: 3
-  currentRoamTime: 0
+  walkTime: 2
+  runTime: 2
   roamDirection: {x: 0, y: 0, z: 0}
-  walkCoolDown: 3
-  walkCurrentTime: 0
-  runCoolDown: 3
-  runCurrentTime: 0
 --- !u!1 &8465007571931611342
 GameObject:
   m_ObjectHideFlags: 0

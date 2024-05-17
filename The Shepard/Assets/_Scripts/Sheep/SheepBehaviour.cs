@@ -5,11 +5,14 @@ using UnityEngine;
 public class SheepBehaviour : MonoBehaviour
 {
     public Rigidbody rb;
-    public float speedLimit;
+    public float currentLimit;
+    public float walkLimit;
+    public float runLimit;
     public SheepState state;
     public bool inAura;
     public bool startled;   //barked at
     public SheepState nextState;
+    public float currentTime;
 
     #region State Machine
     public SheepBaseState currentState;
@@ -21,45 +24,27 @@ public class SheepBehaviour : MonoBehaviour
     public SheepWalkingState WalkingState = new SheepWalkingState();
     #endregion
 
-    [Header("Idle")]
-    public float waitTime;
-    public float currentWaitTime;
-
-    [Header("Grazing")]
+    [Header("State Times")]
+    public float idleTime;
     public float grazeTime;
-    public float currnetGrazeTime;
-
-    [Header("Roaming")]
     public float roamTime;
-    public float currentRoamTime;
+    public float walkTime;
+    public float runTime;
+
+    [Space(10)]
     public Vector3 roamDirection;
-
-    [Header("Walking")]
-    public float walkCoolDown;
-    public float walkCurrentTime;
-
-    [Header("Running")]
-    public float runCoolDown;
-    public float runCurrentTime;
-    
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
         currentState = IdleState;
+        currentLimit = walkLimit;
+        SetIdleTime();
     }
 
     private void Update()
     {
-        rb.velocity = Vector3.ClampMagnitude(rb.velocity, speedLimit);
+        rb.velocity = Vector3.ClampMagnitude(rb.velocity, currentLimit);
         currentState.UpdateState(this);
-    }
-
-    private void FixedUpdate()
-    {
-        //if (state == SheepState.Roaming)
-        //{
-        //    rb.AddForce(roamDirection, ForceMode.Force);
-        //}
     }
 
     public void SwitchState(SheepBaseState state)
@@ -68,6 +53,53 @@ public class SheepBehaviour : MonoBehaviour
         currentState = state;
         currentState.EnterState(this);
     }
+
+    #region Set Times
+    public void SetIdleTime() => idleTime = Random.Range(SheepManager.Instance.idleRange.x, SheepManager.Instance.idleRange.y);
+    public void SetGrazeTime() => grazeTime = Random.Range(SheepManager.Instance.grazeRange.x, SheepManager.Instance.grazeRange.y);
+    public void SetRoamTime() => roamTime = Random.Range(SheepManager.Instance.roamRange.x, SheepManager.Instance.roamRange.y);
+    public void SetWalkTime() => walkTime = Random.Range(SheepManager.Instance.walkRange.x, SheepManager.Instance.walkRange.y);
+    public void SetRunTime() => runTime = Random.Range(SheepManager.Instance.runRange.x, SheepManager.Instance.runRange.y);
+    #endregion
+
+    #region Debug Colours
+    public void DebugIdle()
+    {
+        if (SheepManager.Instance.debugColour)
+        {
+            GetComponentInChildren<SpriteRenderer>().color = SheepManager.Instance.idleColour;
+        }
+    }
+    public void DebugGraze()
+    {
+        if (SheepManager.Instance.debugColour)
+        {
+            GetComponentInChildren<SpriteRenderer>().color = SheepManager.Instance.grazeColour;
+        }
+    }
+
+    public void DebugRoam()
+    {
+        if (SheepManager.Instance.debugColour)
+        {
+            GetComponentInChildren<SpriteRenderer>().color = SheepManager.Instance.roamColour;
+        }
+    }
+    public void DebugWalk()
+    {
+        if (SheepManager.Instance.debugColour)
+        {
+            GetComponentInChildren<SpriteRenderer>().color = SheepManager.Instance.walkColour;
+        }
+    }
+    public void DebugRun()
+    {
+        if (SheepManager.Instance.debugColour)
+        {
+            GetComponentInChildren<SpriteRenderer>().color = SheepManager.Instance.runColour;
+        }
+    }
+    #endregion
 }
 
 public enum SheepState

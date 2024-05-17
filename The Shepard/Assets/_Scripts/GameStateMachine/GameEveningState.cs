@@ -7,6 +7,7 @@ public class GameEveningState : GameBaseState
     public override void EnterState(GameManager manager)
     {
         Debug.Log("Evening");
+        manager.currentTime = 0;
     }
 
     public override void UpdateState(GameManager manager)

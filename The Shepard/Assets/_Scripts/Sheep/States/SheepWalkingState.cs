@@ -8,17 +8,22 @@ public class SheepWalkingState : SheepBaseState
     public override void EnterState(SheepBehaviour manager)
     {
         manager.state = SheepState.Walking;
-        manager.GetComponentInChildren<SpriteRenderer>().color = Color.yellow;
+        manager.SetWalkTime();
+        manager.DebugWalk();
     }
 
     public override void UpdateState(SheepBehaviour manager)
     {
-        manager.walkCurrentTime += Time.deltaTime;
-        if(manager.walkCurrentTime > manager.walkCoolDown)
+        manager.currentTime += Time.deltaTime;
+        if(manager.currentTime >= manager.walkTime)
         {
-            BoidsManager.Instance.boids.Remove(manager.gameObject);
             manager.inAura = false;
             manager.SwitchState(manager.IdleState);
+        }
+        else if (manager.startled)
+        {
+            manager.inAura = false;
+            manager.SwitchState(manager.RunningState);
         }
         //limit velocity
 
@@ -28,7 +33,7 @@ public class SheepWalkingState : SheepBaseState
 
     public override void ExitState(SheepBehaviour manager)
     {
-        manager.walkCurrentTime = 0;
+        manager.currentTime = 0;
     }
 
 }

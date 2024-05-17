@@ -8,18 +8,19 @@ public class SheepRoamingState : SheepBaseState
     public override void EnterState(SheepBehaviour manager)
     {
         manager.state = SheepState.Roaming;
-        manager.GetComponentInChildren<SpriteRenderer>().color = Color.blue;
+        manager.SetRoamTime();
+        manager.DebugRoam();
         manager.nextState = ChooseNextState();
         roamDir = RoamDir(manager);
     }
 
     public override void UpdateState(SheepBehaviour manager)
     {
-        manager.currentRoamTime += Time.deltaTime;
+        manager.currentTime += Time.deltaTime;
         //manager.rb.AddForce(RoamDir(manager)*5, ForceMode.Force);
         manager.rb.velocity = roamDir;
 
-        if (manager.currentRoamTime >= manager.roamTime)
+        if (manager.currentTime >= manager.roamTime)
         {
             if (manager.nextState == SheepState.Grazing) manager.SwitchState(manager.GrazingState);
             else manager.SwitchState(manager.IdleState);
@@ -35,7 +36,7 @@ public class SheepRoamingState : SheepBaseState
 
     public override void ExitState(SheepBehaviour manager)
     {
-        manager.currentRoamTime = 0;
+        manager.currentTime = 0;
     }
 
     private SheepState ChooseNextState()

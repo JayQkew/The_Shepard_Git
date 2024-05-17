@@ -49,6 +49,7 @@ public class SheepSpawner : MonoBehaviour
 
     public void Init_Herd()
     {
+        BoidsManager.Instance.AddToBoids();
         if (destroyAfterUse) Gen_SpawnMatrix();
         SpawnSheepHerd();
         if (destroyAfterUse) DestroyMatrix();
@@ -56,6 +57,7 @@ public class SheepSpawner : MonoBehaviour
 
     public void Init_Sheep()
     {
+        BoidsManager.Instance.AddToBoids();
         if (destroyAfterUse) Gen_SpawnMatrix();
         AddSheep(1);
         if (destroyAfterUse) DestroyMatrix();

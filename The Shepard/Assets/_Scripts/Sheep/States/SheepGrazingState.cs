@@ -7,15 +7,18 @@ public class SheepGrazingState : SheepBaseState
     public override void EnterState(SheepBehaviour manager)
     {
         manager.state = SheepState.Grazing;
-        manager.GetComponentInChildren<SpriteRenderer>().color = Color.green;
+        manager.SetGrazeTime();
+        manager.DebugGraze();
         manager.nextState = ChooseNextState();
+        manager.rb.drag = 10f;
+        manager.rb.angularDrag = 10f;
     }
 
     public override void UpdateState(SheepBehaviour manager)
     {
-        manager.currnetGrazeTime += Time.deltaTime;
+        manager.currentTime += Time.deltaTime;
 
-        if (manager.currnetGrazeTime >= manager.grazeTime)
+        if (manager.currentTime >= manager.grazeTime)
         {
             if (manager.nextState == SheepState.Grazing) manager.SwitchState(manager.GrazingState);
             else manager.SwitchState(manager.IdleState);
@@ -31,7 +34,10 @@ public class SheepGrazingState : SheepBaseState
 
     public override void ExitState(SheepBehaviour manager)
     {
-        manager.currnetGrazeTime = 0;
+        manager.currentTime = 0; 
+        manager.rb.drag = 0;
+        manager.rb.angularDrag = 0;
+
     }
 
     private SheepState ChooseNextState()

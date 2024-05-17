@@ -7,10 +7,21 @@ public class GameManager : MonoBehaviour
     public GameBaseState currentState;
     public GameMorningState MorningState = new GameMorningState();
     public GameMiddayState MiddayState = new GameMiddayState();
+    public GameTaskState TaskState = new GameTaskState();
     public GameEveningState EveningState = new GameEveningState();
 
+    [Header("Morning & Evening")]
     public bool allSheepHerded = false;
+
+    [Header("Tasks")]
+    public Tasks selectedTask;
+    public bool taskComplete;
+    public int tasklessDays;
+    public bool pauseTime;
+
+    [Header("Midday")]
     public float dayLength = 5;
+    public float taskTime = 2.5f;
     public float currentTime;
 
     private void Awake()

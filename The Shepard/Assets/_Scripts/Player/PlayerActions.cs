@@ -47,7 +47,6 @@ public class PlayerActions : MonoBehaviour
             agent.GetComponent<SheepBehaviour>().startled = true;
         }
 
-        BoidsManager.Instance.AddToBoids(bark1_affectedAgents);
     }
     private Vector3 Bark1_Force(Vector3 target)
     {
@@ -79,8 +78,6 @@ public class PlayerActions : MonoBehaviour
             agent.GetComponent<SheepBehaviour>().inAura = true;
             agent.GetComponent<SheepBehaviour>().startled = true;
         }
-
-        BoidsManager.Instance.AddToBoids(bark2_affectedAgents);
     }
 
     private Vector3 Bark2_Force()

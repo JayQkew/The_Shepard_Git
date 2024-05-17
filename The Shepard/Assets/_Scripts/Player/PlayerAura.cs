@@ -93,8 +93,6 @@ public class PlayerAura : MonoBehaviour
 
         affectedAgents = sur_agents.ToArray();
 
-
-        BoidsManager.Instance.AddToBoids(affectedAgents);
     }
 
     private void OnDrawGizmos()
