@@ -7,6 +7,7 @@ public class GameTaskState : GameBaseState
     public override void EnterState(GameManager manager)
     {
         Debug.Log("Task Start");
+        AssistanceManager.Instance.ToPen();
     }
 
     public override void UpdateState(GameManager manager)
@@ -21,6 +22,19 @@ public class GameTaskState : GameBaseState
     {
         manager.pauseTime = false;
         manager.selectedTask = Tasks.None;
+
+        switch (manager.currentPasture)
+        {
+            case Pastures.Pasture1:
+                AssistanceManager.Instance.ToPasture1();
+                break;
+            case Pastures.Pasture2:
+                AssistanceManager.Instance.ToPasture2();
+                break;
+            case Pastures.Pasture3:
+                AssistanceManager.Instance.ToPasture3();
+                break;
+        }
     }
 
 }

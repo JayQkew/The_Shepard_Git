@@ -8,6 +8,7 @@ public class GameEveningState : GameBaseState
     {
         Debug.Log("Evening");
         manager.currentTime = 0;
+        AssistanceManager.Instance.BackToBarn();
     }
 
     public override void UpdateState(GameManager manager)
