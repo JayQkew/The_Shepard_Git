@@ -3129,8 +3129,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 716652496}
   m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 25, y: 0, z: 65}
-  m_LocalScale: {x: 30, y: 1, z: 0.5}
+  m_LocalPosition: {x: 25, y: 0, z: 64}
+  m_LocalScale: {x: 32, y: 1, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2035187276}
@@ -5267,8 +5267,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1114672277}
   m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 25, y: 0, z: 30}
-  m_LocalScale: {x: 20, y: 1, z: 0.5}
+  m_LocalPosition: {x: 25, y: 0, z: 31}
+  m_LocalScale: {x: 22, y: 1, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2035187276}
@@ -6536,6 +6536,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 714023797}
     m_Modifications:
+    - target: {fileID: 3736967109392727246, guid: 9a8d6cf99fcdccc46b2e2bdfe331a8a7, type: 3}
+      propertyPath: direction
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 7509969330706436966, guid: 9a8d6cf99fcdccc46b2e2bdfe331a8a7, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -6769,7 +6773,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8230884820241211275, guid: 9a8d6cf99fcdccc46b2e2bdfe331a8a7, type: 3}
       propertyPath: m_Name
-      value: Pasture1Left
+      value: Pasture3Left
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -8100,7 +8104,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   barnTop: {fileID: 553458579}
   penBot: {fileID: 338330654}
-  penTop: {fileID: 553458579}
+  penTop: {fileID: 1981329643}
   pasture1Bot: {fileID: 1361694075}
   pasture1Left: {fileID: 1371453257}
   pasture1Right: {fileID: 1446170174}
@@ -8502,6 +8506,11 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1943898656}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1981329643 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8230884820241211275, guid: 9a8d6cf99fcdccc46b2e2bdfe331a8a7, type: 3}
+  m_PrefabInstance: {fileID: 1602418647}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1981329644 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7509969330706436966, guid: 9a8d6cf99fcdccc46b2e2bdfe331a8a7, type: 3}
