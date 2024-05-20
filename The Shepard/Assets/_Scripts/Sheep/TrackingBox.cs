@@ -28,6 +28,33 @@ public class TrackingBox : MonoBehaviour
                     break;
             }
         }
+
+        if (other.tag == "Player")
+        {
+            switch (area)
+            {
+                case TrackArea.Barn:
+                    PlayerController.Instance.playerArea = TrackArea.Barn;
+                    break;
+                case TrackArea.Pen:
+                    PlayerController.Instance.playerArea = TrackArea.Pen;
+                    break;
+                case TrackArea.Pasture1:
+                    PlayerController.Instance.playerArea = TrackArea.Pasture1;
+                    break;
+                case TrackArea.Pasture2:
+                    PlayerController.Instance.playerArea = TrackArea.Pasture2;
+                    break;
+                case TrackArea.Pasture3:
+                    PlayerController.Instance.playerArea = TrackArea.Pasture3;
+                    break;
+                case TrackArea.OpenField:
+                    PlayerController.Instance.playerArea = TrackArea.OpenField;
+                    break;
+            }
+
+            CameraLogic.Instance.ChangeCameraDistance();
+        }
     }
     private void OnTriggerExit(Collider other)
     {
@@ -51,6 +78,11 @@ public class TrackingBox : MonoBehaviour
                     SheepTrackerManager.Instance.pasture3.Remove(other.gameObject);
                     break;
             }
+        }
+
+        if (other.tag == "Player")
+        {
+            CameraLogic.Instance.ChangeCameraDistance();
         }
     }
 }

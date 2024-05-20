@@ -50,5 +50,6 @@ public enum TrackArea
     Pen,
     Pasture1,
     Pasture2,
-    Pasture3
+    Pasture3,
+    OpenField
 }

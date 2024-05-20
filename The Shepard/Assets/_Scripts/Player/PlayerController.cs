@@ -16,6 +16,8 @@ public class PlayerController : MonoBehaviour
 
     public Rigidbody rb;
 
+    public TrackArea playerArea;
+
     private void Awake()
     {
         Instance = this;
@@ -35,6 +37,8 @@ public class PlayerController : MonoBehaviour
         if (Input.GetMouseButtonDown(1)) PlayerActions.Bark2();
 
         PlayerMovement.MoveStateCheck(Input.GetKey(KeyCode.LeftShift), Input.GetKey(KeyCode.V));
+
+        CameraLogic.Instance.CameraZoomControl(Input.mouseScrollDelta.y);
     }
 
     private void FixedUpdate()
