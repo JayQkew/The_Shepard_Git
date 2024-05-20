@@ -40,7 +40,7 @@ public class HerdGateAssistance : MonoBehaviour
                     _sheep.GetComponent<Rigidbody>().AddForce(Vector3.forward * forceMultiplier, ForceMode.Force);
                     break;
                 case Direction.Back:
-                    _sheep.GetComponent<Rigidbody>().AddForce(Vector3.down * forceMultiplier, ForceMode.Force);
+                    _sheep.GetComponent<Rigidbody>().AddForce(Vector3.back * forceMultiplier, ForceMode.Force);
                     break;
             }
         }
