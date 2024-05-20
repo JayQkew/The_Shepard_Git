@@ -13,7 +13,7 @@ public class GameEveningState : GameBaseState
 
     public override void UpdateState(GameManager manager)
     {
-        if (manager.allSheepHerded)
+        if (SheepTrackerManager.Instance.AtRequiredPlace(TrackArea.Barn))
         {
             manager.SwitchState(manager.MorningState);
         }
@@ -21,6 +21,5 @@ public class GameEveningState : GameBaseState
 
     public override void ExitState(GameManager manager)
     {
-        manager.allSheepHerded = false;
     }
 }

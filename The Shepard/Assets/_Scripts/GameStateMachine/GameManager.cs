@@ -11,8 +11,7 @@ public class GameManager : MonoBehaviour
     public GameEveningState EveningState = new GameEveningState();
 
     [Header("Morning & Evening")]
-    public Pastures currentPasture;
-    public bool allSheepHerded = false;
+    public TrackArea currentArea;
 
     [Header("Tasks")]
     public Tasks selectedTask;

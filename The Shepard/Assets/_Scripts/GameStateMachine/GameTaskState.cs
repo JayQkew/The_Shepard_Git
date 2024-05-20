@@ -23,15 +23,15 @@ public class GameTaskState : GameBaseState
         manager.pauseTime = false;
         manager.selectedTask = Tasks.None;
 
-        switch (manager.currentPasture)
+        switch (manager.currentArea)
         {
-            case Pastures.Pasture1:
+            case TrackArea.Pasture1:
                 AssistanceManager.Instance.ToPasture1();
                 break;
-            case Pastures.Pasture2:
+            case TrackArea.Pasture2:
                 AssistanceManager.Instance.ToPasture2();
                 break;
-            case Pastures.Pasture3:
+            case TrackArea.Pasture3:
                 AssistanceManager.Instance.ToPasture3();
                 break;
         }

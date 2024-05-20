@@ -23,7 +23,7 @@ public class HerdAssistance : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "sheep")
+        if (other.tag == "sheep" && !sheep.ContainsKey(other.gameObject))
         {
             sheep.Add(other.gameObject, SheepAreaPos(other.gameObject));
         }
@@ -40,7 +40,7 @@ public class HerdAssistance : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.tag == "sheep")
+        if (other.tag == "sheep" && sheep.ContainsKey(other.gameObject))
         {
             sheep.Remove(other.gameObject);
         }
