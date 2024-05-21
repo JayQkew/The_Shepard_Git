@@ -20,7 +20,6 @@ public class GameTaskState : GameBaseState
     }
     public override void ExitState(GameManager manager)
     {
-        manager.pauseTime = false;
         manager.selectedTask = Tasks.None;
 
         switch (manager.currentArea)

@@ -4,28 +4,35 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    public static GameManager Instance { get; private set; }
+
     public GameBaseState currentState;
     public GameMorningState MorningState = new GameMorningState();
     public GameMiddayState MiddayState = new GameMiddayState();
     public GameTaskState TaskState = new GameTaskState();
     public GameEveningState EveningState = new GameEveningState();
 
-    [Header("Morning & Evening")]
+    [Header("Herding")]
     public TrackArea currentArea;
 
     [Header("Tasks")]
     public Tasks selectedTask;
     public bool taskComplete;
     public int tasklessDays;
-    public bool pauseTime;
 
     [Header("Midday")]
     public float dayLength = 5;
     public float taskTime = 2.5f;
     public float currentTime;
 
+    [Header("Transistion Times")]
+    public float morningEnd;    // transistion into midday
+    public float middayEnd;     // transistion into evening
+    public float eveningEnd;    // day end
+
     private void Awake()
     {
+        Instance = this;
         currentState = MorningState;
     }
     private void Start()
@@ -35,6 +42,7 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
+        currentTime += Time.deltaTime;
         currentState.UpdateState(this);
     }
 

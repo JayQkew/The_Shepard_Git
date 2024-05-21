@@ -12,18 +12,12 @@ public class GameMiddayState : GameBaseState
     }
     public override void UpdateState(GameManager manager)
     {
-        if (!manager.pauseTime)
-        {
-            manager.currentTime += Time.deltaTime;
-        }
-
-        if (manager.currentTime >= manager.taskTime && taskDay && !manager.taskComplete)
-        {
-            manager.pauseTime = true;
-            SelectTask(manager);
-            manager.SwitchState(manager.TaskState);
-        }
-        else if (manager.currentTime >= manager.dayLength)
+        //if (manager.currentTime >= manager.taskTime && taskDay && !manager.taskComplete)
+        //{
+        //    TaskSelect(manager);
+        //    manager.SwitchState(manager.TaskState);
+        //}
+        if (manager.currentTime >= manager.middayEnd)
         {
             manager.SwitchState(manager.EveningState);
         }
@@ -58,7 +52,7 @@ public class GameMiddayState : GameBaseState
 
     }
 
-    public void SelectTask(GameManager manager)
+    public void TaskSelect(GameManager manager)
     {
         int randNum = Random.Range(0, 2);
         if (randNum == 0)
