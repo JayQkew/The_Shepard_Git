@@ -7,15 +7,26 @@ public class CosmeticManager : MonoBehaviour
 {
     public static CosmeticManager Instance { get; private set; }
 
+    public Dictionary<CosmeticName, bool> unlockedCosmetics = new Dictionary<CosmeticName, bool>();
     public GameObject cosmetic;
     public GameObject selectedCosmetic;
 
     public GameObject[] slots;
 
+    public bool Debug;
+
     private void Awake()
     {
         Instance = this;
         slots = GameObject.FindGameObjectsWithTag("slots");
+    }
+
+    private void Start()
+    {
+        foreach(GameObject slot in slots)
+        {
+            unlockedCosmetics.Add(slot.GetComponent<CosmeticSlot>().cosmeticName, Debug);
+        }
     }
 
     public void NoCosmetic() => cosmetic.SetActive(false);
@@ -34,4 +45,12 @@ public class CosmeticManager : MonoBehaviour
         }
         selectedCosmetic = slot;
     }
+}
+
+public enum CosmeticName
+{
+    Hat,
+    Beanie,
+    Collar,
+    Bandanner
 }
