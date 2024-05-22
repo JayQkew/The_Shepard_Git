@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class GameMiddayState : GameBaseState
 {
-    bool taskDay;
     public override void EnterState(GameManager manager)
     {
         Debug.Log("Midday");
@@ -25,14 +24,12 @@ public class GameMiddayState : GameBaseState
 
     public override void ExitState(GameManager manager)
     {
-        taskDay = false;
     }
 
     public void TaskDecider(GameManager manager)
     {
         if (manager.tasklessDays >= 2)
         {
-            taskDay = true;
             manager.tasklessDays = 0;
         }
         else
@@ -41,7 +38,6 @@ public class GameMiddayState : GameBaseState
 
             if (randNum == 0)
             {
-                taskDay = true;
                 manager.tasklessDays = 0;
             }
             else
