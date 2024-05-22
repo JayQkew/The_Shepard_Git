@@ -6,6 +6,7 @@ TagManager:
   tags:
   - sheep
   - GUI_Sprites
+  - slots
   layers:
   - Default
   - TransparentFX
