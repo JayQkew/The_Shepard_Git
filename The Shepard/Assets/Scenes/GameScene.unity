@@ -902,7 +902,7 @@ MonoBehaviour:
   cosmetic: {fileID: 1980849857}
   selectedCosmetic: {fileID: 0}
   slots: []
-  Debug: 0
+  Debug: 1
 --- !u!1 &95423055
 GameObject:
   m_ObjectHideFlags: 0

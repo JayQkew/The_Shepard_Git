@@ -18,14 +18,21 @@ public class CosmeticManager : MonoBehaviour
     private void Awake()
     {
         Instance = this;
-        slots = GameObject.FindGameObjectsWithTag("slots");
     }
 
     private void Start()
     {
-        foreach(GameObject slot in slots)
+    }
+
+    public void GetSlots()
+    {
+        slots = GameObject.FindGameObjectsWithTag("slots");
+        foreach (GameObject slot in slots)
         {
-            unlockedCosmetics.Add(slot.GetComponent<CosmeticSlot>().cosmeticName, Debug);
+            if (!unlockedCosmetics.ContainsKey(slot.GetComponent<CosmeticSlot>().cosmeticName))
+            {
+                unlockedCosmetics.Add(slot.GetComponent<CosmeticSlot>().cosmeticName, Debug);
+            }
         }
     }
 

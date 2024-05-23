@@ -24,6 +24,7 @@ public class UIManager : MonoBehaviour
         if (Input.GetKeyUp(KeyCode.Tab))
         {
             ActivateUI(cosmeticPanel);
+            CosmeticManager.Instance.GetSlots();
         }
     }
 
