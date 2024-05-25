@@ -1,12 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class PlayerController : MonoBehaviour
 {
     public static PlayerController Instance { get; private set; }
-    private PlayerMovement PlayerMovement;
-    private PlayerActions PlayerActions;
+    public PlayerMovement PlayerMovement;
+    public PlayerActions PlayerActions;
 
     private bool forward;
     private bool back;
@@ -39,6 +40,9 @@ public class PlayerController : MonoBehaviour
         PlayerMovement.MoveStateCheck(Input.GetKey(KeyCode.LeftShift), Input.GetKey(KeyCode.V));
 
         CameraLogic.Instance.CameraZoomControl(Input.mouseScrollDelta.y);
+
+
+
     }
 
     private void FixedUpdate()

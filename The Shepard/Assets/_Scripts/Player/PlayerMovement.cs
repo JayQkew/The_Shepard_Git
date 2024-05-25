@@ -1,11 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Rendering;
 
 public class PlayerMovement : MonoBehaviour
 {
     public MoveState moveState;
+
+    public bool canMove;
 
     [Space(10)]
     [SerializeField]
@@ -27,44 +28,47 @@ public class PlayerMovement : MonoBehaviour
     private LayerMask ground;
     public void Move(Vector3 dir)
     {
-        Rigidbody rb = PlayerController.Instance.rb;
-        Vector3 forceDir = dir * speedMultiplier;
-        rb.AddForce(forceDir, ForceMode.Force);
-
-        float xClampedVelocity = rb.velocity.x;
-        float zClampedVelocity = rb.velocity.z;
-        Vector3 clampedVelocity = rb.velocity;
-
-        if (Grounded())
+        if (canMove)
         {
-            switch (moveState)
-            {
-                case MoveState.Walk:
-                    rb.velocity = Vector3.ClampMagnitude(rb.velocity, walkLimit);
-                    break;
-                case MoveState.Sprint:
-                    rb.velocity = Vector3.ClampMagnitude(rb.velocity, sprintLimit);
-                    break;
-                case MoveState.Crawl:
-                    rb.velocity = Vector3.ClampMagnitude(rb.velocity, crawlLimit);
-                    break;
-            }
-        }
-        else
-        {
-            switch (moveState)
-            {
-                case MoveState.Walk:
-                    rb.velocity = new Vector3(Mathf.Clamp(rb.velocity.x, -walkLimit, walkLimit), rb.velocity.y, Mathf.Clamp(rb.velocity.z, -walkLimit, walkLimit));
-                    break;
-                case MoveState.Sprint:
-                    rb.velocity = new Vector3(Mathf.Clamp(rb.velocity.x, -sprintLimit, sprintLimit), rb.velocity.y, Mathf.Clamp(rb.velocity.z, -sprintLimit, sprintLimit));
-                    break;
-                case MoveState.Crawl:
-                    rb.velocity = new Vector3(Mathf.Clamp(rb.velocity.x, -crawlLimit, crawlLimit), rb.velocity.y, Mathf.Clamp(rb.velocity.z, -crawlLimit, crawlLimit));
-                    break;
-            }
+            Rigidbody rb = PlayerController.Instance.rb;
+            Vector3 forceDir = dir * speedMultiplier;
+            rb.AddForce(forceDir, ForceMode.Force);
 
+            float xClampedVelocity = rb.velocity.x;
+            float zClampedVelocity = rb.velocity.z;
+            Vector3 clampedVelocity = rb.velocity;
+
+            if (Grounded())
+            {
+                switch (moveState)
+                {
+                    case MoveState.Walk:
+                        rb.velocity = Vector3.ClampMagnitude(rb.velocity, walkLimit);
+                        break;
+                    case MoveState.Sprint:
+                        rb.velocity = Vector3.ClampMagnitude(rb.velocity, sprintLimit);
+                        break;
+                    case MoveState.Crawl:
+                        rb.velocity = Vector3.ClampMagnitude(rb.velocity, crawlLimit);
+                        break;
+                }
+            }
+            else
+            {
+                switch (moveState)
+                {
+                    case MoveState.Walk:
+                        rb.velocity = new Vector3(Mathf.Clamp(rb.velocity.x, -walkLimit, walkLimit), rb.velocity.y, Mathf.Clamp(rb.velocity.z, -walkLimit, walkLimit));
+                        break;
+                    case MoveState.Sprint:
+                        rb.velocity = new Vector3(Mathf.Clamp(rb.velocity.x, -sprintLimit, sprintLimit), rb.velocity.y, Mathf.Clamp(rb.velocity.z, -sprintLimit, sprintLimit));
+                        break;
+                    case MoveState.Crawl:
+                        rb.velocity = new Vector3(Mathf.Clamp(rb.velocity.x, -crawlLimit, crawlLimit), rb.velocity.y, Mathf.Clamp(rb.velocity.z, -crawlLimit, crawlLimit));
+                        break;
+                }
+
+            }
         }
     }
 

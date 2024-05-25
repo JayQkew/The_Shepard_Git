@@ -11007,6 +11007,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 577e65eccd90eba44b9adc2df954b0e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canBark: 0
   bark_affectedRadius: []
   bark_affectedBox: []
   bark_r: 8
@@ -11032,6 +11033,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveState: 0
+  canMove: 1
   walkLimit: 7.5
   sprintLimit: 15
   crawlLimit: 4
@@ -11053,6 +11055,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4d6866f1ca93694095d9000e2d29fba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PlayerMovement: {fileID: 0}
+  PlayerActions: {fileID: 0}
   rb: {fileID: 1983941144}
   playerArea: 0
 --- !u!114 &1983941149

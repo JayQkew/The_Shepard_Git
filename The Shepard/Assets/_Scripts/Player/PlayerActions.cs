@@ -2,11 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class PlayerActions : MonoBehaviour
 {
 
     [Header("Bark")]
+    public bool canBark;
     public GameObject[] bark_affectedRadius;
     public GameObject[] bark_affectedBox;
     [SerializeField]
@@ -30,6 +32,16 @@ public class PlayerActions : MonoBehaviour
 
         BarkRadius_AoE();
         Bark_AoE();
+
+        if (EventSystem.current.IsPointerOverGameObject())
+        {
+            Debug.Log("over a inputField");
+            PlayerController.Instance.PlayerActions.canBark = false;
+        }
+        else
+        {
+            PlayerController.Instance.PlayerActions.canBark = true;
+        }
 
         //ShootRay();
     }
@@ -58,11 +70,14 @@ public class PlayerActions : MonoBehaviour
     #region Bark
     public void Bark()
     {
-        foreach (GameObject agent in bark_affectedBox)
+        if (canBark)
         {
-            agent.GetComponent<Rigidbody>().AddForce(Bark_Force() * bark_strength, ForceMode.Impulse);
-            agent.GetComponent<SheepBehaviour>().inAura = true;
-            agent.GetComponent<SheepBehaviour>().startled = true;
+            foreach (GameObject agent in bark_affectedBox)
+            {
+                agent.GetComponent<Rigidbody>().AddForce(Bark_Force() * bark_strength, ForceMode.Impulse);
+                agent.GetComponent<SheepBehaviour>().inAura = true;
+                agent.GetComponent<SheepBehaviour>().startled = true;
+            }
         }
     }
 
@@ -138,8 +153,16 @@ public class PlayerActions : MonoBehaviour
 
         if (agent != null)
         {
-            if (!agent.GetComponent<SheepUI>().go_canvas.activeSelf) agent.GetComponent<SheepUI>().go_canvas.SetActive(true);
-            else agent.GetComponent<SheepUI>().go_canvas.SetActive(false);
+            if (!agent.GetComponent<SheepUI>().go_canvas.activeSelf)
+            {
+                agent.GetComponent<SheepUI>().go_canvas.SetActive(true);
+
+            }
+            else
+            {
+                agent.GetComponent<SheepUI>().go_canvas.SetActive(false);
+                PlayerController.Instance.PlayerActions.canBark = true;
+            }
         }
     }
 

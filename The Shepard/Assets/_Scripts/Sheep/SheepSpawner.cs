@@ -37,14 +37,14 @@ public class SheepSpawner : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.M))
-        {
-            Init_Herd();
-        }
-        if (Input.GetKeyDown(KeyCode.N))
-        {
-            Init_Sheep();
-        }
+        //if (Input.GetKeyDown(KeyCode.M))
+        //{
+        //    Init_Herd();
+        //}
+        //if (Input.GetKeyDown(KeyCode.N))
+        //{
+        //    Init_Sheep();
+        //}
     }
 
     public void Init_Herd()
