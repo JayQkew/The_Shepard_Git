@@ -32,18 +32,21 @@ public class GameMorningState : GameBaseState
 
         if(randomNum == 0)
         {
-            manager.currentArea = TrackArea.Pasture1;
-            AssistanceManager.Instance.ToPasture1();
+            manager.currentArea = TrackArea.NorthPasture;
+            AssistanceManager.Instance.ToNorthPasture();
+            FarmerManager.Instance.SetFarmerTarget(FarmerManager.Instance.northPastureOut);
         }
         else if (randomNum == 1)
         {
-            manager.currentArea = TrackArea.Pasture2;
-            AssistanceManager.Instance.ToPasture2();
+            manager.currentArea = TrackArea.WestPasture;
+            AssistanceManager.Instance.ToWestPasture();
+            FarmerManager.Instance.SetFarmerTarget(FarmerManager.Instance.westPastureOut);
         }
         else
         {
-            manager.currentArea = TrackArea.Pasture3;
-            AssistanceManager.Instance.ToPasture3();
+            manager.currentArea = TrackArea.EastPasture;
+            AssistanceManager.Instance.ToEastPasture();
+            FarmerManager.Instance.SetFarmerTarget(FarmerManager.Instance.eastPastureOut);
         }
     }
 }

@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class SheepBehaviour : MonoBehaviour
 {
+    public Sheep sheepStats;
+
     public Rigidbody rb;
     public float currentLimit;
     public float walkLimit;

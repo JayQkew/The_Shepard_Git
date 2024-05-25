@@ -33,8 +33,8 @@ public class PlayerController : MonoBehaviour
         right = Input.GetKey(KeyCode.D);
         jump = Input.GetKey(KeyCode.Space);
 
-        if (Input.GetMouseButtonDown(0)) PlayerActions.Bark1();
-        if (Input.GetMouseButtonDown(1)) PlayerActions.Bark2();
+        if (Input.GetMouseButtonDown(0)) PlayerActions.Bark();
+        if (Input.GetMouseButtonDown(1)) PlayerActions.Interact();
 
         PlayerMovement.MoveStateCheck(Input.GetKey(KeyCode.LeftShift), Input.GetKey(KeyCode.V));
 

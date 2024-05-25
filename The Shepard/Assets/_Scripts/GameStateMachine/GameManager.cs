@@ -29,6 +29,7 @@ public class GameManager : MonoBehaviour
     public float morningEnd;    // transistion into midday
     public float middayEnd;     // transistion into evening
     public float eveningEnd;    // day end
+    public float bringSheepBack;
 
     private void Awake()
     {
@@ -44,6 +45,41 @@ public class GameManager : MonoBehaviour
     {
         currentTime += Time.deltaTime;
         currentState.UpdateState(this);
+
+        if (SheepTrackerManager.Instance.AtRequiredPlace(currentArea))
+        {
+            FarmerManager.Instance.SetFarmerTarget(FarmerManager.Instance.farmHouse);
+        }
+
+        if (currentTime >= bringSheepBack)
+        {
+            //FarmerManager.Instance.SetFarmerTarget()
+            switch (currentArea)
+            {
+                case TrackArea.NorthPasture:
+                    FarmerManager.Instance.SetFarmerTarget(FarmerManager.Instance.northPastureIn);
+                    if (SheepTrackerManager.Instance.AtRequiredPlace(TrackArea.Pen))
+                    {
+                        FarmerManager.Instance.SetFarmerTarget(FarmerManager.Instance.farmHouse);
+                    }
+                    break;
+                case TrackArea.WestPasture:
+                    FarmerManager.Instance.SetFarmerTarget(FarmerManager.Instance.westPastureIn);
+                    if (SheepTrackerManager.Instance.AtRequiredPlace(TrackArea.NorthPasture))
+                    {
+                        FarmerManager.Instance.SetFarmerTarget(FarmerManager.Instance.farmHouse);
+                    }
+                    break;
+                case TrackArea.EastPasture:
+                    FarmerManager.Instance.SetFarmerTarget(FarmerManager.Instance.eastPastureIn);
+                    if (SheepTrackerManager.Instance.AtRequiredPlace(TrackArea.NorthPasture))
+                    {
+                        FarmerManager.Instance.SetFarmerTarget(FarmerManager.Instance.farmHouse);
+                    }
+                    break;
+            }
+        }
+
     }
 
     public void SwitchState(GameBaseState state)

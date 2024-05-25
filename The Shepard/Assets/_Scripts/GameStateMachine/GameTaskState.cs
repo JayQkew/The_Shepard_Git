@@ -24,14 +24,14 @@ public class GameTaskState : GameBaseState
 
         switch (manager.currentArea)
         {
-            case TrackArea.Pasture1:
-                AssistanceManager.Instance.ToPasture1();
+            case TrackArea.NorthPasture:
+                AssistanceManager.Instance.ToNorthPasture();
                 break;
-            case TrackArea.Pasture2:
-                AssistanceManager.Instance.ToPasture2();
+            case TrackArea.WestPasture:
+                AssistanceManager.Instance.ToWestPasture();
                 break;
-            case TrackArea.Pasture3:
-                AssistanceManager.Instance.ToPasture3();
+            case TrackArea.EastPasture:
+                AssistanceManager.Instance.ToEastPasture();
                 break;
         }
     }

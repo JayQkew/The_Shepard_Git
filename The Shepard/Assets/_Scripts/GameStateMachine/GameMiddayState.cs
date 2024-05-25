@@ -20,6 +20,7 @@ public class GameMiddayState : GameBaseState
         {
             manager.SwitchState(manager.EveningState);
         }
+
     }
 
     public override void ExitState(GameManager manager)

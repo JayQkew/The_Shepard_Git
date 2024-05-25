@@ -6,17 +6,13 @@ using UnityEngine;
 public class PlayerActions : MonoBehaviour
 {
 
-    [Header("Bark 1")]
-    public GameObject[] bark1_affectedAgents;
+    [Header("Bark")]
+    public GameObject[] bark_affectedRadius;
+    public GameObject[] bark_affectedBox;
     [SerializeField]
-    private float bark1_r;
+    private float bark_r;
     [SerializeField]
-    private float bark1_strength;
-
-    [Header("Bark 2")]
-    public GameObject[] bark2_affectedAgents;
-    [SerializeField]
-    private float bark2_strength;
+    private float bark_strength;
     [SerializeField]
     private GameObject boxPivot;
     [SerializeField]
@@ -30,33 +26,59 @@ public class PlayerActions : MonoBehaviour
 
     private void Update()
     {
-        Bark2_Box();
+        Bark_Box();
 
-        Bark1_AoE();
-        Bark2_AoE();
+        BarkRadius_AoE();
+        Bark_AoE();
+
+        //ShootRay();
     }
 
     #region Bark 1
-    public void Bark1()
+    //public void Bark1()
+    //{
+    //    foreach (GameObject agent in bark_affectedRadius)
+    //    {
+    //        Vector3 force = Bark1_Force(agent.transform.position) * bark1_strength;
+    //        agent.GetComponent<Rigidbody>().AddForce(force, ForceMode.Impulse);
+    //        agent.GetComponent<SheepBehaviour>().inAura = true;
+    //        agent.GetComponent<SheepBehaviour>().startled = true;
+    //    }
+
+    //}
+    //private Vector3 Bark1_Force(Vector3 target)
+    //{
+    //    Vector3 dir = target - transform.position;
+    //    Vector3 forceNorm = Vector3.ClampMagnitude(dir, 1);
+    //    return forceNorm;
+    //}
+
+    #endregion
+
+    #region Bark
+    public void Bark()
     {
-        foreach (GameObject agent in bark1_affectedAgents)
+        foreach (GameObject agent in bark_affectedBox)
         {
-            Vector3 force = Bark1_Force(agent.transform.position) * bark1_strength;
-            agent.GetComponent<Rigidbody>().AddForce(force, ForceMode.Impulse);
+            agent.GetComponent<Rigidbody>().AddForce(Bark_Force() * bark_strength, ForceMode.Impulse);
             agent.GetComponent<SheepBehaviour>().inAura = true;
             agent.GetComponent<SheepBehaviour>().startled = true;
         }
+    }
 
-    }
-    private Vector3 Bark1_Force(Vector3 target)
+    private Vector3 Bark_Force()
     {
-        Vector3 dir = target - transform.position;
-        Vector3 forceNorm = Vector3.ClampMagnitude(dir, 1);
-        return forceNorm;
+        Vector3 mousePos = Input.mousePosition;
+        Vector3 playerPos = Camera.main.WorldToScreenPoint(transform.position);
+        Vector3 direction = mousePos - playerPos;
+        Vector3 worldDir = new Vector3(direction.x, 0, direction.y);
+
+        return Vector3.ClampMagnitude(worldDir, 1);
     }
-    private void Bark1_AoE()
+
+    private void BarkRadius_AoE()
     {
-        RaycastHit[] hit = Physics.SphereCastAll(transform.position, bark1_r, Vector3.up, 0, effectedAgents);
+        RaycastHit[] hit = Physics.SphereCastAll(transform.position, bark_r, Vector3.up, 0, effectedAgents);
         List<GameObject> sur_agents = new List<GameObject>();
 
         for (int i = 0; i < hit.Length; i++)
@@ -64,50 +86,25 @@ public class PlayerActions : MonoBehaviour
             if (hit[i].transform.gameObject != gameObject) sur_agents.Add(hit[i].transform.gameObject);
         }
 
-        bark1_affectedAgents = sur_agents.ToArray();
+        bark_affectedRadius = sur_agents.ToArray();
     }
-
-    #endregion
-
-    #region Bark 2
-    public void Bark2()
+    private void Bark_AoE()
     {
-        foreach (GameObject agent in bark2_affectedAgents)
-        {
-            agent.GetComponent<Rigidbody>().AddForce(Bark2_Force() * bark2_strength, ForceMode.Impulse);
-            agent.GetComponent<SheepBehaviour>().inAura = true;
-            agent.GetComponent<SheepBehaviour>().startled = true;
-        }
-    }
-
-    private Vector3 Bark2_Force()
-    {
-        Vector3 mousePos = Input.mousePosition;
-        Vector3 playerPos = Camera.main.WorldToScreenPoint(transform.position);
-        Vector3 direction = mousePos - playerPos;
-        Vector3 worldDir = new Vector3(direction.x, 0, direction.y);
-        
-        return Vector3.ClampMagnitude(worldDir, 1);
-    }
-
-    private void Bark2_AoE()
-    {
-        RaycastHit[] hit = Physics.BoxCastAll(box.position, box.lossyScale/2, Vector3.up, Quaternion.identity, 0, effectedAgents);
+        RaycastHit[] hit = Physics.BoxCastAll(box.position, box.lossyScale / 2, Vector3.up, Quaternion.identity, 0, effectedAgents);
         List<GameObject> sur_agents = new List<GameObject>();
 
         for (int i = 0; i < hit.Length; i++)
         {
-            if (hit[i].transform.gameObject != gameObject && bark1_affectedAgents.Contains(hit[i].transform.gameObject))
+            if (hit[i].transform.gameObject != gameObject && bark_affectedRadius.Contains(hit[i].transform.gameObject))
             {
                 sur_agents.Add(hit[i].transform.gameObject);
             }
         }
 
-        bark2_affectedAgents = sur_agents.ToArray();
-
+        bark_affectedBox = sur_agents.ToArray();
     }
 
-    private void Bark2_Box()
+    private void Bark_Box()
     {
         Vector3 mousePosition = Input.mousePosition;
         Vector3 playerPosition = Camera.main.WorldToScreenPoint(transform.position);
@@ -117,8 +114,38 @@ public class PlayerActions : MonoBehaviour
     }
     #endregion
 
+    #region Interact
+
+    private GameObject ShootRay()
+    {
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hitData;
+        Physics.Raycast(ray, out hitData, 1000, effectedAgents);
+
+        if (hitData.collider != null)
+        {
+            return hitData.transform.gameObject;
+        }
+        else
+        {
+            return null;
+        }
+    }
+
+    public void Interact()
+    {
+        GameObject agent = ShootRay();
+
+        if (agent != null)
+        {
+            if (!agent.GetComponent<SheepUI>().go_canvas.activeSelf) agent.GetComponent<SheepUI>().go_canvas.SetActive(true);
+            else agent.GetComponent<SheepUI>().go_canvas.SetActive(false);
+        }
+    }
+
+    #endregion
     private void OnDrawGizmos()
     {
-        Gizmos.DrawWireSphere(transform.position, bark1_r);
+        Gizmos.DrawWireSphere(transform.position, bark_r);
     }
 }

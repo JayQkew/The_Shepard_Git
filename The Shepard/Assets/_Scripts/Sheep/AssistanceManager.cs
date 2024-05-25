@@ -21,7 +21,7 @@ public class AssistanceManager : MonoBehaviour
         Instance = this;
     }
 
-    public void ToPasture1()
+    public void ToNorthPasture()
     {
         barnTop.SetActive(true);
         penTop.SetActive(true);
@@ -34,7 +34,7 @@ public class AssistanceManager : MonoBehaviour
         pasture1Right.SetActive(false);
     }
 
-    public void ToPasture2()
+    public void ToWestPasture()
     {
         barnTop.SetActive(true);
         penTop.SetActive(true);
@@ -47,7 +47,7 @@ public class AssistanceManager : MonoBehaviour
         pasture3Left.SetActive(false);
     }
 
-    public void ToPasture3()
+    public void ToEastPasture()
     {
         barnTop.SetActive(true);
         penTop.SetActive(true);
