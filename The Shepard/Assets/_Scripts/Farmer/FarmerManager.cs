@@ -10,7 +10,17 @@ public class FarmerManager : MonoBehaviour
     public GameObject farmer;
     private NavMeshAgent farmerNavAgent;
     public Transform farmerTarget;
+    public LayerMask sheepLayer;
+    public float sheepChaseRadius;
 
+    #region Farmer States
+    public FarmerBaseState currentState;
+    public FarmerGuideState FarmerGuideState = new FarmerGuideState();
+    public FarmerShearingState FarmerShearingState = new FarmerShearingState();
+    public FarmerChillState FarmerChillState = new FarmerChillState();
+    #endregion
+
+    #region Farmer Positions
     [Header("Farmer Posisitons")]
     public Transform farmHouse;
     public Transform northPastureIn;
@@ -19,6 +29,7 @@ public class FarmerManager : MonoBehaviour
     public Transform westPastureOut;
     public Transform eastPastureIn;
     public Transform eastPastureOut;
+    #endregion
 
     private void Awake()
     {
@@ -27,16 +38,31 @@ public class FarmerManager : MonoBehaviour
 
     private void Start()
     {
+        currentState = FarmerGuideState;
         farmerNavAgent = farmer.GetComponent<NavMeshAgent>();
         farmerNavAgent.updateRotation = false;
     }
 
     private void Update()
     {
+        currentState.UpgradeState(this);
+    }
+
+    public void SwitchState(FarmerBaseState state)
+    {
+        currentState.ExitState(this);
+        currentState = state;
+        currentState.EnterState(this);
     }
 
     public void SetFarmerTarget(Transform target)
     {
         farmerNavAgent.SetDestination(target.position);
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.blue;
+        Gizmos.DrawWireSphere(farmer.transform.position, sheepChaseRadius);
     }
 }

@@ -26,6 +26,13 @@ public class SheepBehaviour : MonoBehaviour
     public SheepWalkingState WalkingState = new SheepWalkingState();
     #endregion
 
+    #region Wool
+    public float woolCurrrentTime;
+    public float woolGrow;
+    public float woolGrowMin;
+    public float woolGrowMax;
+    #endregion
+
     [Header("State Times")]
     public float idleTime;
     public float grazeTime;
@@ -41,10 +48,12 @@ public class SheepBehaviour : MonoBehaviour
         currentState = IdleState;
         currentLimit = walkLimit;
         SetIdleTime();
+        SetGrowSpeed();
     }
 
     private void Update()
     {
+        GrowWool();
         rb.velocity = Vector3.ClampMagnitude(rb.velocity, currentLimit);
         currentState.UpdateState(this);
     }
@@ -55,6 +64,24 @@ public class SheepBehaviour : MonoBehaviour
         currentState = state;
         currentState.EnterState(this);
     }
+
+    public void GrowWool()
+    {
+        if (sheepStats.woolLength != WoolLength.Long)
+        {
+            woolCurrrentTime += Time.deltaTime;
+
+            if (woolCurrrentTime >= woolGrow)
+            {
+                woolCurrrentTime = 0;
+                sheepStats.woolLength++;
+
+                if(sheepStats.woolLength == WoolLength.Long) GameManager.Instance.longWoolCount++;
+            }
+        }
+    }
+
+    private void SetGrowSpeed() => woolGrow = Random.Range(woolGrowMin, woolGrowMax);
 
     #region Set Times
     public void SetIdleTime() => idleTime = Random.Range(SheepManager.Instance.idleRange.x, SheepManager.Instance.idleRange.y);

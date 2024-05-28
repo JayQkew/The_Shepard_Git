@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6219806777059543089}
   - component: {fileID: 5320081048338513906}
-  m_Layer: 6
+  m_Layer: 5
   m_Name: Text Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -37,7 +37,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: -0.5}
-  m_SizeDelta: {x: -20, y: -13}
+  m_SizeDelta: {x: 0, y: -13}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &5320081048338513906
 MonoBehaviour:
@@ -65,7 +65,7 @@ GameObject:
   - component: {fileID: 6663283818127543954}
   - component: {fileID: 1443200010945833595}
   - component: {fileID: 7012010311307068895}
-  m_Layer: 6
+  m_Layer: 5
   m_Name: Placeholder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -220,7 +220,7 @@ GameObject:
   - component: {fileID: 9045025172507585386}
   - component: {fileID: 2893234156550217444}
   - component: {fileID: 2875816747595515700}
-  m_Layer: 6
+  m_Layer: 5
   m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -356,7 +356,8 @@ GameObject:
   - component: {fileID: 7174094675085038907}
   - component: {fileID: 1694820104314746785}
   - component: {fileID: 6685076340325298669}
-  m_Layer: 6
+  - component: {fileID: 8929208354599775846}
+  m_Layer: 5
   m_Name: InputField (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -381,7 +382,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -0.54}
+  m_AnchoredPosition: {x: 0, y: -0.817}
   m_SizeDelta: {x: 76.88, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7174094675085038907
@@ -405,7 +406,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.8301887, g: 0.7836337, b: 0.69234604, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -480,10 +481,22 @@ MonoBehaviour:
   m_CharacterValidation: 0
   m_RegexValue: 
   m_GlobalPointSize: 14
-  m_CharacterLimit: 0
+  m_CharacterLimit: 12
   m_OnEndEdit:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6046902425638355960}
+        m_TargetAssemblyTypeName: SheepUI, Assembly-CSharp
+        m_MethodName: EnterName
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_OnSubmit:
     m_PersistentCalls:
       m_Calls: []
@@ -520,6 +533,18 @@ MonoBehaviour:
   m_isRichTextEditingAllowed: 0
   m_LineLimit: 0
   m_InputValidator: {fileID: 0}
+--- !u!114 &8929208354599775846
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4893750641567917588}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f92e0eb46cc63404db3d413173564073, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6750600856883670798
 GameObject:
   m_ObjectHideFlags: 0
@@ -532,7 +557,7 @@ GameObject:
   - component: {fileID: 8085146682037133509}
   - component: {fileID: 5187273404013375533}
   - component: {fileID: 2763341519629829694}
-  m_Layer: 6
+  m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -791,7 +816,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sheepStats:
-    name: 
+    name: Bert
     woolLength: 0
     tagged: 0
   rb: {fileID: 0}
@@ -803,6 +828,10 @@ MonoBehaviour:
   startled: 0
   nextState: 0
   currentTime: 0
+  woolCurrrentTime: 0
+  woolGrow: 0
+  woolGrowMin: 5
+  woolGrowMax: 8
   idleTime: 3
   grazeTime: 2
   roamTime: 3
@@ -823,6 +852,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   go_canvas: {fileID: 6750600856883670798}
   sheepCanvas: {fileID: 0}
+  inputField: {fileID: 0}
 --- !u!1 &8465007571931611342
 GameObject:
   m_ObjectHideFlags: 0

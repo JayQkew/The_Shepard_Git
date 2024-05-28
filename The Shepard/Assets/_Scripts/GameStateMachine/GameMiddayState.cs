@@ -7,7 +7,7 @@ public class GameMiddayState : GameBaseState
     public override void EnterState(GameManager manager)
     {
         Debug.Log("Midday");
-        TaskDecider(manager);
+        //TaskDecider(manager);
     }
     public override void UpdateState(GameManager manager)
     {
@@ -16,6 +16,12 @@ public class GameMiddayState : GameBaseState
         //    TaskSelect(manager);
         //    manager.SwitchState(manager.TaskState);
         //}
+
+        if (manager.selectedTask != Tasks.None && manager.currentTime >= manager.taskTime)
+        {
+            manager.SwitchState(manager.TaskState);
+        }
+
         if (manager.currentTime >= manager.middayEnd)
         {
             manager.SwitchState(manager.EveningState);

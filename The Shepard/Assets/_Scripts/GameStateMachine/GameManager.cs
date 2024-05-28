@@ -13,23 +13,27 @@ public class GameManager : MonoBehaviour
     public GameEveningState EveningState = new GameEveningState();
 
     [Header("Herding")]
-    public TrackArea currentArea;
+    public TrackArea targetArea;
 
     [Header("Tasks")]
     public Tasks selectedTask;
     public bool taskComplete;
     public int tasklessDays;
 
+    public Vector2 longWoolRatio;
+    public int shearTaskCount;
+    public int longWoolCount;
+
     [Header("Midday")]
     public float dayLength = 5;
-    public float taskTime = 2.5f;
     public float currentTime;
 
     [Header("Transistion Times")]
     public float morningEnd;    // transistion into midday
+    public float taskTime;
+    public float bringSheepBack;
     public float middayEnd;     // transistion into evening
     public float eveningEnd;    // day end
-    public float bringSheepBack;
 
     private void Awake()
     {
@@ -46,38 +50,32 @@ public class GameManager : MonoBehaviour
         currentTime += Time.deltaTime;
         currentState.UpdateState(this);
 
-        if (SheepTrackerManager.Instance.AtRequiredPlace(currentArea))
-        {
-            FarmerManager.Instance.SetFarmerTarget(FarmerManager.Instance.farmHouse);
-        }
-
         if (currentTime >= bringSheepBack)
         {
-            //FarmerManager.Instance.SetFarmerTarget()
-            switch (currentArea)
-            {
-                case TrackArea.NorthPasture:
-                    FarmerManager.Instance.SetFarmerTarget(FarmerManager.Instance.northPastureIn);
-                    if (SheepTrackerManager.Instance.AtRequiredPlace(TrackArea.Pen))
-                    {
-                        FarmerManager.Instance.SetFarmerTarget(FarmerManager.Instance.farmHouse);
-                    }
-                    break;
-                case TrackArea.WestPasture:
-                    FarmerManager.Instance.SetFarmerTarget(FarmerManager.Instance.westPastureIn);
-                    if (SheepTrackerManager.Instance.AtRequiredPlace(TrackArea.NorthPasture))
-                    {
-                        FarmerManager.Instance.SetFarmerTarget(FarmerManager.Instance.farmHouse);
-                    }
-                    break;
-                case TrackArea.EastPasture:
-                    FarmerManager.Instance.SetFarmerTarget(FarmerManager.Instance.eastPastureIn);
-                    if (SheepTrackerManager.Instance.AtRequiredPlace(TrackArea.NorthPasture))
-                    {
-                        FarmerManager.Instance.SetFarmerTarget(FarmerManager.Instance.farmHouse);
-                    }
-                    break;
-            }
+            FarmerGuideBack();
+        }
+
+    }
+
+    private void FarmerGuideBack()
+    {
+        switch (targetArea)
+        {
+            case TrackArea.NorthPasture:
+                FarmerManager.Instance.farmerTarget = FarmerManager.Instance.northPastureIn;
+                targetArea = TrackArea.Pen;
+                FarmerManager.Instance.SwitchState(FarmerManager.Instance.FarmerGuideState);
+                break;
+            case TrackArea.WestPasture:
+                FarmerManager.Instance.farmerTarget = FarmerManager.Instance.westPastureIn;
+                targetArea = TrackArea.NorthPasture;
+                FarmerManager.Instance.SwitchState(FarmerManager.Instance.FarmerGuideState);
+                break;
+            case TrackArea.EastPasture:
+                FarmerManager.Instance.farmerTarget = FarmerManager.Instance.eastPastureIn;
+                targetArea = TrackArea.NorthPasture;
+                FarmerManager.Instance.SwitchState(FarmerManager.Instance.FarmerGuideState);
+                break;
         }
 
     }
@@ -88,4 +86,5 @@ public class GameManager : MonoBehaviour
         currentState = state;
         currentState.EnterState(this);
     }
+
 }

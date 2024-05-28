@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class PlayerActions : MonoBehaviour
 {
+    public static PlayerActions Instance { get; private set; }
 
     [Header("Bark")]
     public bool canBark;
@@ -25,6 +27,12 @@ public class PlayerActions : MonoBehaviour
     private LayerMask effectedAgents;
     [SerializeField]
     private LayerMask ground;
+    public bool hoverOverUI;
+
+    private void Awake()
+    {
+        Instance = this;
+    }
 
     private void Update()
     {
@@ -33,7 +41,7 @@ public class PlayerActions : MonoBehaviour
         BarkRadius_AoE();
         Bark_AoE();
 
-        if (EventSystem.current.IsPointerOverGameObject())
+        if (hoverOverUI)
         {
             Debug.Log("over a inputField");
             PlayerController.Instance.PlayerActions.canBark = false;
@@ -166,6 +174,7 @@ public class PlayerActions : MonoBehaviour
         }
     }
 
+    
     #endregion
     private void OnDrawGizmos()
     {

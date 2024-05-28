@@ -12,19 +12,19 @@ public class TrackingBox : MonoBehaviour
             switch (area)
             {
                 case TrackArea.Barn:
-                    SheepTrackerManager.Instance.barn.Add(other.gameObject);
+                    SheepTracker.Instance.barn.Add(other.gameObject);
                     break;
                 case TrackArea.Pen:
-                    SheepTrackerManager.Instance.pen.Add(other.gameObject);
+                    SheepTracker.Instance.pen.Add(other.gameObject);
                     break;
                 case TrackArea.NorthPasture:
-                    SheepTrackerManager.Instance.pasture1.Add(other.gameObject);
+                    SheepTracker.Instance.pasture1.Add(other.gameObject);
                     break;
                 case TrackArea.WestPasture:
-                    SheepTrackerManager.Instance.pasture2.Add(other.gameObject);
+                    SheepTracker.Instance.pasture2.Add(other.gameObject);
                     break;
                 case TrackArea.EastPasture:
-                    SheepTrackerManager.Instance.pasture3.Add(other.gameObject);
+                    SheepTracker.Instance.pasture3.Add(other.gameObject);
                     break;
             }
         }
@@ -63,19 +63,19 @@ public class TrackingBox : MonoBehaviour
             switch (area)
             {
                 case TrackArea.Barn:
-                    SheepTrackerManager.Instance.barn.Remove(other.gameObject);
+                    SheepTracker.Instance.barn.Remove(other.gameObject);
                     break;
                 case TrackArea.Pen:
-                    SheepTrackerManager.Instance.pen.Remove(other.gameObject);
+                    SheepTracker.Instance.pen.Remove(other.gameObject);
                     break;
                 case TrackArea.NorthPasture:
-                    SheepTrackerManager.Instance.pasture1.Remove(other.gameObject);
+                    SheepTracker.Instance.pasture1.Remove(other.gameObject);
                     break;
                 case TrackArea.WestPasture:
-                    SheepTrackerManager.Instance.pasture2.Remove(other.gameObject);
+                    SheepTracker.Instance.pasture2.Remove(other.gameObject);
                     break;
                 case TrackArea.EastPasture:
-                    SheepTrackerManager.Instance.pasture3.Remove(other.gameObject);
+                    SheepTracker.Instance.pasture3.Remove(other.gameObject);
                     break;
             }
         }

@@ -18,6 +18,11 @@ public class SheepUI : MonoBehaviour
         inputField = sheepCanvas.GetComponentInChildren<TMP_InputField>();
     }
 
+    private void Start()
+    {
+        inputField.text = GetComponent<SheepBehaviour>().sheepStats.name;
+    }
+
     private void Update()
     {
 
@@ -31,7 +36,15 @@ public class SheepUI : MonoBehaviour
             else
             {
                 PlayerController.Instance.PlayerMovement.canMove = true;
+                EventSystem.current.SetSelectedGameObject(null);
+
             }
         }
+    }
+
+    public void EnterName()
+    {
+        GetComponent<SheepBehaviour>().sheepStats.name = inputField.text;
+        GetComponent<SheepBehaviour>().sheepStats.tagged = true;
     }
 }

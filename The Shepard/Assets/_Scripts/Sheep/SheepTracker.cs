@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SheepTrackerManager : MonoBehaviour
+public class SheepTracker : MonoBehaviour
 {
-    public static SheepTrackerManager Instance { get; private set; }
+    public static SheepTracker Instance { get; private set; }
 
     public GameObject[] allSheep;
 

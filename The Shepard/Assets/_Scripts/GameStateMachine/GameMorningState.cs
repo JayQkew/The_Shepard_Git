@@ -9,8 +9,9 @@ public class GameMorningState : GameBaseState
         Debug.Log("Morning");
         //add more sheep here
         SheepSpawner.Instance.Init_Herd();
-        SheepTrackerManager.Instance.allSheep = GameObject.FindGameObjectsWithTag("sheep");
+        SheepTracker.Instance.allSheep = GameObject.FindGameObjectsWithTag("sheep");
         SelectPasture(manager);
+        ShearSheepCount(manager);
     }
 
     public override void UpdateState(GameManager manager)
@@ -32,21 +33,34 @@ public class GameMorningState : GameBaseState
 
         if(randomNum == 0)
         {
-            manager.currentArea = TrackArea.NorthPasture;
+            manager.targetArea = TrackArea.NorthPasture;
+            FarmerManager.Instance.farmerTarget = FarmerManager.Instance.northPastureOut;
             AssistanceManager.Instance.ToNorthPasture();
-            FarmerManager.Instance.SetFarmerTarget(FarmerManager.Instance.northPastureOut);
         }
         else if (randomNum == 1)
         {
-            manager.currentArea = TrackArea.WestPasture;
+            manager.targetArea = TrackArea.WestPasture;
             AssistanceManager.Instance.ToWestPasture();
-            FarmerManager.Instance.SetFarmerTarget(FarmerManager.Instance.westPastureOut);
+            FarmerManager.Instance.farmerTarget = FarmerManager.Instance.westPastureOut;
         }
         else
         {
-            manager.currentArea = TrackArea.EastPasture;
+            manager.targetArea = TrackArea.EastPasture;
             AssistanceManager.Instance.ToEastPasture();
-            FarmerManager.Instance.SetFarmerTarget(FarmerManager.Instance.eastPastureOut);
+            FarmerManager.Instance.farmerTarget = FarmerManager.Instance.eastPastureOut;
+        }
+
+        FarmerManager.Instance.SwitchState(FarmerManager.Instance.FarmerGuideState);
+    }
+
+    private void ShearSheepCount(GameManager manager)
+    {
+        float amount = SheepTracker.Instance.allSheep.Length * (manager.longWoolRatio.x / manager.longWoolRatio.y);
+        manager.shearTaskCount = Mathf.FloorToInt(amount);
+
+        if(manager.longWoolCount >= manager.shearTaskCount)
+        {
+            manager.selectedTask = Tasks.Shearing;
         }
     }
 }
