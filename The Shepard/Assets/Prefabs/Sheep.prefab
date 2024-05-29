@@ -664,6 +664,8 @@ GameObject:
   - component: {fileID: 8874801221532679563}
   - component: {fileID: 1714984266542149112}
   - component: {fileID: 6046902425638355960}
+  - component: {fileID: 3347048957001927111}
+  - component: {fileID: 2145702796242059617}
   m_Layer: 6
   m_Name: Sheep
   m_TagString: sheep
@@ -853,6 +855,41 @@ MonoBehaviour:
   go_canvas: {fileID: 6750600856883670798}
   sheepCanvas: {fileID: 0}
   inputField: {fileID: 0}
+--- !u!95 &3347048957001927111
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7749666498480161004}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 8aab635e9cadea244aa66b05b604faf7, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &2145702796242059617
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7749666498480161004}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4875697050839bb48aaffa4d79d2639f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mainAnim: {fileID: 3347048957001927111}
+  guiAnim: {fileID: 0}
 --- !u!1 &8465007571931611342
 GameObject:
   m_ObjectHideFlags: 0
@@ -863,6 +900,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7775762618535430215}
   - component: {fileID: 6263680760384475595}
+  - component: {fileID: 2839699678848973620}
   m_Layer: 6
   m_Name: GUI
   m_TagString: GUI_Sprites
@@ -937,3 +975,24 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &2839699678848973620
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8465007571931611342}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: ddd21d89eedc3e94387b0851c5b0e8aa, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

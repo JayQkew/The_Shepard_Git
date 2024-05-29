@@ -53,6 +53,7 @@ public class SheepBehaviour : MonoBehaviour
 
     private void Update()
     {
+        CheckDirection();
         GrowWool();
         rb.velocity = Vector3.ClampMagnitude(rb.velocity, currentLimit);
         currentState.UpdateState(this);
@@ -82,6 +83,12 @@ public class SheepBehaviour : MonoBehaviour
     }
 
     private void SetGrowSpeed() => woolGrow = Random.Range(woolGrowMin, woolGrowMax);
+
+    private void CheckDirection()
+    {
+        if (rb.velocity.x < -0.5f) GetComponent<Sheep_GUI>().FlipLeft();
+        else if (rb.velocity.x > 0.5f) GetComponent<Sheep_GUI>().FlipRight();
+    }
 
     #region Set Times
     public void SetIdleTime() => idleTime = Random.Range(SheepManager.Instance.idleRange.x, SheepManager.Instance.idleRange.y);
