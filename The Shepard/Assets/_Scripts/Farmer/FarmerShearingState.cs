@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class FarmerShearingState : FarmerBaseState
@@ -13,16 +14,25 @@ public class FarmerShearingState : FarmerBaseState
     }
     public override void UpgradeState(FarmerManager manager)
     {
+        GameObject closestSheep = ClosestSheep(manager);
+
         //all sheep in pen = start chasing sheep
         if (SheepTracker.Instance.AtRequiredPlace(TrackArea.Pen))
         {
-            GameObject closestSheep = ClosestSheep(manager);
-
             if (closestSheep != null)
             {
-                manager.SetFarmerTarget(closestSheep.transform);
+                if (closestSheep.GetComponent<SheepBehaviour>().sheepStats.woolLength == WoolLength.Long)
+                {
+                    manager.SetFarmerTarget(closestSheep.transform);
+                }
+
             }
+            ShearSheep(manager);
         }
+    }
+    public override void FixedUpdateState(FarmerManager manager)
+    {
+        AuraEffect(manager);
     }
 
     public override void ExitState(FarmerManager manager)
@@ -40,8 +50,12 @@ public class FarmerShearingState : FarmerBaseState
         {
             if (hit[i].transform.gameObject != manager.farmer)
             {
-                sheep_distance.Add(hit[i].transform.gameObject, Vector3.Distance(manager.farmer.transform.position, hit[i].transform.position));
-                closestDistance = Vector3.Distance(manager.farmer.transform.position, hit[i].transform.position);
+                if (hit[i].transform.GetComponent<SheepBehaviour>().sheepStats.woolLength == WoolLength.Long)
+                {
+                    sheep_distance.Add(hit[i].transform.gameObject, Vector3.Distance(manager.farmer.transform.position, hit[i].transform.position));
+                    closestDistance = Vector3.Distance(manager.farmer.transform.position, hit[i].transform.position);
+
+                }
             }
         }
 
@@ -62,6 +76,58 @@ public class FarmerShearingState : FarmerBaseState
         }
 
         return closestSheep;
+
+    }
+
+
+    private void AuraEffect(FarmerManager manager)
+    {
+        foreach(GameObject agent in AreaOfEffect(manager))
+        {
+            Vector3 force = PushForce(manager, agent) * manager.farmerPushForce;
+            agent.GetComponent<Rigidbody>().AddForce(force, ForceMode.Force);
+        }
+    }
+
+    private Vector3 PushForce(FarmerManager manager, GameObject effectedAgent)
+    {
+        Vector3 dir = effectedAgent.transform.position - manager.farmer.transform.position;
+        Vector3 forceNorm = Vector3.ClampMagnitude(dir, 1);
+        return forceNorm;
+    }
+
+    public GameObject[] AreaOfEffect(FarmerManager manager)
+    {
+        RaycastHit[] hit = Physics.SphereCastAll(manager.farmer.transform.position, manager.farmerAuraRadius, Vector3.up, 0, manager.sheepLayer);
+        List<GameObject> sur_agents = new List<GameObject>();
+
+        for (int i  = 0; i < hit.Length; i++)
+        {
+            if (hit[i].transform.gameObject != manager.farmer)
+            {
+                sur_agents.Add(hit[i].transform.gameObject);
+            }
+        }
+
+        return sur_agents.ToArray();
+    }
+
+
+    //Shear the sheep if collision occurs!
+    public void ShearSheep(FarmerManager manager)
+    {
+        RaycastHit[] hit = Physics.SphereCastAll(manager.farmer.transform.position, 1, Vector3.up, 0, manager.sheepLayer);
+        List<GameObject> sur_agents = new List<GameObject>();
+
+        for (int i = 0; i < hit.Length; i++)
+        {
+            if (hit[i].transform.gameObject != manager.farmer)
+            {
+                hit[i].transform.GetComponent<SheepBehaviour>().sheepStats.woolLength = WoolLength.None;
+                GameManager.Instance.shearTaskCount--;
+                Debug.Log($"{hit[i].transform.GetComponent<SheepBehaviour>().sheepStats.name} got sheared");
+            }
+        }
 
     }
 }

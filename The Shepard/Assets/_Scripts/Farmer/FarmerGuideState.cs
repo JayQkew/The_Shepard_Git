@@ -22,4 +22,7 @@ public class FarmerGuideState : FarmerBaseState
     {
     }
 
+    public override void FixedUpdateState(FarmerManager manager)
+    {
+    }
 }

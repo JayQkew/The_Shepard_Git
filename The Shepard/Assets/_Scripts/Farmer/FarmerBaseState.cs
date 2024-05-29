@@ -9,4 +9,6 @@ public abstract class FarmerBaseState
     public abstract void UpgradeState(FarmerManager manager);
 
     public abstract void ExitState(FarmerManager manager);
+
+    public abstract void FixedUpdateState(FarmerManager manager);
 }

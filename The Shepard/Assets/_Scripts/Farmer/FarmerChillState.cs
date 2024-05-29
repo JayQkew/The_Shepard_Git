@@ -18,4 +18,7 @@ public class FarmerChillState : FarmerBaseState
     {
     }
 
+    public override void FixedUpdateState(FarmerManager manager)
+    {
+    }
 }

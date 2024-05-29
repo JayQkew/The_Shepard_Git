@@ -14,6 +14,12 @@ public class GameTaskState : GameBaseState
     public override void UpdateState(GameManager manager)
     {
         manager.currentTime += Time.deltaTime;
+
+        if (SheepTracker.Instance.AtRequiredPlace(TrackArea.Pen))
+        {
+            manager.penForceWall.SetActive(true);
+        }
+
         if (manager.taskComplete == true)
         {
             //manager.SwitchState(manager.MiddayState);
@@ -28,6 +34,8 @@ public class GameTaskState : GameBaseState
     }
     public override void ExitState(GameManager manager)
     {
+        manager.penForceWall.SetActive(false);
+
         if (manager.taskComplete == true)
         {
             manager.selectedTask = Tasks.None;

@@ -19,6 +19,7 @@ public class GameManager : MonoBehaviour
     public Tasks selectedTask;
     public bool taskComplete;
     public int tasklessDays;
+    public GameObject penForceWall;
 
     public Vector2 longWoolRatio;
     public int shearTaskCount;

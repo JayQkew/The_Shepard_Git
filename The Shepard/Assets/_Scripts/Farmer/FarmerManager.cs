@@ -12,6 +12,8 @@ public class FarmerManager : MonoBehaviour
     public Transform farmerTarget;
     public LayerMask sheepLayer;
     public float sheepChaseRadius;
+    public float farmerAuraRadius;
+    public float farmerPushForce;
 
     #region Farmer States
     public FarmerBaseState currentState;
@@ -46,6 +48,11 @@ public class FarmerManager : MonoBehaviour
     private void Update()
     {
         currentState.UpgradeState(this);
+    }
+
+    private void FixedUpdate()
+    {
+        currentState.FixedUpdateState(this);
     }
 
     public void SwitchState(FarmerBaseState state)
