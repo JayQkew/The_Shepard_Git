@@ -39,6 +39,10 @@ public class PlayerController : MonoBehaviour
         if (right) PlayerGUI.FlipRight();
         if (left) PlayerGUI.FlipLeft();
 
+        if (!PlayerMovement.Grounded()) PlayerGUI.JumpAnim();
+        else if (forward || back || left || right) PlayerGUI.RunAnim();
+        else PlayerGUI.IdleAnim();
+
 
         if (Input.GetMouseButtonDown(0)) PlayerActions.Bark();
         if (Input.GetMouseButtonDown(1)) PlayerActions.Interact();

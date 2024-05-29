@@ -11,4 +11,8 @@ public class Player_GUI : MonoBehaviour
     public void FlipRight() => mainAnim.SetBool("FaceRight", true);
 
     public void FlipLeft() => mainAnim.SetBool("FaceRight", false);
+
+    public void RunAnim() => guiAnim.SetInteger("Move", 1);
+    public void IdleAnim() => guiAnim.SetInteger("Move", 0);
+    public void JumpAnim() => guiAnim.SetInteger("Move", 2);
 }

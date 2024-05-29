@@ -70,10 +70,10 @@ public class FarmerShearingState : FarmerBaseState
             }
         }
 
-        if(closestSheep != null)
-        {
-            Debug.Log(closestSheep.GetComponent<SheepBehaviour>().sheepStats.name);
-        }
+        //if(closestSheep != null)
+        //{
+        //    Debug.Log(closestSheep.GetComponent<SheepBehaviour>().sheepStats.name);
+        //}
 
         return closestSheep;
 
@@ -121,10 +121,10 @@ public class FarmerShearingState : FarmerBaseState
 
         for (int i = 0; i < hit.Length; i++)
         {
-            if (hit[i].transform.gameObject != manager.farmer)
+            if (hit[i].transform.gameObject != manager.farmer && hit[i].transform.GetComponent<SheepBehaviour>().sheepStats.woolLength == WoolLength.Long)
             {
                 hit[i].transform.GetComponent<SheepBehaviour>().sheepStats.woolLength = WoolLength.None;
-                GameManager.Instance.shearTaskCount--;
+                GameManager.Instance.longWoolCount--;
                 Debug.Log($"{hit[i].transform.GetComponent<SheepBehaviour>().sheepStats.name} got sheared");
             }
         }

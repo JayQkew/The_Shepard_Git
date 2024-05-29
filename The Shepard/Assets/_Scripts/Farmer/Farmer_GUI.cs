@@ -11,7 +11,7 @@ public class Farmer_GUI : MonoBehaviour
 
     private void Update()
     {
-        if (farmerNavAgent.remainingDistance == 0)
+        if (farmerNavAgent.remainingDistance <= 1.5f)
         {
             animator.SetInteger("AnimState", 0);
         }

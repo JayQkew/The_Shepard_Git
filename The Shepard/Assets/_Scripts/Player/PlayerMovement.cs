@@ -90,7 +90,7 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    private bool Grounded()
+    public bool Grounded()
     {
         return Physics.Raycast(transform.position, Vector3.down, groundCastY, ground);
     }
