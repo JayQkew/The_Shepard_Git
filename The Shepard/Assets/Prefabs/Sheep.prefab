@@ -889,7 +889,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mainAnim: {fileID: 3347048957001927111}
-  guiAnim: {fileID: 0}
+  guiAnim: {fileID: 2839699678848973620}
 --- !u!1 &8465007571931611342
 GameObject:
   m_ObjectHideFlags: 0
@@ -916,7 +916,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8465007571931611342}
   m_LocalRotation: {x: 0.13052616, y: 0, z: 0, w: 0.9914449}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.05, z: 0.01}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -964,7 +964,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 1932771206, guid: 9a73c43e1bdc89b4782cc25961dd61b6, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 5f82f869621fdd441acb205ee4981207, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -985,7 +985,7 @@ Animator:
   m_GameObject: {fileID: 8465007571931611342}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: ddd21d89eedc3e94387b0851c5b0e8aa, type: 2}
+  m_Controller: {fileID: 9100000, guid: c96a41ef9e161d7418db3ff428306746, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

@@ -76,9 +76,28 @@ public class SheepBehaviour : MonoBehaviour
             {
                 woolCurrrentTime = 0;
                 sheepStats.woolLength++;
-
+                CheckWool();
                 if(sheepStats.woolLength == WoolLength.Long) GameManager.Instance.longWoolCount++;
             }
+        }
+    }
+
+    public void CheckWool()
+    {
+        switch (sheepStats.woolLength)
+        {
+            case WoolLength.None:
+                GetComponent<Sheep_GUI>().NoneWool();
+                break;
+            case WoolLength.Short:
+                GetComponent<Sheep_GUI>().ShortWool();
+                break;
+            case WoolLength.Medium:
+                GetComponent<Sheep_GUI>().MediumWool();
+                break;
+            case WoolLength.Long:
+                GetComponent<Sheep_GUI>().LongWool();
+                break;
         }
     }
 
@@ -86,8 +105,8 @@ public class SheepBehaviour : MonoBehaviour
 
     private void CheckDirection()
     {
-        if (rb.velocity.x < -0.5f) GetComponent<Sheep_GUI>().FlipLeft();
-        else if (rb.velocity.x > 0.5f) GetComponent<Sheep_GUI>().FlipRight();
+        if (rb.velocity.x < -1f) GetComponent<Sheep_GUI>().FlipLeft();
+        else if (rb.velocity.x > 1f) GetComponent<Sheep_GUI>().FlipRight();
     }
 
     #region Set Times
