@@ -36,4 +36,15 @@ public class SpriteManager : MonoBehaviour
         SetSpriteRotation();
     }
 
+    public IEnumerator FlipSprite(GameObject sprite, int direction, float targetTime)
+    {
+        float elapsedTime = 0;
+        while (elapsedTime < targetTime)
+        {
+            elapsedTime += Time.deltaTime;
+            sprite.transform.localScale = Vector3.MoveTowards(sprite.transform.localScale, new Vector3(sprite.transform.localScale.x * direction, sprite.transform.localScale.y, sprite.transform.localScale.z), 1000);
+            yield return null;
+        }
+    }
+
 }

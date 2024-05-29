@@ -16,6 +16,8 @@ public class FarmerGuideState : FarmerBaseState
             manager.SwitchState(manager.FarmerChillState);
 
         }
+
+
     }
 
     public override void ExitState(FarmerManager manager)

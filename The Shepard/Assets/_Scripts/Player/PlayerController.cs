@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
     public static PlayerController Instance { get; private set; }
     public PlayerMovement PlayerMovement;
     public PlayerActions PlayerActions;
+    public Player_GUI PlayerGUI;
 
     private bool forward;
     private bool back;
@@ -24,6 +25,7 @@ public class PlayerController : MonoBehaviour
         Instance = this;
         PlayerMovement = GetComponent<PlayerMovement>();
         PlayerActions = GetComponent<PlayerActions>();
+        PlayerGUI = GetComponent<Player_GUI>();
     }
 
     private void Update()
@@ -33,6 +35,10 @@ public class PlayerController : MonoBehaviour
         left = Input.GetKey(KeyCode.A);
         right = Input.GetKey(KeyCode.D);
         jump = Input.GetKey(KeyCode.Space);
+
+        if (right) PlayerGUI.FlipRight();
+        if (left) PlayerGUI.FlipLeft();
+
 
         if (Input.GetMouseButtonDown(0)) PlayerActions.Bark();
         if (Input.GetMouseButtonDown(1)) PlayerActions.Interact();

@@ -8,12 +8,13 @@ public class FarmerManager : MonoBehaviour
     public static FarmerManager Instance { get; private set; }
 
     public GameObject farmer;
-    private NavMeshAgent farmerNavAgent;
+    public NavMeshAgent farmerNavAgent;
     public Transform farmerTarget;
     public LayerMask sheepLayer;
     public float sheepChaseRadius;
     public float farmerAuraRadius;
     public float farmerPushForce;
+    public bool arriveAtDestination;
 
     #region Farmer States
     public FarmerBaseState currentState;

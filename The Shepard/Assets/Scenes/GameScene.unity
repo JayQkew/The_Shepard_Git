@@ -1480,6 +1480,7 @@ GameObject:
   m_Component:
   - component: {fileID: 218100884}
   - component: {fileID: 218100885}
+  - component: {fileID: 218100886}
   m_Layer: 0
   m_Name: GUI
   m_TagString: GUI_Sprites
@@ -1554,6 +1555,27 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &218100886
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 218100883}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: e3458d38ff2a4b14ba835ce58ad64138, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!224 &226132985 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4233093444574796927, guid: f668713569ddd524a81e687e7609e666, type: 3}
@@ -2530,6 +2552,7 @@ GameObject:
   - component: {fileID: 454090430}
   - component: {fileID: 454090429}
   - component: {fileID: 454090428}
+  - component: {fileID: 454090432}
   m_Layer: 0
   m_Name: Farmer
   m_TagString: Untagged
@@ -2567,9 +2590,9 @@ NavMeshAgent:
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
-  m_StoppingDistance: 0
+  m_StoppingDistance: 2.37
   m_AutoTraverseOffMeshLink: 1
-  m_AutoBraking: 1
+  m_AutoBraking: 0
   m_AutoRepath: 1
   m_Height: 2
   m_BaseOffset: 1
@@ -2648,6 +2671,21 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 454090426}
   m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &454090432
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 454090426}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d541c631aa8415646b117bc17202695b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GUI: {fileID: 218100883}
+  animator: {fileID: 218100886}
+  farmerNavAgent: {fileID: 454090428}
 --- !u!1 &462437175
 GameObject:
   m_ObjectHideFlags: 0
@@ -3107,13 +3145,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   farmer: {fileID: 454090426}
+  farmerNavAgent: {fileID: 0}
   farmerTarget: {fileID: 535185628}
   sheepLayer:
     serializedVersion: 2
     m_Bits: 64
   sheepChaseRadius: 30
-  farmerAuraRadius: 15
+  farmerAuraRadius: 5
   farmerPushForce: 5
+  arriveAtDestination: 0
   farmHouse: {fileID: 9346485}
   northPastureIn: {fileID: 864937502}
   northPastureOut: {fileID: 535185628}
@@ -9505,7 +9545,7 @@ MonoBehaviour:
   roamRange: {x: 1, y: 2}
   walkRange: {x: 1, y: 3}
   runRange: {x: 1, y: 2}
-  debugColour: 1
+  debugColour: 0
   idleColour: {r: 1, g: 1, b: 1, a: 1}
   grazeColour: {r: 0.48671967, g: 0.9622642, b: 0.43937343, a: 1}
   roamColour: {r: 0.38113207, g: 0.65213335, b: 1, a: 1}
@@ -10193,6 +10233,8 @@ GameObject:
   - component: {fileID: 1983941147}
   - component: {fileID: 1983941146}
   - component: {fileID: 1983941149}
+  - component: {fileID: 1983941151}
+  - component: {fileID: 1983941152}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -10378,6 +10420,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PlayerMovement: {fileID: 0}
   PlayerActions: {fileID: 0}
+  PlayerGUI: {fileID: 0}
   rb: {fileID: 1983941144}
   playerArea: 0
 --- !u!114 &1983941149
@@ -10401,6 +10444,42 @@ MonoBehaviour:
   effectedAgents:
     serializedVersion: 2
     m_Bits: 64
+--- !u!114 &1983941151
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1983941139}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: efe09cf9790a0374abd186e585f00d6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerGUI: {fileID: 154338351}
+  mainAnim: {fileID: 1983941152}
+  guiAnim: {fileID: 0}
+--- !u!95 &1983941152
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1983941139}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: cd63a9cb945177f43955d8de8ba8dbf2, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &2008976648
 GameObject:
   m_ObjectHideFlags: 0
