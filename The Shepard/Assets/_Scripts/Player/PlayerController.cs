@@ -40,8 +40,8 @@ public class PlayerController : MonoBehaviour
         if (!PlayerMovement.Grounded()) PlayerGUI.JumpAnim();
         else if (forward || back || left || right)
         {
-            if (left && rb.velocity.x > 0 && PlayerMovement.Grounded() && Input.GetKey(KeyCode.LeftShift)) PlayerGUI.ZoomiesAnim();
-            else if (right && rb.velocity.x < 0 && PlayerMovement.Grounded() && Input.GetKey(KeyCode.LeftShift)) PlayerGUI.ZoomiesAnim();
+            if (left && rb.velocity.x >= 0 && PlayerMovement.Grounded() && Input.GetKey(KeyCode.LeftShift)) PlayerGUI.ZoomiesAnim();
+            else if (right && rb.velocity.x <= 0 && PlayerMovement.Grounded() && Input.GetKey(KeyCode.LeftShift)) PlayerGUI.ZoomiesAnim();
             else PlayerGUI.RunAnim();
         }
         else PlayerGUI.IdleAnim();
@@ -68,7 +68,7 @@ public class PlayerController : MonoBehaviour
 
         CameraLogic.Instance.CameraZoomControl(Input.mouseScrollDelta.y);
 
-
+        PlayerGUI.DustParticle(PlayerMovement.Grounded());
 
     }
 
