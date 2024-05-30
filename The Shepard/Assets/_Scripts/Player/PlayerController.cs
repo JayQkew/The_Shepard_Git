@@ -36,13 +36,26 @@ public class PlayerController : MonoBehaviour
         right = Input.GetKey(KeyCode.D);
         jump = Input.GetKey(KeyCode.Space);
 
+        #region Player Sprite Animations
+        if (!PlayerMovement.Grounded()) PlayerGUI.JumpAnim();
+        else if (forward || back || left || right)
+        {
+            if (left && rb.velocity.x > 0 && PlayerMovement.Grounded() && Input.GetKey(KeyCode.LeftShift)) PlayerGUI.ZoomiesAnim();
+            else if (right && rb.velocity.x < 0 && PlayerMovement.Grounded() && Input.GetKey(KeyCode.LeftShift)) PlayerGUI.ZoomiesAnim();
+            else PlayerGUI.RunAnim();
+        }
+        else PlayerGUI.IdleAnim();
+        #endregion
+
+        #region Flip Animation
         if (right) PlayerGUI.FlipRight();
         if (left) PlayerGUI.FlipLeft();
+        #endregion
 
-        if (!PlayerMovement.Grounded()) PlayerGUI.JumpAnim();
-        else if (forward || back || left || right) PlayerGUI.RunAnim();
-        else PlayerGUI.IdleAnim();
-
+        #region Inertia Damping
+        if (!forward && !back) PlayerMovement.InertiaDamp_Z(rb);
+        if (!left && !right) PlayerMovement.InertiaDamp_X(rb);
+        #endregion
 
         if (Input.GetMouseButtonDown(0)) PlayerActions.Bark();
         if (Input.GetMouseButtonDown(1)) PlayerActions.Interact();

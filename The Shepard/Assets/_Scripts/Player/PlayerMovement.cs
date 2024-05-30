@@ -8,7 +8,7 @@ public class PlayerMovement : MonoBehaviour
 
     public bool canMove;
 
-    [Space(10)]
+    [Header("Movement Limits")]
     [SerializeField]
     private float walkLimit;
     [SerializeField]
@@ -16,7 +16,6 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField]
     private float crawlLimit;
     [SerializeField]
-    [Space(10)]
 
     private float speedMultiplier = 1;
 
@@ -26,6 +25,8 @@ public class PlayerMovement : MonoBehaviour
     private float groundCastY;
     [SerializeField]
     private LayerMask ground;
+    [SerializeField]
+    private float intertiaDampDelta;
     public void Move(Vector3 dir)
     {
         if (canMove)
@@ -100,6 +101,19 @@ public class PlayerMovement : MonoBehaviour
         Gizmos.DrawLine(transform.position, transform.position + new Vector3(0, -groundCastY, 0));
     }
 
+    #region Inertia Damping
+    public void InertiaDamp_X(Rigidbody rb)
+    {
+        Vector3 xAxisDamp = new Vector3(0, rb.velocity.y, rb.velocity.z);
+        rb.velocity = Vector3.MoveTowards(rb.velocity, xAxisDamp, intertiaDampDelta * Time.deltaTime);
+    }
+
+    public void InertiaDamp_Z(Rigidbody rb)
+    {
+        Vector3 zAxisDamp = new Vector3(rb.velocity.x, rb.velocity.y, 0);
+        rb.velocity = Vector3.MoveTowards(rb.velocity, zAxisDamp, intertiaDampDelta * Time.deltaTime);
+    }
+    #endregion
 }
 
 public enum MoveState

@@ -12,7 +12,12 @@ public class Player_GUI : MonoBehaviour
 
     public void FlipLeft() => mainAnim.SetBool("FaceRight", false);
 
-    public void RunAnim() => guiAnim.SetInteger("Move", 1);
     public void IdleAnim() => guiAnim.SetInteger("Move", 0);
+    public void RunAnim() => guiAnim.SetInteger("Move", 1);
     public void JumpAnim() => guiAnim.SetInteger("Move", 2);
+    public void ZoomiesAnim()
+    {
+        guiAnim.SetInteger("Move", 3);
+        Debug.Log("Zoomies");
+    }
 }
