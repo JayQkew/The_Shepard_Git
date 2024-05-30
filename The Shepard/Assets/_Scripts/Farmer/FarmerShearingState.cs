@@ -30,7 +30,7 @@ public class FarmerShearingState : FarmerBaseState
     }
     public override void FixedUpdateState(FarmerManager manager)
     {
-        AuraEffect(manager);
+        //AuraEffect(manager);
     }
 
     public override void ExitState(FarmerManager manager)

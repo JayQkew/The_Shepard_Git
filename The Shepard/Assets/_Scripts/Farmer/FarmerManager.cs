@@ -28,8 +28,6 @@ public class FarmerManager : MonoBehaviour
     public Transform farmHouse;
     public Transform northPastureIn;
     public Transform northPastureOut;
-    public Transform westPastureIn;
-    public Transform westPastureOut;
     public Transform eastPastureIn;
     public Transform eastPastureOut;
     #endregion

@@ -33,9 +33,6 @@ public class SheepTracker : MonoBehaviour
             case TrackArea.NorthPasture:
                 if (pasture1.Count == allSheep.Length) return true;
                 else return false;
-            case TrackArea.WestPasture:
-                if (pasture2.Count == allSheep.Length) return true;
-                else return false;
             case TrackArea.EastPasture:
                 if (pasture3.Count == allSheep.Length) return true;
                 else return false;
@@ -49,7 +46,6 @@ public enum TrackArea
     Barn,
     Pen,
     NorthPasture,
-    WestPasture,
     EastPasture,
     OpenField
 }

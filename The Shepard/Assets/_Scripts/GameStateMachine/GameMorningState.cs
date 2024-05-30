@@ -29,19 +29,13 @@ public class GameMorningState : GameBaseState
 
     public void SelectPasture(GameManager manager)
     {
-        int randomNum = Random.Range(0, 3);
+        int randomNum = Random.Range(0, 2);
 
         if(randomNum == 0)
         {
             manager.targetArea = TrackArea.NorthPasture;
             FarmerManager.Instance.farmerTarget = FarmerManager.Instance.northPastureOut;
             AssistanceManager.Instance.ToNorthPasture();
-        }
-        else if (randomNum == 1)
-        {
-            manager.targetArea = TrackArea.WestPasture;
-            AssistanceManager.Instance.ToWestPasture();
-            FarmerManager.Instance.farmerTarget = FarmerManager.Instance.westPastureOut;
         }
         else
         {

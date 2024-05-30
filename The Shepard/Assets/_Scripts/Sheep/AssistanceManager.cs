@@ -7,14 +7,12 @@ public class AssistanceManager : MonoBehaviour
     public static AssistanceManager Instance { get; private set; }
 
     [Header("Herd Assistance Areas")]
-    public GameObject barnTop;
-    public GameObject penBot;
+    public GameObject barnRight;
+    public GameObject penRight;
     public GameObject penTop;
-    public GameObject pasture1Bot;
-    public GameObject pasture1Left;
-    public GameObject pasture1Right;
-    public GameObject pasture2Right;
-    public GameObject pasture3Left;
+    public GameObject penLeft;
+    public GameObject pastureN_Bot;
+    public GameObject pastureE_Left;
 
     private void Awake()
     {
@@ -23,67 +21,52 @@ public class AssistanceManager : MonoBehaviour
 
     public void ToNorthPasture()
     {
-        barnTop.SetActive(true);
+        barnRight.SetActive(true);
         penTop.SetActive(true);
-        pasture2Right.SetActive(true);
-        pasture3Left.SetActive(true);
+        pastureE_Left.SetActive(true);
 
-        penBot.SetActive(false); 
-        pasture1Bot.SetActive(false);
-        pasture1Left.SetActive(false);
-        pasture1Right.SetActive(false);
+        penRight.SetActive(false); 
+        pastureN_Bot.SetActive(false);
     }
 
     public void ToWestPasture()
     {
-        barnTop.SetActive(true);
+        barnRight.SetActive(true);
         penTop.SetActive(true);
-        pasture1Left.SetActive(true);
 
-        penBot.SetActive(false);
-        pasture1Bot.SetActive(false);
-        pasture1Right.SetActive(false);
-        pasture2Right.SetActive(false);
-        pasture3Left.SetActive(false);
+        penRight.SetActive(false);
+        pastureN_Bot.SetActive(false);
+        pastureE_Left.SetActive(false);
     }
 
     public void ToEastPasture()
     {
-        barnTop.SetActive(true);
+        barnRight.SetActive(true);
         penTop.SetActive(true);
-        pasture1Right.SetActive(true);
-        pasture2Right.SetActive(true);
 
-        penBot.SetActive(false);
-        pasture1Bot.SetActive(false);
-        pasture1Left.SetActive(false);
-        pasture3Left.SetActive(false);
+        penRight.SetActive(false);
+        pastureN_Bot.SetActive(false);
+        pastureE_Left.SetActive(false);
     }
 
     public void ToPen()
     {
-        barnTop.SetActive(true);
-        pasture1Bot.SetActive(true);
-        pasture2Right.SetActive(true);
-        pasture3Left.SetActive(true);
+        barnRight.SetActive(true);
+        pastureN_Bot.SetActive(true);
+        pastureE_Left.SetActive(true);
 
         penTop.SetActive(false);
-        penBot.SetActive(false);
-        pasture1Left.SetActive(false);
-        pasture1Right.SetActive(false);
+        penRight.SetActive(false);
     }
 
     public void BackToBarn()
     {
-        pasture1Bot.SetActive(true);
-        pasture3Left.SetActive(true);
-        pasture2Right.SetActive(true);
-        penBot.SetActive(true);
+        pastureN_Bot.SetActive(true);
+        pastureE_Left.SetActive(true);
+        penRight.SetActive(true);
 
-        barnTop.SetActive(false);
+        barnRight.SetActive(false);
         penTop.SetActive(false);
-        pasture1Left.SetActive(false);
-        pasture1Right.SetActive(false);
     }
 
 }

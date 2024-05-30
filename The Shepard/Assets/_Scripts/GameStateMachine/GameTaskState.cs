@@ -48,9 +48,6 @@ public class GameTaskState : GameBaseState
             case TrackArea.NorthPasture:
                 AssistanceManager.Instance.ToNorthPasture();
                 break;
-            case TrackArea.WestPasture:
-                AssistanceManager.Instance.ToWestPasture();
-                break;
             case TrackArea.EastPasture:
                 AssistanceManager.Instance.ToEastPasture();
                 break;

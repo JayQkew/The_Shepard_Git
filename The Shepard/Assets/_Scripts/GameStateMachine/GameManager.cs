@@ -67,11 +67,6 @@ public class GameManager : MonoBehaviour
                 targetArea = TrackArea.Pen;
                 FarmerManager.Instance.SwitchState(FarmerManager.Instance.FarmerGuideState);
                 break;
-            case TrackArea.WestPasture:
-                FarmerManager.Instance.farmerTarget = FarmerManager.Instance.westPastureIn;
-                targetArea = TrackArea.NorthPasture;
-                FarmerManager.Instance.SwitchState(FarmerManager.Instance.FarmerGuideState);
-                break;
             case TrackArea.EastPasture:
                 FarmerManager.Instance.farmerTarget = FarmerManager.Instance.eastPastureIn;
                 targetArea = TrackArea.NorthPasture;
