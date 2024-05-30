@@ -10,7 +10,6 @@ public class FarmerShearingState : FarmerBaseState
     {
         manager.farmerTarget = manager.northPastureOut;
         manager.SetFarmerTarget(manager.farmerTarget);
-        Debug.Log("Farmer in Shearing State");
     }
     public override void UpgradeState(FarmerManager manager)
     {
@@ -25,7 +24,6 @@ public class FarmerShearingState : FarmerBaseState
                 {
                     manager.SetFarmerTarget(closestSheep.transform);
                 }
-
             }
             ShearSheep(manager);
         }

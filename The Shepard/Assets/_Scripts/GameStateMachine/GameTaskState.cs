@@ -22,7 +22,6 @@ public class GameTaskState : GameBaseState
 
         if (manager.longWoolCount == 0)
         {
-            //manager.SwitchState(manager.MiddayState);
             ToCurrentState(manager);
         }
         else if (manager.currentTime >= manager.middayEnd)
@@ -78,6 +77,8 @@ public class GameTaskState : GameBaseState
         {
             manager.SwitchState(manager.EveningState);
         }
+        
+        FarmerManager.Instance.SwitchState(FarmerManager.Instance.FarmerChillState);
     }
 
 }

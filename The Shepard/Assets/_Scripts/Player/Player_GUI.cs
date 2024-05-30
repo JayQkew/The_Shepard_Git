@@ -8,26 +8,12 @@ public class Player_GUI : MonoBehaviour
     public Animator mainAnim;
     public Animator guiAnim;
 
-    public void FlipRight()
-    {
-        mainAnim.SetBool("FaceRight", true);
-    }
-    public void FlipLeft()
-    {
-        mainAnim.SetBool("FaceRight", false);
-    }
+    public void FlipRight() => mainAnim.SetBool("FaceRight", true);
+    public void FlipLeft() => mainAnim.SetBool("FaceRight", false);
     public void BarkAnim()
     {
-        if (mainAnim.GetCurrentAnimatorStateInfo(0).IsName("PlayerFlipLeft"))
-        {
-            mainAnim.Play("PlayerBarkLeft");
-            Debug.Log("BarkLeft");
-        }
-        else if (mainAnim.GetCurrentAnimatorStateInfo(0).IsName("PlayerFlipRight"))
-        {
-            mainAnim.Play("PlayerBarkRight");
-            Debug.Log("BarkRight");
-        }
+        if (mainAnim.GetCurrentAnimatorStateInfo(0).IsName("PlayerFlipLeft")) mainAnim.Play("PlayerBarkLeft");
+        else if (mainAnim.GetCurrentAnimatorStateInfo(0).IsName("PlayerFlipRight")) mainAnim.Play("PlayerBarkRight");
     }
 
     public void IdleAnim() => guiAnim.SetInteger("Move", 0);
