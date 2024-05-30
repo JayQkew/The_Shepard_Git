@@ -10692,6 +10692,7 @@ MonoBehaviour:
   ground:
     serializedVersion: 2
     m_Bits: 72
+  intertiaDampDelta: 15
 --- !u!114 &1983941148
 MonoBehaviour:
   m_ObjectHideFlags: 0

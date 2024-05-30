@@ -20,7 +20,7 @@ public class GameTaskState : GameBaseState
             manager.penForceWall.SetActive(true);
         }
 
-        if (manager.taskComplete == true)
+        if (manager.longWoolCount == 0)
         {
             //manager.SwitchState(manager.MiddayState);
             ToCurrentState(manager);

@@ -57,7 +57,11 @@ public class PlayerController : MonoBehaviour
         if (!left && !right) PlayerMovement.InertiaDamp_X(rb);
         #endregion
 
-        if (Input.GetMouseButtonDown(0)) PlayerActions.Bark();
+        if (Input.GetMouseButtonDown(0))
+        {
+            PlayerActions.Bark();
+            PlayerGUI.BarkAnim();
+        }
         if (Input.GetMouseButtonDown(1)) PlayerActions.Interact();
 
         PlayerMovement.MoveStateCheck(Input.GetKey(KeyCode.LeftShift), Input.GetKey(KeyCode.V));
