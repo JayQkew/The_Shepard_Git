@@ -123,6 +123,7 @@ public class FarmerShearingState : FarmerBaseState
             {
                 hit[i].transform.GetComponent<SheepBehaviour>().sheepStats.woolLength = WoolLength.None;
                 hit[i].transform.GetComponent<SheepBehaviour>().CheckWool();
+                hit[i].transform.GetComponent<SheepBehaviour>().shearedWool.Play();
                 GameManager.Instance.longWoolCount--;
 
                 Debug.Log($"{hit[i].transform.GetComponent<SheepBehaviour>().sheepStats.name} got sheared");

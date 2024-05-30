@@ -15,6 +15,7 @@ public class SheepBehaviour : MonoBehaviour
     public bool startled;   //barked at
     public SheepState nextState;
     public float currentTime;
+    public ParticleSystem shearedWool;
 
     #region State Machine
     public SheepBaseState currentState;
