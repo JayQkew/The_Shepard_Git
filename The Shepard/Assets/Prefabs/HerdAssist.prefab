@@ -274,5 +274,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   direction: 2
-  forceMultiplier: 2
+  forceMultiplier: 4
   sheep: []

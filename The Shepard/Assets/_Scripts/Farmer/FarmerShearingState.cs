@@ -14,7 +14,7 @@ public class FarmerShearingState : FarmerBaseState
     public override void UpgradeState(FarmerManager manager)
     {
         GameObject closestSheep = ClosestSheep(manager);
-
+        AuraEffect(manager);
         //all sheep in pen = start chasing sheep
         if (SheepTracker.Instance.AtRequiredPlace(TrackArea.Pen))
         {
@@ -30,7 +30,7 @@ public class FarmerShearingState : FarmerBaseState
     }
     public override void FixedUpdateState(FarmerManager manager)
     {
-        //AuraEffect(manager);
+        AuraEffect(manager);
     }
 
     public override void ExitState(FarmerManager manager)
@@ -83,7 +83,7 @@ public class FarmerShearingState : FarmerBaseState
         foreach(GameObject agent in AreaOfEffect(manager))
         {
             Vector3 force = PushForce(manager, agent) * manager.farmerPushForce;
-            agent.GetComponent<Rigidbody>().AddForce(force, ForceMode.Force);
+            agent.GetComponent<Rigidbody>().AddForce(force * Time.deltaTime, ForceMode.Force);
         }
     }
 

@@ -23,28 +23,19 @@ public class AssistanceManager : MonoBehaviour
     {
         barnRight.SetActive(true);
         penTop.SetActive(true);
-        pastureE_Left.SetActive(true);
 
-        penRight.SetActive(false); 
-        pastureN_Bot.SetActive(false);
-    }
-
-    public void ToWestPasture()
-    {
-        barnRight.SetActive(true);
-        penTop.SetActive(true);
-
+        penLeft.SetActive(false);
+        pastureE_Left.SetActive(false);
         penRight.SetActive(false);
         pastureN_Bot.SetActive(false);
-        pastureE_Left.SetActive(false);
     }
-
     public void ToEastPasture()
     {
         barnRight.SetActive(true);
-        penTop.SetActive(true);
+        penRight.SetActive(true);
 
-        penRight.SetActive(false);
+        penLeft.SetActive(false);
+        penTop.SetActive(false);
         pastureN_Bot.SetActive(false);
         pastureE_Left.SetActive(false);
     }
@@ -55,6 +46,7 @@ public class AssistanceManager : MonoBehaviour
         pastureN_Bot.SetActive(true);
         pastureE_Left.SetActive(true);
 
+        penLeft.SetActive(false);
         penTop.SetActive(false);
         penRight.SetActive(false);
     }
@@ -64,6 +56,7 @@ public class AssistanceManager : MonoBehaviour
         pastureN_Bot.SetActive(true);
         pastureE_Left.SetActive(true);
         penRight.SetActive(true);
+        penLeft.SetActive(true);
 
         barnRight.SetActive(false);
         penTop.SetActive(false);

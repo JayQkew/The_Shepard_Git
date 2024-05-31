@@ -9,6 +9,8 @@ public class Sheep_GUI : MonoBehaviour
 
     public void FlipRight() => mainAnim.SetBool("FaceRight", true);
     public void FlipLeft() => mainAnim.SetBool("FaceRight", false);
+    public void RunAnim() => mainAnim.SetInteger("Move", 1);
+    public void IdleAnim() => mainAnim.SetInteger("Move", 0);
 
     public void NoneWool() => guiAnim.SetInteger("SheepLength", 0);
     public void ShortWool() => guiAnim.SetInteger("SheepLength", 1);

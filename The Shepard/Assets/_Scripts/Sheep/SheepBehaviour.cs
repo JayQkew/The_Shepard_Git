@@ -54,7 +54,7 @@ public class SheepBehaviour : MonoBehaviour
 
     private void Update()
     {
-        CheckDirection();
+        CheckMovement();
         GrowWool();
         rb.velocity = Vector3.ClampMagnitude(rb.velocity, currentLimit);
         currentState.UpdateState(this);
@@ -104,10 +104,23 @@ public class SheepBehaviour : MonoBehaviour
 
     private void SetGrowSpeed() => woolGrow = Random.Range(woolGrowMin, woolGrowMax);
 
-    private void CheckDirection()
+    private void CheckMovement()
     {
-        if (rb.velocity.x < -1f) GetComponent<Sheep_GUI>().FlipLeft();
-        else if (rb.velocity.x > 1f) GetComponent<Sheep_GUI>().FlipRight();
+        if (rb.velocity.x < -0.25f)
+        {
+            GetComponent<Sheep_GUI>().FlipLeft();
+
+            if(rb.velocity.x < -0.26f) GetComponent<Sheep_GUI>().RunAnim();
+        }
+        else if (rb.velocity.x > 0.25f)
+        {
+            GetComponent<Sheep_GUI>().FlipRight();
+            if(rb.velocity.x > 0.26f) GetComponent<Sheep_GUI>().RunAnim();
+        }
+        else
+        {
+            GetComponent<Sheep_GUI>().IdleAnim();
+        }
     }
 
     #region Set Times
