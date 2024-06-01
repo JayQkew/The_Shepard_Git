@@ -8,29 +8,49 @@ public class FarmerShearingState : FarmerBaseState
 {
     public override void EnterState(FarmerManager manager)
     {
-        manager.farmerTarget = manager.northPastureOut;
-        manager.SetFarmerTarget(manager.farmerTarget);
+        manager.farmerTarget = SheepPastureArea(manager);
+        manager.pushDoor = true;
+        manager.SetFarmerTarget(manager.farmerTarget); //where the sheep are currently
     }
     public override void UpgradeState(FarmerManager manager)
     {
+        AreaOfEffect(manager);
         GameObject closestSheep = ClosestSheep(manager);
-        AuraEffect(manager);
-        //all sheep in pen = start chasing sheep
-        if (SheepTracker.Instance.AtRequiredPlace(TrackArea.Pen))
+
+        if(manager.farmerNavAgent.remainingDistance <= 0.25f && SheepTracker.Instance.AtRequiredPlace(TrackArea.Pen))
         {
+            manager.pushDoor = false;
+            manager.SetFarmerTarget(manager.shearPosition);
+
+            AssistanceManager.Instance.CloseAllGates();
+        }
+
+        //all sheep in pen = start chasing sheep
+        if (SheepTracker.Instance.AtRequiredPlace(TrackArea.Pen) && GameManager.Instance.longWoolCount > 0)
+        {
+            //AuraEffect(manager);
             if (closestSheep != null)
             {
-                if (closestSheep.GetComponent<SheepBehaviour>().sheepStats.woolLength == WoolLength.Long)
-                {
-                    manager.SetFarmerTarget(closestSheep.transform);
-                }
+                if (closestSheep.GetComponent<SheepBehaviour>().sheepStats.woolLength == WoolLength.Long) manager.SetFarmerTarget(closestSheep.transform);
             }
             ShearSheep(manager);
+        }
+
+
+        if(GameManager.Instance.longWoolCount <= 0)
+        {
+            manager.farmerTarget = manager.barnOut;
+            GameManager.Instance.targetArea = TrackArea.Barn;
+            AssistanceManager.Instance.BackToBarn();
+            manager.SwitchState(manager.FarmerGuideState);
         }
     }
     public override void FixedUpdateState(FarmerManager manager)
     {
-        AuraEffect(manager);
+        if (manager.farmerNavAgent.remainingDistance <= 1f && SheepTracker.Instance.AtRequiredPlace(TrackArea.Pen))
+        {
+            AuraEffect(manager);
+        }
     }
 
     public override void ExitState(FarmerManager manager)
@@ -76,47 +96,38 @@ public class FarmerShearingState : FarmerBaseState
         return closestSheep;
 
     }
-
-
     private void AuraEffect(FarmerManager manager)
     {
-        foreach(GameObject agent in AreaOfEffect(manager))
+        foreach(GameObject agent in manager.sur_agents)
         {
             Vector3 force = PushForce(manager, agent) * manager.farmerPushForce;
             agent.GetComponent<Rigidbody>().AddForce(force * Time.deltaTime, ForceMode.Force);
         }
     }
-
     private Vector3 PushForce(FarmerManager manager, GameObject effectedAgent)
     {
         Vector3 dir = effectedAgent.transform.position - manager.farmer.transform.position;
         Vector3 forceNorm = Vector3.ClampMagnitude(dir, 1);
         return forceNorm;
     }
-
-    public GameObject[] AreaOfEffect(FarmerManager manager)
+    public void AreaOfEffect(FarmerManager manager)
     {
         RaycastHit[] hit = Physics.SphereCastAll(manager.farmer.transform.position, manager.farmerAuraRadius, Vector3.up, 0, manager.sheepLayer);
         List<GameObject> sur_agents = new List<GameObject>();
 
         for (int i  = 0; i < hit.Length; i++)
         {
-            if (hit[i].transform.gameObject != manager.farmer)
+            if (hit[i].transform.gameObject != manager.farmer && !sur_agents.Contains(hit[i].transform.gameObject))
             {
                 sur_agents.Add(hit[i].transform.gameObject);
             }
         }
 
-        return sur_agents.ToArray();
+        manager.sur_agents = sur_agents.ToArray();
     }
-
-
-    //Shear the sheep if collision occurs!
     public void ShearSheep(FarmerManager manager)
     {
         RaycastHit[] hit = Physics.SphereCastAll(manager.farmer.transform.position, 1, Vector3.up, 0, manager.sheepLayer);
-        List<GameObject> sur_agents = new List<GameObject>();
-
         for (int i = 0; i < hit.Length; i++)
         {
             if (hit[i].transform.gameObject != manager.farmer && hit[i].transform.GetComponent<SheepBehaviour>().sheepStats.woolLength == WoolLength.Long)
@@ -129,6 +140,15 @@ public class FarmerShearingState : FarmerBaseState
                 Debug.Log($"{hit[i].transform.GetComponent<SheepBehaviour>().sheepStats.name} got sheared");
             }
         }
+    }
+    private Transform SheepPastureArea(FarmerManager manager)
+    {
+        int allSheepLength = SheepTracker.Instance.allSheep.Length;
 
+        if (SheepTracker.Instance.northPasture.Count == allSheepLength) return manager.northPastureOut;
+        else if (SheepTracker.Instance.eastPasture.Count == allSheepLength) return manager.eastPastureOut;
+        else if (SheepTracker.Instance.barn.Count == allSheepLength) return manager.barnOut;
+        else if (SheepTracker.Instance.pen.Count == allSheepLength) return manager.shearPosition;
+        else return manager.shearPosition;
     }
 }

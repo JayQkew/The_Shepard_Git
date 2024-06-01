@@ -25,6 +25,7 @@ public class GameEveningState : GameBaseState
 
     public override void ExitState(GameManager manager)
     {
+        manager.taskComplete = false;
         manager.currentTime = 0;
     }
 }

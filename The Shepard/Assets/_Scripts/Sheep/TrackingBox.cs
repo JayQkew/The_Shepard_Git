@@ -18,10 +18,10 @@ public class TrackingBox : MonoBehaviour
                     SheepTracker.Instance.pen.Add(other.gameObject);
                     break;
                 case TrackArea.NorthPasture:
-                    SheepTracker.Instance.pasture1.Add(other.gameObject);
+                    SheepTracker.Instance.northPasture.Add(other.gameObject);
                     break;
                 case TrackArea.EastPasture:
-                    SheepTracker.Instance.pasture3.Add(other.gameObject);
+                    SheepTracker.Instance.eastPasture.Add(other.gameObject);
                     break;
             }
         }
@@ -63,10 +63,10 @@ public class TrackingBox : MonoBehaviour
                     SheepTracker.Instance.pen.Remove(other.gameObject);
                     break;
                 case TrackArea.NorthPasture:
-                    SheepTracker.Instance.pasture1.Remove(other.gameObject);
+                    SheepTracker.Instance.northPasture.Remove(other.gameObject);
                     break;
                 case TrackArea.EastPasture:
-                    SheepTracker.Instance.pasture3.Remove(other.gameObject);
+                    SheepTracker.Instance.eastPasture.Remove(other.gameObject);
                     break;
             }
         }

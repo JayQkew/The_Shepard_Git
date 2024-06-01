@@ -8,6 +8,7 @@ public class GameTaskState : GameBaseState
     {
         Debug.Log("Task Start");
         AssistanceManager.Instance.ToPen();
+        manager.targetArea = TrackArea.Pen;
         FarmerManager.Instance.SwitchState(FarmerManager.Instance.FarmerShearingState);
     }
 
@@ -20,8 +21,9 @@ public class GameTaskState : GameBaseState
             manager.penForceWall.SetActive(true);
         }
 
-        if (manager.longWoolCount == 0)
+        if (manager.longWoolCount <= 0)
         {
+            manager.taskComplete = true;
             ToCurrentState(manager);
         }
         else if (manager.currentTime >= manager.middayEnd)
@@ -38,26 +40,11 @@ public class GameTaskState : GameBaseState
         if (manager.taskComplete == true)
         {
             manager.selectedTask = Tasks.None;
-            manager.taskComplete = false;
+
         }
 
-        //ToCurrentState(manager);
-
-        switch (manager.targetArea)
-        {
-            case TrackArea.NorthPasture:
-                AssistanceManager.Instance.ToNorthPasture();
-                break;
-            case TrackArea.EastPasture:
-                AssistanceManager.Instance.ToEastPasture();
-                break;
-            case TrackArea.Barn:
-                AssistanceManager.Instance.BackToBarn();
-                break;
-            case TrackArea.Pen:
-                AssistanceManager.Instance.ToPen();
-                break;
-        }
+        AssistanceManager.Instance.BackToBarn();
+        manager.targetArea = TrackArea.Barn;
     }
 
     public void ToCurrentState(GameManager manager)
@@ -75,7 +62,6 @@ public class GameTaskState : GameBaseState
             manager.SwitchState(manager.EveningState);
         }
         
-        FarmerManager.Instance.SwitchState(FarmerManager.Instance.FarmerChillState);
     }
 
 }

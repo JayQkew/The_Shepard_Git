@@ -8,9 +8,14 @@ public class HerdGateAssistance : MonoBehaviour
     public float forceMultiplier;
     public List<GameObject> sheep;
 
+
+    private void OnDisable()
+    {
+        sheep.Clear();
+    }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "sheep")
+        if (other.tag == "sheep" && !sheep.Contains(other.gameObject))
         {
             sheep.Add(other.gameObject);
         }

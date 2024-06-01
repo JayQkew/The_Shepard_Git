@@ -64,12 +64,12 @@ public class GameManager : MonoBehaviour
         {
             case TrackArea.NorthPasture:
                 FarmerManager.Instance.farmerTarget = FarmerManager.Instance.northPastureIn;
-                targetArea = TrackArea.Pen;
+                targetArea = TrackArea.Barn;
                 FarmerManager.Instance.SwitchState(FarmerManager.Instance.FarmerGuideState);
                 break;
             case TrackArea.EastPasture:
                 FarmerManager.Instance.farmerTarget = FarmerManager.Instance.eastPastureIn;
-                targetArea = TrackArea.NorthPasture;
+                targetArea = TrackArea.Barn;
                 FarmerManager.Instance.SwitchState(FarmerManager.Instance.FarmerGuideState);
                 break;
         }

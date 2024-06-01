@@ -11,9 +11,9 @@ public class SheepTracker : MonoBehaviour
     [Header("Area Tracking")]
     public List<GameObject> barn;
     public List<GameObject> pen;
-    public List<GameObject> pasture1;
+    public List<GameObject> northPasture;
     public List<GameObject> pasture2;
-    public List<GameObject> pasture3;
+    public List<GameObject> eastPasture;
 
     private void Awake()
     {
@@ -31,14 +31,15 @@ public class SheepTracker : MonoBehaviour
                 if (pen.Count == allSheep.Length) return true;
                 else return false;
             case TrackArea.NorthPasture:
-                if (pasture1.Count == allSheep.Length) return true;
+                if (northPasture.Count == allSheep.Length) return true;
                 else return false;
             case TrackArea.EastPasture:
-                if (pasture3.Count == allSheep.Length) return true;
+                if (eastPasture.Count == allSheep.Length) return true;
                 else return false;
             default: return false;
         }
     }
+
 }
 
 public enum TrackArea

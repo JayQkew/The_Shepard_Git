@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.AI.Navigation;
 using UnityEngine;
 
 public class AssistanceManager : MonoBehaviour
 {
     public static AssistanceManager Instance { get; private set; }
 
+    public bool debugging;
     [Header("Herd Assistance Areas")]
     public GameObject barnRight;
     public GameObject penRight;
@@ -14,9 +16,18 @@ public class AssistanceManager : MonoBehaviour
     public GameObject pastureN_Bot;
     public GameObject pastureE_Left;
 
+    [Header("Herding Gates")]
+    public GameObject barnGate;
+    public GameObject pastureN_gate;
+    public GameObject pastureE_gate;
+
     private void Awake()
     {
         Instance = this;
+    }
+
+    private void Update()
+    {
     }
 
     public void ToNorthPasture()
@@ -28,6 +39,10 @@ public class AssistanceManager : MonoBehaviour
         pastureE_Left.SetActive(false);
         penRight.SetActive(false);
         pastureN_Bot.SetActive(false);
+
+        //GateOpenOut(barnGate);
+        //GateOpenOut(pastureN_gate);
+        //GateClose(pastureE_gate);
     }
     public void ToEastPasture()
     {
@@ -38,8 +53,11 @@ public class AssistanceManager : MonoBehaviour
         penTop.SetActive(false);
         pastureN_Bot.SetActive(false);
         pastureE_Left.SetActive(false);
-    }
 
+        //GateOpenOut(barnGate);
+        //GateOpenOut(pastureE_gate);
+        //GateClose(pastureN_gate);
+    }
     public void ToPen()
     {
         barnRight.SetActive(true);
@@ -49,8 +67,11 @@ public class AssistanceManager : MonoBehaviour
         penLeft.SetActive(false);
         penTop.SetActive(false);
         penRight.SetActive(false);
-    }
 
+        //GateOpenOut(barnGate);
+        //GateOpenIn(pastureN_gate);
+        //GateOpenIn(pastureE_gate);
+    }
     public void BackToBarn()
     {
         pastureN_Bot.SetActive(true);
@@ -60,8 +81,22 @@ public class AssistanceManager : MonoBehaviour
 
         barnRight.SetActive(false);
         penTop.SetActive(false);
+
+        //GateOpenIn(barnGate);
+        //GateOpenIn(pastureN_gate);
+        //GateOpenIn(pastureE_gate);
     }
 
+    public void CloseAllGates()
+    {
+        GateClose(barnGate);
+        GateClose(pastureN_gate);
+        GateClose(pastureE_gate);
+    }
+
+    public void GateClose(GameObject gate) => gate.GetComponent<Animator>().SetInteger("Angle", 0);
+    public void GateOpenOut(GameObject gate) => gate.GetComponent<Animator>().SetInteger("Angle", 1);
+    public void GateOpenIn(GameObject gate) => gate.GetComponent<Animator>().SetInteger("Angle", 2);
 }
 
 public enum Pastures

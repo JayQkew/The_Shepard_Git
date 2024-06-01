@@ -15,6 +15,9 @@ public class FarmerManager : MonoBehaviour
     public float farmerAuraRadius;
     public float farmerPushForce;
     public bool arriveAtDestination;
+    public bool pushDoor;
+
+    public GameObject[] sur_agents;
 
     #region Farmer States
     public FarmerBaseState currentState;
@@ -30,6 +33,8 @@ public class FarmerManager : MonoBehaviour
     public Transform northPastureOut;
     public Transform eastPastureIn;
     public Transform eastPastureOut;
+    public Transform shearPosition;
+    public Transform barnOut;
     #endregion
 
     private void Awake()
@@ -70,5 +75,8 @@ public class FarmerManager : MonoBehaviour
     {
         Gizmos.color = Color.blue;
         Gizmos.DrawWireSphere(farmer.transform.position, sheepChaseRadius);
+
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(farmer.transform.position, farmerAuraRadius);
     }
 }
