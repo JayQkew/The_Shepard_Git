@@ -9,7 +9,7 @@ public class FarmerShearingState : FarmerBaseState
     public override void EnterState(FarmerManager manager)
     {
         manager.farmerTarget = SheepPastureArea(manager);
-        manager.pushDoor = true;
+        manager.openGate = true;
         manager.SetFarmerTarget(manager.farmerTarget); //where the sheep are currently
     }
     public override void UpgradeState(FarmerManager manager)
@@ -19,7 +19,7 @@ public class FarmerShearingState : FarmerBaseState
 
         if(manager.farmerNavAgent.remainingDistance <= 0.25f && SheepTracker.Instance.AtRequiredPlace(TrackArea.Pen))
         {
-            manager.pushDoor = false;
+            manager.openGate = false;
             manager.SetFarmerTarget(manager.shearPosition);
 
             AssistanceManager.Instance.CloseAllGates();

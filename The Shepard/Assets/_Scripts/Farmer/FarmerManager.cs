@@ -15,7 +15,8 @@ public class FarmerManager : MonoBehaviour
     public float farmerAuraRadius;
     public float farmerPushForce;
     public bool arriveAtDestination;
-    public bool pushDoor;
+
+    public bool openGate;
 
     public GameObject[] sur_agents;
 

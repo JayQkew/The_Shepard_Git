@@ -5,21 +5,18 @@ using UnityEngine;
 public class GateTriggerLogic : MonoBehaviour
 {
     public GameObject gate;
-    OpenDirection openDirection;
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.tag == "farmer")
-        {
-            if(FarmerManager.Instance.pushDoor) AssistanceManager.Instance.GateOpenOut(gate);
-        }
-    }
+    public OpenDirection gateOpenDirection;
 
     private void OnTriggerStay(Collider other)
     {
         if (other.tag == "farmer")
         {
-            if(!FarmerManager.Instance.pushDoor) AssistanceManager.Instance.GateClose(gate);
+            if(!FarmerManager.Instance.openGate) AssistanceManager.Instance.GateClose(gate);
+            else
+            {
+                if (gateOpenDirection == OpenDirection.Out) AssistanceManager.Instance.GateOpenOut(gate);
+                else if (gateOpenDirection == OpenDirection.In) AssistanceManager.Instance.GateOpenIn(gate);
+            }
         }
     }
 }
@@ -27,6 +24,5 @@ public class GateTriggerLogic : MonoBehaviour
 public enum OpenDirection
 {
     In,
-    Out,
-    Close
+    Out
 }

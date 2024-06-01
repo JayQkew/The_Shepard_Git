@@ -40,9 +40,9 @@ public class AssistanceManager : MonoBehaviour
         penRight.SetActive(false);
         pastureN_Bot.SetActive(false);
 
-        //GateOpenOut(barnGate);
-        //GateOpenOut(pastureN_gate);
-        //GateClose(pastureE_gate);
+        barnGate.GetComponentInChildren<GateTriggerLogic>().gateOpenDirection = OpenDirection.Out;
+        pastureN_gate.GetComponentInChildren<GateTriggerLogic>().gateOpenDirection = OpenDirection.Out;
+        pastureE_gate.GetComponentInChildren<GateTriggerLogic>().gateOpenDirection = OpenDirection.Out;
     }
     public void ToEastPasture()
     {
@@ -54,9 +54,9 @@ public class AssistanceManager : MonoBehaviour
         pastureN_Bot.SetActive(false);
         pastureE_Left.SetActive(false);
 
-        //GateOpenOut(barnGate);
-        //GateOpenOut(pastureE_gate);
-        //GateClose(pastureN_gate);
+        barnGate.GetComponentInChildren<GateTriggerLogic>().gateOpenDirection = OpenDirection.Out;
+        pastureN_gate.GetComponentInChildren<GateTriggerLogic>().gateOpenDirection = OpenDirection.Out;
+        pastureE_gate.GetComponentInChildren<GateTriggerLogic>().gateOpenDirection = OpenDirection.Out;
     }
     public void ToPen()
     {
@@ -68,23 +68,23 @@ public class AssistanceManager : MonoBehaviour
         penTop.SetActive(false);
         penRight.SetActive(false);
 
-        //GateOpenOut(barnGate);
-        //GateOpenIn(pastureN_gate);
-        //GateOpenIn(pastureE_gate);
+        barnGate.GetComponentInChildren<GateTriggerLogic>().gateOpenDirection = OpenDirection.Out;
+        pastureN_gate.GetComponentInChildren<GateTriggerLogic>().gateOpenDirection = OpenDirection.In;
+        pastureE_gate.GetComponentInChildren<GateTriggerLogic>().gateOpenDirection = OpenDirection.In;
     }
     public void BackToBarn()
     {
         pastureN_Bot.SetActive(true);
         pastureE_Left.SetActive(true);
-        penRight.SetActive(true);
+        penRight.SetActive(false);
         penLeft.SetActive(true);
 
         barnRight.SetActive(false);
         penTop.SetActive(false);
 
-        //GateOpenIn(barnGate);
-        //GateOpenIn(pastureN_gate);
-        //GateOpenIn(pastureE_gate);
+        barnGate.GetComponentInChildren<GateTriggerLogic>().gateOpenDirection = OpenDirection.In;
+        pastureN_gate.GetComponentInChildren<GateTriggerLogic>().gateOpenDirection = OpenDirection.In;
+        pastureE_gate.GetComponentInChildren<GateTriggerLogic>().gateOpenDirection = OpenDirection.In;
     }
 
     public void CloseAllGates()

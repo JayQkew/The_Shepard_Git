@@ -12,11 +12,6 @@ public class GameEveningState : GameBaseState
 
     public override void UpdateState(GameManager manager)
     {
-        //if (SheepTrackerManager.Instance.AtRequiredPlace(TrackArea.Barn))
-        //{
-        //    manager.SwitchState(manager.MorningState);
-        //}
-
         if (manager.currentTime >= manager.eveningEnd)
         {
             manager.SwitchState(manager.MorningState);
@@ -25,6 +20,7 @@ public class GameEveningState : GameBaseState
 
     public override void ExitState(GameManager manager)
     {
+        AssistanceManager.Instance.CloseAllGates();
         manager.taskComplete = false;
         manager.currentTime = 0;
     }

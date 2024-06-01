@@ -6,7 +6,7 @@ public class FarmerGuideState : FarmerBaseState
 {
     public override void EnterState(FarmerManager manager)
     {
-        manager.pushDoor = true;
+        manager.openGate = true;
         manager.SetFarmerTarget(manager.farmerTarget);
     }
 
@@ -15,7 +15,7 @@ public class FarmerGuideState : FarmerBaseState
         if (SheepTracker.Instance.AtRequiredPlace(GameManager.Instance.targetArea))
         {
             Debug.Log($"All sheep @ {GameManager.Instance.targetArea}");
-            manager.pushDoor = false;
+            manager.openGate = false;
             manager.SwitchState(manager.FarmerChillState);
         }
     }
