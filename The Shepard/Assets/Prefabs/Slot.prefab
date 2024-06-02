@@ -60,9 +60,10 @@ MonoBehaviour:
   cosmeticType: 0
   missionDescription: 
   cosmeticDescription: 
-  empty: {r: 1, g: 1, b: 1, a: 1}
-  hover: {r: 0.4716981, g: 0.4716981, b: 0.4716981, a: 1}
-  pressed: {r: 0.18867922, g: 0.18867922, b: 0.18867922, a: 1}
+  hoverColour: {r: 0.87058824, g: 0.87058824, b: 0.87058824, a: 1}
+  selectedColor: {r: 0.6784314, g: 0.79607844, b: 0.99215686, a: 1}
+  unpressedButton: {fileID: 21300000, guid: e5da0bf13f459124880e4fb99b996679, type: 3}
+  pressedButton: {fileID: 21300000, guid: ddf5963b9a5752547ad1e706b7d152aa, type: 3}
 --- !u!1 &2943329459951543512
 GameObject:
   m_ObjectHideFlags: 0

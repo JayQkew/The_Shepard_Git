@@ -55,6 +55,22 @@ public class CosmeticManager : MonoBehaviour
     private void Start()
     {
         GetSlots();
+
+        if (Debug)
+        {
+            allCosmetics = new Dictionary<CosmeticName, bool>
+            {
+                {CosmeticName.Eyelashes,    true },
+                {CosmeticName.Glasses,      true },
+                {CosmeticName.Anime,        true },
+                {CosmeticName.Scarf,        true },
+                {CosmeticName.Bandana,      true },
+                {CosmeticName.Bowtie,       true },
+                {CosmeticName.Frog,         true },
+                {CosmeticName.Ducken,       true },
+                {CosmeticName.Noot,         true }
+            };
+        }
     }
 
     public void GetSlots()
@@ -78,8 +94,17 @@ public class CosmeticManager : MonoBehaviour
         CosmeticType cosType = slot.GetComponent<CosmeticSlot>().cosmeticType;
         foreach (GameObject s in slots)
         {
-            if (s != slot && s.GetComponent<CosmeticSlot>().cosmeticType == cosType) s.GetComponent<CosmeticSlot>().selected = false;
-            else s.GetComponent<CosmeticSlot>().selected = true;
+            if (s != slot && s.GetComponent<CosmeticSlot>().cosmeticType == cosType)
+            {
+                s.GetComponent<CosmeticSlot>().selected = false;
+                s.GetComponent <CosmeticSlot>().slotIcon.GetComponent<Image>().sprite = s.GetComponent<CosmeticSlot>().unpressedButton;
+                s.GetComponent <CosmeticSlot>().slotIcon.GetComponent<Image>().color = Color.white;
+            }
+            else if (s.GetComponent<CosmeticSlot>().cosmeticType == cosType)
+            {
+                s.GetComponent<CosmeticSlot>().selected = true;
+                s.GetComponent<CosmeticSlot>().slotIcon.GetComponent<Image>().color = s.GetComponent<CosmeticSlot>().selectedColor;
+            }
         }
 
         switch (cosType)
@@ -112,6 +137,8 @@ public class CosmeticManager : MonoBehaviour
     {
         cosmeticType.GetComponent<SpriteRenderer>().sprite = null;
         displayType.GetComponent<Image>().color = Color.clear;
+        slot.GetComponent<CosmeticSlot>().slotIcon.GetComponent<Image>().sprite = slot.GetComponent<CosmeticSlot>().unpressedButton;
+        slot.GetComponent<CosmeticSlot>().selected = false;
 
         equiptCosmetics[slot.GetComponent<CosmeticSlot>().cosmeticType] = CosmeticName.None;
     }

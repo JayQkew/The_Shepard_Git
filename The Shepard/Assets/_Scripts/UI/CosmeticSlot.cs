@@ -18,12 +18,10 @@ public class CosmeticSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
     public string missionDescription;
     public string cosmeticDescription;
 
-
-    [Header("Debug")]
-    public Color empty;
-    public Color hover;
-    public Color pressed;
-
+    public Color hoverColour;
+    public Color selectedColor;
+    public Sprite unpressedButton;
+    public Sprite pressedButton;
     private void Start()
     {
         unlocked = CosmeticManager.Instance.allCosmetics[cosmeticName];
@@ -35,6 +33,17 @@ public class CosmeticSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
         {
             cosmeticIcon.GetComponent<Image>().color = Color.white;
             slotIcon.GetComponent<Image>().color = Color.white;
+
+            if (selected)
+            {
+                slotIcon.GetComponent<Image>().sprite = pressedButton;
+                slotIcon.GetComponent<Image>().color = selectedColor;
+            }
+            else
+            {
+                slotIcon.GetComponent <Image>().sprite = unpressedButton;
+                slotIcon.GetComponent<Image>().color = Color.white;
+            }
         }
         else
         {
@@ -47,11 +56,30 @@ public class CosmeticSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
     {
         CosmeticManager.Instance.SetCosmeticInfo(gameObject);
         CosmeticManager.Instance.ShowOnDisplay(gameObject);
+
+        if (unlocked)
+        {
+            slotIcon.GetComponent<Image>().color = hoverColour;
+        }
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
         CosmeticManager.Instance.ReturnToOriginalDisplay(gameObject);
+
+        if (unlocked)
+        {
+            if (selected)
+            {
+                slotIcon.GetComponent<Image>().sprite = pressedButton;
+                slotIcon.GetComponent<Image>().color = selectedColor;
+            }
+            else
+            {
+                slotIcon.GetComponent<Image>().sprite = unpressedButton;
+                slotIcon.GetComponent<Image>().color = Color.white;
+            }
+        }
     }
 
     public void OnPointerDown(PointerEventData eventData)
@@ -64,6 +92,19 @@ public class CosmeticSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        CosmeticManager.Instance.SelectedSlot(gameObject);
+        if (unlocked)
+        {
+            CosmeticManager.Instance.SelectedSlot(gameObject);
+            if (selected)
+            {
+                slotIcon.GetComponent<Image>().sprite = pressedButton;
+                slotIcon.GetComponent<Image>().color = selectedColor;
+            }
+            else
+            {
+                slotIcon.GetComponent<Image>().sprite = unpressedButton;
+                slotIcon.GetComponent<Image>().color = Color.white;
+            }
+        }
     }
 }
