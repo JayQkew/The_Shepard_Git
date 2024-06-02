@@ -51,10 +51,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa6523b50cf12ce429dd42604107d867, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cosmeticName: 0
-  cosmetic: {fileID: 0}
+  cosmeticSprite: {fileID: 0}
   cosmeticIcon: {fileID: 2943329459951543512}
+  slotIcon: {fileID: 8168129514389708168}
   selected: 0
+  unlocked: 0
+  cosmeticName: 0
+  cosmeticType: 0
+  missionDescription: 
+  cosmeticDescription: 
   empty: {r: 1, g: 1, b: 1, a: 1}
   hover: {r: 0.4716981, g: 0.4716981, b: 0.4716981, a: 1}
   pressed: {r: 0.18867922, g: 0.18867922, b: 0.18867922, a: 1}

@@ -7,10 +7,17 @@ using UnityEngine.UI;
 public class CosmeticSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler, IPointerUpHandler, IPointerClickHandler
 {
     [Header("Cosmetics")]
-    public CosmeticName cosmeticName;
-    public Sprite cosmetic;
+    public Sprite cosmeticSprite;
     public GameObject cosmeticIcon;
+    public GameObject slotIcon;
     public bool selected;
+
+    public bool unlocked;
+    public CosmeticName cosmeticName;
+    public CosmeticType cosmeticType;
+    public string missionDescription;
+    public string cosmeticDescription;
+
 
     [Header("Debug")]
     public Color empty;
@@ -19,58 +26,44 @@ public class CosmeticSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
 
     private void Start()
     {
-        cosmeticIcon.GetComponent<Image>().sprite = cosmetic;
+        unlocked = CosmeticManager.Instance.allCosmetics[cosmeticName];
+    }
+
+    private void OnEnable()
+    {
+        if (unlocked)
+        {
+            cosmeticIcon.GetComponent<Image>().color = Color.white;
+            slotIcon.GetComponent<Image>().color = Color.white;
+        }
+        else
+        {
+            cosmeticIcon.GetComponent<Image>().color = Color.black;
+            slotIcon.GetComponent<Image>().color = Color.gray;
+        }
     }
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        if (CosmeticManager.Instance.unlockedCosmetics[cosmeticName] == true)
-        {
-            GetComponentInChildren<Image>().color = hover;
-        }
-        else
-        {
-            //dont change colour as much
-            GetComponentInChildren<Image>().color = empty;
-        }
+        CosmeticManager.Instance.SetCosmeticInfo(gameObject);
+        CosmeticManager.Instance.ShowOnDisplay(gameObject);
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        GetComponentInChildren<Image>().color = empty;
+        CosmeticManager.Instance.ReturnToOriginalDisplay(gameObject);
     }
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        if (CosmeticManager.Instance.unlockedCosmetics[cosmeticName] == true)
-        {
-            GetComponentInChildren<Image>().color = pressed;
-        }
     }
 
     public void OnPointerUp(PointerEventData eventData)
     {
-        if (CosmeticManager.Instance.unlockedCosmetics[cosmeticName] == true)
-        {
-            GetComponentInChildren<Image>().color = hover;
-        }
-        else
-        {
-            //dont change colour as much
-            GetComponentInChildren<Image>().color = empty;
-        }
     }
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        if (CosmeticManager.Instance.unlockedCosmetics[cosmeticName] == true)
-        {
-            CosmeticManager.Instance.ChangeCosmetic(cosmetic);
-            CosmeticManager.Instance.SelectedSlot(gameObject);
-        }
-        else
-        {
-            //play animation (shake)
-        }
+        CosmeticManager.Instance.SelectedSlot(gameObject);
     }
 }
