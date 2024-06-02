@@ -14,7 +14,6 @@ public class FarmerGuideState : FarmerBaseState
     {
         if (SheepTracker.Instance.AtRequiredPlace(GameManager.Instance.targetArea))
         {
-            Debug.Log($"All sheep @ {GameManager.Instance.targetArea}");
             manager.openGate = false;
             manager.SwitchState(manager.FarmerChillState);
         }

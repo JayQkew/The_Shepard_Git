@@ -834,8 +834,8 @@ MonoBehaviour:
   shearedWool: {fileID: 3567147018067977496}
   woolCurrrentTime: 0
   woolGrow: 0
-  woolGrowMin: 5
-  woolGrowMax: 8
+  woolGrowMin: 75
+  woolGrowMax: 85
   idleTime: 3
   grazeTime: 2
   roamTime: 3

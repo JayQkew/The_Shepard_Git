@@ -18,18 +18,16 @@ public class GameManager : MonoBehaviour
     [Header("Tasks")]
     public Tasks selectedTask;
     public bool taskComplete;
-    public int tasklessDays;
     public GameObject penForceWall;
 
     public Vector2 longWoolRatio;
     public int shearTaskCount;
     public int longWoolCount;
 
-    [Header("Midday")]
-    public float dayLength = 5;
-    public float currentTime;
 
     [Header("Transistion Times")]
+    public float currentTime;
+    [Space(5)]
     public float morningEnd;    // transistion into midday
     public float taskTime;
     public float bringSheepBack;
@@ -74,6 +72,7 @@ public class GameManager : MonoBehaviour
                 break;
         }
 
+        AssistanceManager.Instance.BackToBarn();
     }
 
     public void SwitchState(GameBaseState state)

@@ -427,7 +427,7 @@ MonoBehaviour:
   cosmeticName: {fileID: 1195117208}
   cosmeticDescription: {fileID: 1793107401}
   slots: []
-  Debug: 1
+  Debug: 0
 --- !u!1 &95423055
 GameObject:
   m_ObjectHideFlags: 0
@@ -15223,18 +15223,16 @@ MonoBehaviour:
   targetArea: 0
   selectedTask: 0
   taskComplete: 0
-  tasklessDays: 0
   penForceWall: {fileID: 1457207014}
   longWoolRatio: {x: 5, y: 7}
   shearTaskCount: 0
   longWoolCount: 0
-  dayLength: 5
   currentTime: 0
-  morningEnd: 20
-  taskTime: 21
+  morningEnd: 40
+  taskTime: 50
   bringSheepBack: 110
-  middayEnd: 130
-  eveningEnd: 150
+  middayEnd: 150
+  eveningEnd: 180
 --- !u!1 &2146456576
 GameObject:
   m_ObjectHideFlags: 0

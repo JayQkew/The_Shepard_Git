@@ -40,8 +40,16 @@ public class AssistanceManager : MonoBehaviour
         penRight.SetActive(false);
         pastureN_Bot.SetActive(false);
 
-        barnGate.GetComponentInChildren<GateTriggerLogic>().gateOpenDirection = OpenDirection.Out;
-        pastureN_gate.GetComponentInChildren<GateTriggerLogic>().gateOpenDirection = OpenDirection.Out;
+        if (GameManager.Instance.currentTime >= GameManager.Instance.bringSheepBack)
+        {
+            barnGate.GetComponentInChildren<GateTriggerLogic>().gateOpenDirection = OpenDirection.In;
+            pastureN_gate.GetComponentInChildren<GateTriggerLogic>().gateOpenDirection = OpenDirection.In;
+        }
+        else
+        {
+            barnGate.GetComponentInChildren<GateTriggerLogic>().gateOpenDirection = OpenDirection.Out;
+            pastureN_gate.GetComponentInChildren<GateTriggerLogic>().gateOpenDirection = OpenDirection.Out;
+        }
         pastureE_gate.GetComponentInChildren<GateTriggerLogic>().gateOpenDirection = OpenDirection.Out;
     }
     public void ToEastPasture()
@@ -54,8 +62,16 @@ public class AssistanceManager : MonoBehaviour
         pastureN_Bot.SetActive(false);
         pastureE_Left.SetActive(false);
 
-        barnGate.GetComponentInChildren<GateTriggerLogic>().gateOpenDirection = OpenDirection.Out;
-        pastureN_gate.GetComponentInChildren<GateTriggerLogic>().gateOpenDirection = OpenDirection.Out;
+        if (GameManager.Instance.currentTime >= GameManager.Instance.bringSheepBack)
+        {
+            barnGate.GetComponentInChildren<GateTriggerLogic>().gateOpenDirection = OpenDirection.In;
+            pastureN_gate.GetComponentInChildren<GateTriggerLogic>().gateOpenDirection = OpenDirection.In;
+        }
+        else
+        {
+            barnGate.GetComponentInChildren<GateTriggerLogic>().gateOpenDirection = OpenDirection.Out;
+            pastureN_gate.GetComponentInChildren<GateTriggerLogic>().gateOpenDirection = OpenDirection.Out;
+        }
         pastureE_gate.GetComponentInChildren<GateTriggerLogic>().gateOpenDirection = OpenDirection.Out;
     }
     public void ToPen()
