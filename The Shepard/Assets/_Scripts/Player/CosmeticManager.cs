@@ -91,34 +91,42 @@ public class CosmeticManager : MonoBehaviour
 
     public void SelectedSlot(GameObject slot)
     {
-        CosmeticType cosType = slot.GetComponent<CosmeticSlot>().cosmeticType;
+        CosmeticSlot cosmeticSlot = slot.GetComponent<CosmeticSlot>();
+        CosmeticType cosType = cosmeticSlot.cosmeticType;
+
         foreach (GameObject s in slots)
         {
-            if (s != slot && s.GetComponent<CosmeticSlot>().cosmeticType == cosType)
+            CosmeticSlot s_cosmeticSlot = s.GetComponent<CosmeticSlot>();
+
+            if (allCosmetics[s_cosmeticSlot.cosmeticName] && s_cosmeticSlot.cosmeticType == cosType)  //unlocked
             {
-                s.GetComponent<CosmeticSlot>().selected = false;
-                s.GetComponent <CosmeticSlot>().slotIcon.GetComponent<Image>().sprite = s.GetComponent<CosmeticSlot>().unpressedButton;
-                s.GetComponent <CosmeticSlot>().slotIcon.GetComponent<Image>().color = Color.white;
-            }
-            else if (s.GetComponent<CosmeticSlot>().cosmeticType == cosType)
-            {
-                s.GetComponent<CosmeticSlot>().selected = true;
-                s.GetComponent<CosmeticSlot>().slotIcon.GetComponent<Image>().color = s.GetComponent<CosmeticSlot>().selectedColor;
+                if (s != slot) //not selected Slot
+                {
+                    s_cosmeticSlot.selected = false;
+                    s_cosmeticSlot.slotIcon.GetComponent<Image>().sprite = s_cosmeticSlot.unpressedButton;
+                    s_cosmeticSlot.slotIcon.GetComponent<Image>().color = Color.white;
+                }
+                else
+                {
+                    s_cosmeticSlot.selected = true;
+                    s_cosmeticSlot.slotIcon.GetComponent<Image>().color = s_cosmeticSlot.selectedColor;
+                }
+
             }
         }
 
         switch (cosType)
         {
             case CosmeticType.Head:
-                if (equiptCosmetics[cosType] == slot.GetComponent<CosmeticSlot>().cosmeticName) UnEquiptItem(playerHeadCosmetic, headDisplay, slot);
+                if (equiptCosmetics[cosType] == cosmeticSlot.cosmeticName) UnEquiptItem(playerHeadCosmetic, headDisplay, slot);
                 else EquiptItem(playerHeadCosmetic, headDisplay, slot);
                 break;
             case CosmeticType.Body:
-                if (equiptCosmetics[cosType] == slot.GetComponent<CosmeticSlot>().cosmeticName) UnEquiptItem(playerBodyCosmetic, bodyDisplay, slot);
+                if (equiptCosmetics[cosType] == cosmeticSlot.cosmeticName) UnEquiptItem(playerBodyCosmetic, bodyDisplay, slot);
                 else EquiptItem(playerBodyCosmetic, bodyDisplay, slot);
                 break;
             case CosmeticType.Back:
-                if (equiptCosmetics[cosType] == slot.GetComponent<CosmeticSlot>().cosmeticName) UnEquiptItem(playerBackCosmetic, backDisplay, slot);
+                if (equiptCosmetics[cosType] == cosmeticSlot.cosmeticName) UnEquiptItem(playerBackCosmetic, backDisplay, slot);
                 else EquiptItem(playerBackCosmetic, backDisplay, slot);
                 break;
         }

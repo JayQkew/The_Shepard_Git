@@ -98,12 +98,10 @@ public class CosmeticSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
             if (selected)
             {
                 slotIcon.GetComponent<Image>().sprite = pressedButton;
-                slotIcon.GetComponent<Image>().color = selectedColor;
             }
             else
             {
                 slotIcon.GetComponent<Image>().sprite = unpressedButton;
-                slotIcon.GetComponent<Image>().color = Color.white;
             }
         }
     }
