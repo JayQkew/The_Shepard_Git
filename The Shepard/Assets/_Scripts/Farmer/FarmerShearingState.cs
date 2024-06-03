@@ -127,7 +127,7 @@ public class FarmerShearingState : FarmerBaseState
     }
     public void ShearSheep(FarmerManager manager)
     {
-        RaycastHit[] hit = Physics.SphereCastAll(manager.farmer.transform.position, 1, Vector3.up, 0, manager.sheepLayer);
+        RaycastHit[] hit = Physics.SphereCastAll(manager.farmer.transform.position, manager.shearRadius, Vector3.up, 0, manager.sheepLayer);
         for (int i = 0; i < hit.Length; i++)
         {
             if (hit[i].transform.gameObject != manager.farmer && hit[i].transform.GetComponent<SheepBehaviour>().sheepStats.woolLength == WoolLength.Long)
@@ -137,7 +137,7 @@ public class FarmerShearingState : FarmerBaseState
                 hit[i].transform.GetComponent<SheepBehaviour>().shearedWool.Play();
                 GameManager.Instance.longWoolCount--;
 
-                Debug.Log($"{hit[i].transform.GetComponent<SheepBehaviour>().sheepStats.name} got sheared");
+                MissionManager.Instance.SheepSheared();
             }
         }
     }

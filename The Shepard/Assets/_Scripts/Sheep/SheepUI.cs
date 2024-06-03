@@ -46,5 +46,19 @@ public class SheepUI : MonoBehaviour
     {
         GetComponent<SheepBehaviour>().sheepStats.name = inputField.text;
         GetComponent<SheepBehaviour>().sheepStats.tagged = true;
+
+        int taggedSheep = 0;
+
+        foreach (GameObject sheep in SheepTracker.Instance.allSheep)
+        {
+            if (sheep.GetComponent<SheepBehaviour>().sheepStats.tagged)
+            {
+                taggedSheep++;
+            }
+        }
+
+        MissionManager.Instance.sheepNamed = taggedSheep;
+
+        MissionManager.Instance.SheepNamed();
     }
 }

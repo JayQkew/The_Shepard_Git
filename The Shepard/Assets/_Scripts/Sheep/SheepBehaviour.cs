@@ -50,6 +50,7 @@ public class SheepBehaviour : MonoBehaviour
         currentLimit = walkLimit;
         SetIdleTime();
         SetGrowSpeed();
+        CheckWool();
     }
 
     private void Update()

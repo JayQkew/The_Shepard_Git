@@ -27,6 +27,8 @@ public class PlayerActions : MonoBehaviour
     private LayerMask effectedAgents;
     [SerializeField]
     private LayerMask ground;
+    [SerializeField]
+    public LayerMask interactionAgents;
     public bool hoverOverUI;
 
     private void Awake()
@@ -143,7 +145,7 @@ public class PlayerActions : MonoBehaviour
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hitData;
-        Physics.Raycast(ray, out hitData, 1000, effectedAgents);
+        Physics.Raycast(ray, out hitData, 1000, interactionAgents);
 
         if (hitData.collider != null)
         {
@@ -161,15 +163,23 @@ public class PlayerActions : MonoBehaviour
 
         if (agent != null)
         {
-            if (!agent.GetComponent<SheepUI>().go_canvas.activeSelf)
+            if (agent.tag == "sheep")
             {
-                agent.GetComponent<SheepUI>().go_canvas.SetActive(true);
+                if (!agent.GetComponent<SheepUI>().go_canvas.activeSelf)
+                {
+                    agent.GetComponent<SheepUI>().go_canvas.SetActive(true);
 
+                }
+                else
+                {
+                    agent.GetComponent<SheepUI>().go_canvas.SetActive(false);
+                    PlayerController.Instance.PlayerActions.canBark = true;
+                }
             }
-            else
+            else if (agent.tag == "frog")
             {
-                agent.GetComponent<SheepUI>().go_canvas.SetActive(false);
-                PlayerController.Instance.PlayerActions.canBark = true;
+                if (!agent.GetComponent<FrogManager>().found) MissionManager.Instance.FrogFound();
+                agent.GetComponent<FrogManager>().found = true;
             }
         }
     }

@@ -8,6 +8,7 @@ TagManager:
   - GUI_Sprites
   - slots
   - farmer
+  - frog
   layers:
   - Default
   - TransparentFX
@@ -17,7 +18,7 @@ TagManager:
   - UI
   - boids
   - Player
-  - 
+  - frog
   - 
   - 
   - 

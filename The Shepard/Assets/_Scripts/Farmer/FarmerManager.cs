@@ -15,7 +15,7 @@ public class FarmerManager : MonoBehaviour
     public float farmerAuraRadius;
     public float farmerPushForce;
     public bool arriveAtDestination;
-
+    public float shearRadius;
     public bool openGate;
 
     public GameObject[] sur_agents;
@@ -78,6 +78,6 @@ public class FarmerManager : MonoBehaviour
         Gizmos.DrawWireSphere(farmer.transform.position, sheepChaseRadius);
 
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(farmer.transform.position, farmerAuraRadius);
+        Gizmos.DrawWireSphere(farmer.transform.position, shearRadius);
     }
 }

@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
 
     [Header("Herding")]
     public TrackArea targetArea;
+    public bool atTargetArea;
 
     [Header("Tasks")]
     public Tasks selectedTask;

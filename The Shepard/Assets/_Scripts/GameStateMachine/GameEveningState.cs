@@ -23,7 +23,9 @@ public class GameEveningState : GameBaseState
     {
         AssistanceManager.Instance.CloseAllGates();
         FarmerManager.Instance.farmer.transform.position = new Vector3(FarmerManager.Instance.farmHouse.position.x, FarmerManager.Instance.farmer.transform.position.y, FarmerManager.Instance.farmHouse.position.z);
+        if (SheepTracker.Instance.AtRequiredPlace(TrackArea.Barn) && manager.atTargetArea) MissionManager.Instance.SheepHerded();
         manager.taskComplete = false;
         manager.currentTime = 0;
+        manager.atTargetArea = false;
     }
 }
