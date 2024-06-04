@@ -21,6 +21,8 @@ public class MissionManager : MonoBehaviour
     [Space(10)]
     public int birdsBarkedAt;    //noot
     public int noot_r;
+    [Space(10)]
+    public int followingDuckens;
 
     private void Awake()
     {
@@ -52,5 +54,11 @@ public class MissionManager : MonoBehaviour
         if (birdsBarkedAt == noot_r) CosmeticManager.Instance.allCosmetics[CosmeticName.Noot] = true;
     }
     public void FarmerInteract() => CosmeticManager.Instance.allCosmetics[CosmeticName.Bandana] = true;
-    public void BarkAtDuckens() => CosmeticManager.Instance.allCosmetics[CosmeticName.Ducken] = true;
+    public void BarkAtDuckens()
+    {
+        if (PlayerController.Instance.followingDuckens.Count >= followingDuckens)
+        {
+            CosmeticManager.Instance.allCosmetics[CosmeticName.Ducken] = true;
+        }
+    }
 }

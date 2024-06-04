@@ -10978,6 +10978,7 @@ MonoBehaviour:
   frog_r: 3
   birdsBarkedAt: 0
   noot_r: 10
+  followingDuckens: 6
 --- !u!1 &1146809873
 GameObject:
   m_ObjectHideFlags: 0

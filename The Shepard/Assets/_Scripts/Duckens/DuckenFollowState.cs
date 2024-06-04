@@ -15,6 +15,7 @@ public class DuckenFollowState : DuckenBaseState
         if (GameManager.Instance.currentTime >= GameManager.Instance.eveningEnd)
         {
             manager.transform.position = new Vector3(manager.startPosition.x, 0, manager.startPosition.y);
+            manager.followAgent = null;
             manager.SwitchState(manager.DuckenChillingState);
         }
     }
