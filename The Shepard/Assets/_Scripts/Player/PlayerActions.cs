@@ -84,9 +84,30 @@ public class PlayerActions : MonoBehaviour
         {
             foreach (GameObject agent in bark_affectedBox)
             {
-                agent.GetComponent<Rigidbody>().AddForce(Bark_Force() * bark_strength, ForceMode.Impulse);
-                agent.GetComponent<SheepBehaviour>().inAura = true;
-                agent.GetComponent<SheepBehaviour>().startled = true;
+                if (agent.tag == "sheep")
+                {
+                    agent.GetComponent<Rigidbody>().AddForce(Bark_Force() * bark_strength, ForceMode.Impulse);
+                    agent.GetComponent<SheepBehaviour>().inAura = true;
+                    agent.GetComponent<SheepBehaviour>().startled = true;
+                }
+                else if (agent.tag == "ducken")
+                {
+                    if (!PlayerController.Instance.followingDuckens.Contains(agent))
+                    {
+                        if (PlayerController.Instance.followingDuckens.Count > 0)
+                        {
+                            agent.GetComponent<DuckenManager>().followAgent = PlayerController.Instance.followingDuckens[PlayerController.Instance.followingDuckens.Count - 1];
+                        }
+                        else
+                        {
+                            agent.GetComponent<DuckenManager>().followAgent = gameObject;
+                        }
+
+                        agent.GetComponent<DuckenManager>().SwitchState(agent.GetComponent<DuckenManager>().DuckenFollowState);
+                        PlayerController.Instance.followingDuckens.Add(agent);
+                    }
+
+                }
             }
         }
     }

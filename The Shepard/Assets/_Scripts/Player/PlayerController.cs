@@ -20,6 +20,8 @@ public class PlayerController : MonoBehaviour
 
     public TrackArea playerArea;
 
+    public List<GameObject> followingDuckens = new List<GameObject>();
+
     private void Awake()
     {
         Instance = this;
