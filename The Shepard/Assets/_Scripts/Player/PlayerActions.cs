@@ -105,6 +105,7 @@ public class PlayerActions : MonoBehaviour
 
                         agent.GetComponent<DuckenManager>().SwitchState(agent.GetComponent<DuckenManager>().DuckenFollowState);
                         PlayerController.Instance.followingDuckens.Add(agent);
+                        MissionManager.Instance.BarkAtDuckens();
                     }
 
                 }

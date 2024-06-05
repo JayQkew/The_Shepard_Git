@@ -31,27 +31,27 @@ public class MissionManager : MonoBehaviour
     public void SheepHerded()
     {
         daysHerded++;
-        if (daysHerded == bowtie_r) CosmeticManager.Instance.allCosmetics[CosmeticName.Bowtie] = true;
-        else if (daysHerded == anime_r) CosmeticManager.Instance.allCosmetics[CosmeticName.Anime] = true;
+        if (daysHerded >= bowtie_r) CosmeticManager.Instance.allCosmetics[CosmeticName.Bowtie] = true;
+        else if (daysHerded >= anime_r) CosmeticManager.Instance.allCosmetics[CosmeticName.Anime] = true;
     }
     public void SheepNamed()
     {
-        if (sheepNamed == glasses_r) CosmeticManager.Instance.allCosmetics[CosmeticName.Glasses] = true;
+        if (sheepNamed >= glasses_r) CosmeticManager.Instance.allCosmetics[CosmeticName.Glasses] = true;
     }
     public void SheepSheared()
     {
         shearedSheep++;
-        if (shearedSheep == scarf_r) CosmeticManager.Instance.allCosmetics[CosmeticName.Scarf] = true;
+        if (shearedSheep >= scarf_r) CosmeticManager.Instance.allCosmetics[CosmeticName.Scarf] = true;
     }
     public void FrogFound()
     {
         frogsFound++;
-        if (frogsFound == frog_r) CosmeticManager.Instance.allCosmetics[CosmeticName.Frog] = true;
+        if (frogsFound >= frog_r) CosmeticManager.Instance.allCosmetics[CosmeticName.Frog] = true;
     }
     public void BarkAtBird()
     {
         birdsBarkedAt++;
-        if (birdsBarkedAt == noot_r) CosmeticManager.Instance.allCosmetics[CosmeticName.Noot] = true;
+        if (birdsBarkedAt >= noot_r) CosmeticManager.Instance.allCosmetics[CosmeticName.Noot] = true;
     }
     public void FarmerInteract() => CosmeticManager.Instance.allCosmetics[CosmeticName.Bandana] = true;
     public void BarkAtDuckens()

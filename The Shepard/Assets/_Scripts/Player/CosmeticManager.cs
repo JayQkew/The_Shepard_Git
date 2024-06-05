@@ -41,6 +41,7 @@ public class CosmeticManager : MonoBehaviour
     [Header("Cosmetic Description")]
     public TextMeshProUGUI cosmeticName;
     public TextMeshProUGUI cosmeticDescription;
+    public TextMeshProUGUI cosmeticProgress;
 
     [Space(15)]
     public GameObject[] slots;
@@ -164,8 +165,52 @@ public class CosmeticManager : MonoBehaviour
         {
             cosmeticName.text = "...";
             cosmeticDescription.text = slot.GetComponent<CosmeticSlot>().missionDescription;
+            cosmeticProgress.text = MissionDescription(slot);
         }
 
+    }
+
+    private string MissionDescription(GameObject slot)
+    {
+        int completed = 0;
+        string inbetween = " of ";
+        int needed = 0;
+
+        switch (slot.GetComponent<CosmeticSlot>().cosmeticName)
+        {
+            case CosmeticName.Glasses:
+                completed = MissionManager.Instance.sheepNamed;
+                needed = MissionManager.Instance.glasses_r;
+                break;
+            case CosmeticName.Anime:
+                completed = MissionManager.Instance.daysHerded;
+                needed = MissionManager.Instance.anime_r;
+                break;
+            case CosmeticName.Scarf:
+                completed = MissionManager.Instance.shearedSheep;
+                needed = MissionManager.Instance.scarf_r;
+                break;
+            case CosmeticName.Bandana:
+                return "";
+            case CosmeticName.Bowtie:
+                completed = MissionManager.Instance.daysHerded;
+                needed = MissionManager.Instance.bowtie_r;
+                break;
+            case CosmeticName.Frog:
+                completed = MissionManager.Instance.frogsFound;
+                needed = MissionManager.Instance.frog_r;
+                break;
+            case CosmeticName.Ducken:
+                completed = PlayerController.Instance.followingDuckens.Count;
+                needed = MissionManager.Instance.followingDuckens;
+                break;
+            case CosmeticName.Noot:
+                completed = MissionManager.Instance.birdsBarkedAt;
+                needed = MissionManager.Instance.noot_r;
+                break;
+        }
+
+        return $"{completed}{inbetween}{needed}";
     }
 
     public void ShowOnDisplay(GameObject slot)

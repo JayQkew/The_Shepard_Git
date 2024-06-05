@@ -29,6 +29,8 @@ public class CosmeticSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
 
     private void OnEnable()
     {
+        unlocked = CosmeticManager.Instance.allCosmetics[cosmeticName];
+
         if (unlocked)
         {
             cosmeticIcon.GetComponent<Image>().color = Color.white;
