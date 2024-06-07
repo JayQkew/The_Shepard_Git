@@ -53,7 +53,7 @@ public class PlayerActions : MonoBehaviour
             PlayerController.Instance.PlayerActions.canBark = true;
         }
 
-        //ShootRay();
+        ShootRay();
     }
 
     #region Bark
@@ -155,10 +155,21 @@ public class PlayerActions : MonoBehaviour
 
         if (hitData.collider != null)
         {
+            if (hitData.transform.tag == "sheep") MouseLogic.Instance.mouseState = MouseState.Interact;
+            else if (hitData.transform.tag == "frog") MouseLogic.Instance.mouseState = MouseState.Interact;
+            else MouseLogic.Instance.mouseState = MouseState.None;
             return hitData.transform.gameObject;
         }
         else
         {
+            if (hoverOverUI)
+            {
+                MouseLogic.Instance.mouseState = MouseState.Edit;
+            }
+            else
+            {
+                MouseLogic.Instance.mouseState = MouseState.None;
+            }
             return null;
         }
     }
@@ -190,7 +201,7 @@ public class PlayerActions : MonoBehaviour
         }
     }
 
-    
+
     #endregion
     private void OnDrawGizmos()
     {

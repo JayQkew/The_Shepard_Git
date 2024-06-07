@@ -7,6 +7,7 @@ public class GameMorningState : GameBaseState
     public override void EnterState(GameManager manager)
     {
         Debug.Log("Morning");
+        BirdManager.Instance.FindSpawnArea();
         //add more sheep here
         SheepSpawner.Instance.Init_Herd();
         SheepTracker.Instance.allSheep = GameObject.FindGameObjectsWithTag("sheep");

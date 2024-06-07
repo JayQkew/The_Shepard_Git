@@ -11,13 +11,20 @@ public class BirdLogic : MonoBehaviour
     public float upwardForce;
     public float awayForce;
 
+    public Animator anim;
+
     private void Start()
     {
         SetStats();
+        anim = GetComponentInChildren<Animator>();
     }
     private void Update()
     {
+        anim.SetBool("Scared", scared);
+
         if (!scared) AreaScan();
+
+        if (transform.position.y > 30f) gameObject.SetActive(false);
     }
 
     private void FixedUpdate()
