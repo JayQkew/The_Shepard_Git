@@ -185,7 +185,13 @@ public class PlayerActions : MonoBehaviour
                 if (!agent.GetComponent<SheepUI>().go_canvas.activeSelf)
                 {
                     agent.GetComponent<SheepUI>().go_canvas.SetActive(true);
-
+                    foreach (GameObject sheep in SheepTracker.Instance.allSheep)
+                    {
+                        if (sheep != agent)
+                        {
+                            sheep.GetComponent<SheepUI>().go_canvas.SetActive(false);
+                        }
+                    }
                 }
                 else
                 {

@@ -30,14 +30,12 @@ public class SheepUI : MonoBehaviour
         {
             if (inputField.isFocused)
             {
-                Debug.Log("isFocused");
                 PlayerController.Instance.PlayerMovement.canMove = false;
             }
             else
             {
                 PlayerController.Instance.PlayerMovement.canMove = true;
                 EventSystem.current.SetSelectedGameObject(null);
-
             }
         }
     }
