@@ -35,7 +35,7 @@ Transform:
   m_Children:
   - {fileID: 4228401758474904785}
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &1093755361413264769
 MeshFilter:
@@ -166,7 +166,7 @@ GameObject:
   - component: {fileID: 5310989507615905229}
   m_Layer: 11
   m_Name: GUI
-  m_TagString: Untagged
+  m_TagString: GUI_Sprites
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

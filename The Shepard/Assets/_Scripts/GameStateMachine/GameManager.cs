@@ -12,6 +12,10 @@ public class GameManager : MonoBehaviour
     public GameTaskState TaskState = new GameTaskState();
     public GameEveningState EveningState = new GameEveningState();
 
+    public bool dayComplete;
+    public int day;
+    public List<int> sheepCountProgression = new List<int>();
+
     [Header("Herding")]
     public TrackArea targetArea;
     public bool atTargetArea;

@@ -28,24 +28,6 @@ public class SheepSpawner : MonoBehaviour
         Instance = this;
         activeSheep = GameObject.FindGameObjectsWithTag("sheep");
     }
-    private void Start()
-    {
-        //Gen_SpawnMatrix();
-        //SpawnSheepHerd();
-        //SpawnSheep();
-    }
-
-    private void Update()
-    {
-        //if (Input.GetKeyDown(KeyCode.M))
-        //{
-        //    Init_Herd();
-        //}
-        //if (Input.GetKeyDown(KeyCode.N))
-        //{
-        //    Init_Sheep();
-        //}
-    }
 
     public void Init_Herd()
     {
@@ -55,11 +37,11 @@ public class SheepSpawner : MonoBehaviour
         if (destroyAfterUse) DestroyMatrix();
     }
 
-    public void Init_Sheep()
+    public void Init_Sheep(int num)
     {
         BoidsManager.Instance.AddToBoids();
         if (destroyAfterUse) Gen_SpawnMatrix();
-        AddSheep(1);
+        AddSheep(num);
         if (destroyAfterUse) DestroyMatrix();
     }
 
@@ -137,7 +119,7 @@ public class SheepSpawner : MonoBehaviour
             activeSheep = newSheep.ToArray();
         }
 
-        SpawnSheepHerd();
+        // SpawnSheepHerd();
 
     }
     public void SpawnSheepHerd()

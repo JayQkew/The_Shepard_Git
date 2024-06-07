@@ -20108,6 +20108,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ff548cc1fb9d714d93094573bbccf70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dayComplete: 1
+  day: 0
+  sheepCountProgression: 00000000030000000100000001000000010000000100000001000000
   targetArea: 0
   atTargetArea: 0
   selectedTask: 0

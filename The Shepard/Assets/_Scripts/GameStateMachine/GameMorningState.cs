@@ -8,7 +8,7 @@ public class GameMorningState : GameBaseState
     {
         Debug.Log("Morning");
         BirdManager.Instance.FindSpawnArea();
-        //add more sheep here
+        SetSheepAmount(manager);
         SheepSpawner.Instance.Init_Herd();
         SheepTracker.Instance.allSheep = GameObject.FindGameObjectsWithTag("sheep");
         SelectPasture(manager);
@@ -59,5 +59,14 @@ public class GameMorningState : GameBaseState
         {
             manager.selectedTask = Tasks.Shearing;
         }
+    }
+
+    private void SetSheepAmount(GameManager manager)
+    {
+        if (manager.day <= manager.sheepCountProgression.Count && manager.dayComplete)
+        {
+            SheepSpawner.Instance.AddSheep(manager.sheepCountProgression[manager.day]);
+        }
+        else return;
     }
 }
