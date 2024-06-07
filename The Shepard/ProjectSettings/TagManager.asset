@@ -10,6 +10,7 @@ TagManager:
   - farmer
   - frog
   - ducken
+  - bird
   layers:
   - Default
   - TransparentFX
@@ -21,8 +22,8 @@ TagManager:
   - Player
   - frog
   - ducken
-  - 
-  - 
+  - farmer
+  - bird
   - 
   - 
   - 

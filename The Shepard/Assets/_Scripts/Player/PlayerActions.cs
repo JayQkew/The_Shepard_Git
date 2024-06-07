@@ -56,27 +56,6 @@ public class PlayerActions : MonoBehaviour
         //ShootRay();
     }
 
-    #region Bark 1
-    //public void Bark1()
-    //{
-    //    foreach (GameObject agent in bark_affectedRadius)
-    //    {
-    //        Vector3 force = Bark1_Force(agent.transform.position) * bark1_strength;
-    //        agent.GetComponent<Rigidbody>().AddForce(force, ForceMode.Impulse);
-    //        agent.GetComponent<SheepBehaviour>().inAura = true;
-    //        agent.GetComponent<SheepBehaviour>().startled = true;
-    //    }
-
-    //}
-    //private Vector3 Bark1_Force(Vector3 target)
-    //{
-    //    Vector3 dir = target - transform.position;
-    //    Vector3 forceNorm = Vector3.ClampMagnitude(dir, 1);
-    //    return forceNorm;
-    //}
-
-    #endregion
-
     #region Bark
     public void Bark()
     {
@@ -107,7 +86,12 @@ public class PlayerActions : MonoBehaviour
                         PlayerController.Instance.followingDuckens.Add(agent);
                         MissionManager.Instance.BarkAtDuckens();
                     }
-
+                }
+                else if (agent.tag == "bird")
+                {
+                    agent.GetComponent<BirdLogic>().scared = true;
+                    agent.GetComponent<BirdLogic>().scareAgent = gameObject;
+                    MissionManager.Instance.BarkAtBird();
                 }
             }
         }
