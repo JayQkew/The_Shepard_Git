@@ -20357,6 +20357,12 @@ MonoBehaviour:
   longWoolRatio: {x: 5, y: 7}
   shearTaskCount: 0
   longWoolCount: 0
+  n_herdOut: 0
+  herdOutNotification: 5
+  n_herdIn: 0
+  herdInNortification: 112
+  n_shearIn: 0
+  shearNotification: 50
   currentTime: 0
   morningEnd: 40
   taskTime: 50
@@ -20378,7 +20384,7 @@ MonoBehaviour:
   notificationBar: {fileID: 1414382386}
   notificationText: {fileID: 183646953}
   anim: {fileID: 0}
-  hoverTime: 2
+  hoverTime: 5
   tutorialNotifications: []
   dayNotifications:
   - 'Herd the sheep to the <color=#575757>pasture</color>
