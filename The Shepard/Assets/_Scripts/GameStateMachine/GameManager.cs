@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
     public bool dayComplete;
     public int day;
     public List<int> sheepCountProgression = new List<int>();
+    public GameObject fadePanel;
 
     [Header("Herding")]
     public TrackArea targetArea;

@@ -13,6 +13,11 @@ public class GameEveningState : GameBaseState
 
     public override void UpdateState(GameManager manager)
     {
+        if (manager.currentTime >= manager.eveningEnd - 5)
+        {
+            manager.fadePanel.GetComponent<Animator>().SetBool("fadeIn", false);
+        }
+
         if (manager.currentTime >= manager.eveningEnd)
         {
             manager.SwitchState(manager.MorningState);
@@ -34,6 +39,7 @@ public class GameEveningState : GameBaseState
             manager.dayComplete = false;
         }
         PlayerController.Instance.followingDuckens.Clear();
+        PlayerController.Instance.gameObject.transform.position = PlayerController.Instance.startPos;
         manager.taskComplete = false;
         manager.currentTime = 0;
         manager.atTargetArea = false;

@@ -21,6 +21,7 @@ public class PlayerController : MonoBehaviour
     public TrackArea playerArea;
 
     public List<GameObject> followingDuckens = new List<GameObject>();
+    public Vector3 startPos;
 
     private void Awake()
     {
@@ -28,6 +29,11 @@ public class PlayerController : MonoBehaviour
         PlayerMovement = GetComponent<PlayerMovement>();
         PlayerActions = GetComponent<PlayerActions>();
         PlayerGUI = GetComponent<Player_GUI>();
+    }
+
+    private void Start()
+    {
+        startPos = transform.position;
     }
 
     private void Update()

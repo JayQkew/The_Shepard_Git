@@ -7,6 +7,7 @@ public class GameMorningState : GameBaseState
     public override void EnterState(GameManager manager)
     {
         Debug.Log("Morning");
+        manager.fadePanel.GetComponent<Animator>().SetBool("fadeIn", true);
         BirdManager.Instance.FindSpawnArea();
         SetSheepAmount(manager);
         SheepSpawner.Instance.Init_Herd();
