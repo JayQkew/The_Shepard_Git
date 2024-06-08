@@ -29,6 +29,14 @@ public class GameManager : MonoBehaviour
     public int shearTaskCount;
     public int longWoolCount;
 
+    [Header("Notification Times")]
+    public bool n_herdOut;
+    public float herdOutNotification;
+    public bool n_herdIn;
+    public float herdInNortification;
+    public bool n_shearIn;
+    public float shearNotification;
+
 
     [Header("Transistion Times")]
     public float currentTime;
@@ -59,6 +67,21 @@ public class GameManager : MonoBehaviour
             FarmerGuideBack();
         }
 
+        if (currentTime >= herdOutNotification && !n_herdOut)
+        {
+            NotificationManager.Instance.Notification(NotificationManager.Instance.dayNotifications[0]);
+            n_herdOut = true;
+        }
+        else if (currentTime >= shearNotification && !n_shearIn && selectedTask != Tasks.None)
+        {
+            NotificationManager.Instance.Notification(NotificationManager.Instance.dayNotifications[2]);
+            n_shearIn = true;
+        }
+        else if (currentTime >= herdInNortification && !n_herdIn)
+        {
+            NotificationManager.Instance.Notification(NotificationManager.Instance.dayNotifications[1]);
+            n_herdIn = true;
+        }
     }
 
     private void FarmerGuideBack()

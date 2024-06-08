@@ -61,8 +61,8 @@ public class BirdLogic : MonoBehaviour
         upwardForce = Random.Range(BirdManager.Instance.flyUpRanger.x, BirdManager.Instance.flyUpRanger.y);
     }
 
-    private void OnDrawGizmos()
-    {
-        Gizmos.DrawWireSphere(transform.position, BirdManager.Instance.areaRadius);
-    }
+    //private void OnDrawGizmos()
+    //{
+    //    Gizmos.DrawWireSphere(transform.position, BirdManager.Instance.areaRadius);
+    //}
 }

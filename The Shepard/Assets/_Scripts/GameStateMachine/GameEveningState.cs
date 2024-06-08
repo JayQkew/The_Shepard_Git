@@ -37,5 +37,9 @@ public class GameEveningState : GameBaseState
         manager.taskComplete = false;
         manager.currentTime = 0;
         manager.atTargetArea = false;
+
+        manager.n_herdIn = false;
+        manager.n_herdOut = false;
+        manager.n_shearIn = false;
     }
 }
