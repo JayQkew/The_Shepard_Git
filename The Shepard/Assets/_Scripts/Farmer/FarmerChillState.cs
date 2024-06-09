@@ -6,6 +6,7 @@ public class FarmerChillState : FarmerBaseState
 {
     public override void EnterState(FarmerManager manager)
     {
+        Debug.Log("Chilling");
         manager.SetFarmerTarget(manager.farmHouse);
     }
 

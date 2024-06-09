@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance { get; private set; }
 
     public GameBaseState currentState;
+    public GameTutorialState TutorialState = new GameTutorialState();
     public GameMorningState MorningState = new GameMorningState();
     public GameMiddayState MiddayState = new GameMiddayState();
     public GameTaskState TaskState = new GameTaskState();
@@ -16,6 +17,22 @@ public class GameManager : MonoBehaviour
     public int day;
     public List<int> sheepCountProgression = new List<int>();
     public GameObject fadePanel;
+
+    [Header("Tutorial")]
+    public TutorialState currentTutorial;
+    [Space(5)]
+    public bool pressed_W;
+    public bool pressed_A;
+    public bool pressed_S;
+    public bool pressed_D;
+    [Space(5)]
+    public bool jumped;
+    [Space(5)]
+    public bool sprinted;
+    [Space(5)]
+    public bool scrolled;
+    [Space(5)]
+    public bool herded;
 
     [Header("Herding")]
     public TrackArea targetArea;
@@ -51,7 +68,7 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         Instance = this;
-        currentState = MorningState;
+        currentState = TutorialState;
     }
     private void Start()
     {
@@ -60,7 +77,11 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        currentTime += Time.deltaTime;
+        if (currentState != TutorialState)
+        {
+            currentTime += Time.deltaTime;
+        }
+
         currentState.UpdateState(this);
 
         if (currentTime >= bringSheepBack)

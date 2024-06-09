@@ -29,10 +29,13 @@ public class NotificationManager : MonoBehaviour
     {
     }
 
+    public void TutorialNotification(string text) => SetNotification(text);
+
     public void Notification(string text) => StartCoroutine(PopUpNotification(text));
 
     public void SetNotification(string text)
     {
+        StopCoroutine(PopUpNotification(text));
         notificationText.richText = true;
         notificationText.text = text;
         anim.SetBool("notification", true);

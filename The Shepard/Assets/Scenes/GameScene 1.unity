@@ -605,7 +605,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 0.12430618, g: 0.11667851, b: 0.14150941, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -4157,7 +4157,7 @@ GameObject:
   - component: {fileID: 454090428}
   - component: {fileID: 454090432}
   - component: {fileID: 454090433}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Farmer
   m_TagString: farmer
   m_Icon: {fileID: 0}
@@ -4954,7 +4954,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   farmer: {fileID: 454090426}
   farmerNavAgent: {fileID: 0}
-  farmerTarget: {fileID: 535185628}
+  farmerTarget: {fileID: 956569767}
   sheepLayer:
     serializedVersion: 2
     m_Bits: 64
@@ -4964,6 +4964,7 @@ MonoBehaviour:
   arriveAtDestination: 0
   shearRadius: 0.5
   openGate: 0
+  interacted: 0
   sur_agents: []
   farmHouse: {fileID: 9346485}
   northPastureIn: {fileID: 864937502}
@@ -20564,7 +20565,7 @@ MonoBehaviour:
     m_Bits: 72
   interactionAgents:
     serializedVersion: 2
-    m_Bits: 320
+    m_Bits: 1344
   hoverOverUI: 0
 --- !u!114 &1983941147
 MonoBehaviour:
@@ -20988,7 +20989,16 @@ MonoBehaviour:
   day: 0
   sheepCountProgression: 00000000030000000100000001000000010000000100000001000000
   fadePanel: {fileID: 63520658}
-  targetArea: 0
+  currentTutorial: 0
+  pressed_W: 0
+  pressed_A: 0
+  pressed_S: 0
+  pressed_D: 0
+  jumped: 0
+  sprinted: 0
+  scrolled: 0
+  herded: 0
+  targetArea: 1
   atTargetArea: 0
   selectedTask: 0
   taskComplete: 0
@@ -21024,7 +21034,20 @@ MonoBehaviour:
   notificationText: {fileID: 183646953}
   anim: {fileID: 0}
   hoverTime: 5
-  tutorialNotifications: []
+  tutorialNotifications:
+  - <color=#575757>WASD </color> to move
+  - <color=#575757>Spacebar</color> to jump
+  - '<color=#575757>Left Shift</color> to sprint
+
+'
+  - <color=#575757>Scroll wheel</color> to zoom in and out
+  - '<color=#575757>Herd</color> the sheep to the <color=#575757>Pen</color>
+
+    Follow
+    the <#575757>Farmer'
+  - <color=#575757>Right click</color> to Interact if <color=#575757>cursor</color>
+    becomes a <color=#575757>Star</color>
+  - <color=#575757>Left click</color> to bark in direction of  <color=#575757>Cursor</color>
   dayNotifications:
   - 'Herd the sheep to the <color=#575757>pasture</color>
 

@@ -17,6 +17,7 @@ public class FarmerManager : MonoBehaviour
     public bool arriveAtDestination;
     public float shearRadius;
     public bool openGate;
+    public bool interacted;
 
     public GameObject[] sur_agents;
 

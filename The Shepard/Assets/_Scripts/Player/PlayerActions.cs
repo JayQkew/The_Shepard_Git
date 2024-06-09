@@ -157,6 +157,7 @@ public class PlayerActions : MonoBehaviour
         {
             if (hitData.transform.tag == "sheep") MouseLogic.Instance.mouseState = MouseState.Interact;
             else if (hitData.transform.tag == "frog") MouseLogic.Instance.mouseState = MouseState.Interact;
+            else if (hitData.transform.tag == "farmer") MouseLogic.Instance.mouseState = MouseState.Interact;
             else MouseLogic.Instance.mouseState = MouseState.None;
             return hitData.transform.gameObject;
         }
@@ -203,6 +204,14 @@ public class PlayerActions : MonoBehaviour
             {
                 if (!agent.GetComponent<FrogManager>().found) MissionManager.Instance.FrogFound();
                 agent.GetComponent<FrogManager>().found = true;
+            }
+            else if (agent.tag == "farmer")
+            {
+                if (!FarmerManager.Instance.interacted)
+                {
+                    MissionManager.Instance.FarmerInteract();
+                    FarmerManager.Instance.interacted = true;
+                }
             }
         }
     }
