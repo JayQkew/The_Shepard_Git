@@ -17,6 +17,12 @@ public class GameEveningState : GameBaseState
         {
             manager.fadePanel.GetComponent<Animator>().SetBool("fadeIn", false);
         }
+        
+        if (manager.currentTime >= manager.eveningEnd - 12 && !manager.eveningMusicEnded)
+        {
+            MusicManager.Instance.FadeMusicOut();
+            manager.eveningMusicEnded = true;
+        }
 
         if (manager.currentTime >= manager.eveningEnd)
         {
@@ -47,5 +53,8 @@ public class GameEveningState : GameBaseState
         manager.n_herdIn = false;
         manager.n_herdOut = false;
         manager.n_shearIn = false;
+
+        manager.eveningMusicStarted = false;
+        manager.eveningMusicEnded = false;
     }
 }

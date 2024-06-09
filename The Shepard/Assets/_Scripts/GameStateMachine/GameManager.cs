@@ -41,7 +41,8 @@ public class GameManager : MonoBehaviour
     public int bark_r;
 
     [Header("Herding")]
-    public bool morningMusicStopped;
+    public bool eveningMusicStarted;
+    public bool eveningMusicEnded;
     public TrackArea targetArea;
     public bool atTargetArea;
 
@@ -58,7 +59,7 @@ public class GameManager : MonoBehaviour
     public bool n_herdOut;
     public float herdOutNotification;
     public bool n_herdIn;
-    public float herdInNortification;
+    public float herdInNotification;
     public bool n_shearIn;
     public float shearNotification;
 
@@ -94,6 +95,11 @@ public class GameManager : MonoBehaviour
         if (currentTime >= bringSheepBack)
         {
             FarmerGuideBack();
+            if (!eveningMusicStarted)
+            {
+                MusicManager.Instance.FadeMusicIn();
+                eveningMusicStarted = true;
+            }
         }
 
         if (currentTime >= herdOutNotification && !n_herdOut)
@@ -106,7 +112,7 @@ public class GameManager : MonoBehaviour
             NotificationManager.Instance.Notification(NotificationManager.Instance.dayNotifications[2]);
             n_shearIn = true;
         }
-        else if (currentTime >= herdInNortification && !n_herdIn)
+        else if (currentTime >= herdInNotification && !n_herdIn)
         {
             NotificationManager.Instance.Notification(NotificationManager.Instance.dayNotifications[1]);
             n_herdIn = true;
