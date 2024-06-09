@@ -68,6 +68,11 @@ public class PlayerActions : MonoBehaviour
                     agent.GetComponent<Rigidbody>().AddForce(Bark_Force() * bark_strength, ForceMode.Impulse);
                     agent.GetComponent<SheepBehaviour>().inAura = true;
                     agent.GetComponent<SheepBehaviour>().startled = true;
+                    if (GameManager.Instance.currentState == GameManager.Instance.TutorialState &&
+                        GameManager.Instance.currentTutorial == TutorialState.Bark)
+                    {
+                        GameManager.Instance.barkTimes++;
+                    }
                 }
                 else if (agent.tag == "ducken")
                 {
@@ -212,6 +217,12 @@ public class PlayerActions : MonoBehaviour
                     MissionManager.Instance.FarmerInteract();
                     FarmerManager.Instance.interacted = true;
                 }
+            }
+
+            if (GameManager.Instance.currentState == GameManager.Instance.TutorialState &&
+                GameManager.Instance.currentTutorial == TutorialState.Interact)
+            {
+                GameManager.Instance.interacted = true;
             }
         }
     }

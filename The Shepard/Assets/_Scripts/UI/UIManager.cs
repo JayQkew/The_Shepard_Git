@@ -9,6 +9,7 @@ public class UIManager : MonoBehaviour
     [Header("UI Elements")]
     public GameObject pausePanel;
     public GameObject cosmeticPanel;
+    public GameObject nonDiegetic;
     private void Awake()
     {
         Instance = this;
@@ -33,10 +34,12 @@ public class UIManager : MonoBehaviour
         if (uiPanel.activeSelf == false)
         {
             uiPanel.SetActive(true);
+            nonDiegetic.SetActive(false);
         }
         else
         {
             uiPanel.SetActive(false);
+            nonDiegetic.SetActive(true);
         }
     }
 

@@ -6,6 +6,10 @@ public class GameTutorialState : GameBaseState
 {
     public override void EnterState(GameManager manager)
     {
+        manager.fadePanel.GetComponent<Animator>().SetBool("fadeIn", true);
+        BirdManager.Instance.FindSpawnArea();
+        SheepSpawner.Instance.Init_Herd();
+        SheepTracker.Instance.allSheep = GameObject.FindGameObjectsWithTag("sheep");
     }
 
     public override void UpdateState(GameManager manager)
@@ -38,6 +42,10 @@ public class GameTutorialState : GameBaseState
 
     public override void ExitState(GameManager manager)
     {
+        AssistanceManager.Instance.CloseAllGates();
+        FarmerManager.Instance.farmer.transform.position = new Vector3(FarmerManager.Instance.farmHouse.position.x, FarmerManager.Instance.farmer.transform.position.y, FarmerManager.Instance.farmHouse.position.z);
+        PlayerController.Instance.followingDuckens.Clear();
+        PlayerController.Instance.gameObject.transform.position = PlayerController.Instance.startPos;
     }
 
     private void MoveState(GameManager manager)
@@ -106,9 +114,13 @@ public class GameTutorialState : GameBaseState
     private void HerdState(GameManager manager)
     {
         NotificationManager.Instance.TutorialNotification(NotificationManager.Instance.tutorialNotifications[4]);
+        FarmerManager.Instance.farmerTarget = FarmerManager.Instance.shearPosition;
         FarmerManager.Instance.SwitchState(FarmerManager.Instance.FarmerGuideState);
+        GameManager.Instance.targetArea = TrackArea.Pen;
+        AssistanceManager.Instance.ToPen();
 
-        if (SheepTracker.Instance.AtRequiredPlace(TrackArea.Barn))
+
+        if (SheepTracker.Instance.AtRequiredPlace(TrackArea.Pen))
         {
             manager.herded = true;
             manager.currentTutorial = TutorialState.Interact;
@@ -119,7 +131,7 @@ public class GameTutorialState : GameBaseState
     {
         NotificationManager.Instance.TutorialNotification(NotificationManager.Instance.tutorialNotifications[5]);
 
-        if (Input.GetMouseButtonDown(1)) //make more specific
+        if (manager.interacted)
         {
             manager.currentTutorial = TutorialState.Bark;
         }
@@ -129,9 +141,12 @@ public class GameTutorialState : GameBaseState
     {
         NotificationManager.Instance.TutorialNotification(NotificationManager.Instance.tutorialNotifications[6]);
 
-        if (Input.GetMouseButtonDown(0)) //make more specific
+        if (manager.barkTimes >= manager.bark_r) //make more specific
         {
-            manager.SwitchState(manager.MorningState);
+            NotificationManager.Instance.RetractNotification();
+            manager.FadeToMorning();
+            manager.currentTutorial = TutorialState.Done;
+            return;
         }
     }
 }
@@ -144,5 +159,6 @@ public enum TutorialState
     Scroll,
     HerdSheep,
     Interact,
-    Bark
+    Bark,
+    Done
 }

@@ -8,34 +8,16 @@ public class FarmerGuideState : FarmerBaseState
     {
         Debug.Log("Guiding to" + manager.farmerTarget.name);
 
-        if (GameManager.Instance.currentState == GameManager.Instance.TutorialState)
-        {
-            GameManager.Instance.targetArea = TrackArea.Pen;
-            manager.farmerTarget = manager.shearPosition;
-            AssistanceManager.Instance.ToPen();
-        }
-
         manager.openGate = true;
         manager.SetFarmerTarget(manager.farmerTarget);
     }
 
     public override void UpgradeState(FarmerManager manager)
     {
-        if (GameManager.Instance.currentState == GameManager.Instance.TutorialState)
+        if (SheepTracker.Instance.AtRequiredPlace(GameManager.Instance.targetArea))
         {
-            if (SheepTracker.Instance.AtRequiredPlace(TrackArea.Barn))
-            {
-                manager.openGate = false;
-                manager.SwitchState(manager.FarmerChillState);
-            }
-        }
-        else
-        {
-            if (SheepTracker.Instance.AtRequiredPlace(GameManager.Instance.targetArea))
-            {
-                manager.openGate = false;
-                manager.SwitchState(manager.FarmerChillState);
-            }
+            manager.openGate = false;
+            manager.SwitchState(manager.FarmerChillState);
         }
     }
 

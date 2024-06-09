@@ -33,6 +33,11 @@ public class GameManager : MonoBehaviour
     public bool scrolled;
     [Space(5)]
     public bool herded;
+    [Space(5)]
+    public bool interacted;
+    [Space(5)]
+    public int barkTimes;
+    public int bark_r;
 
     [Header("Herding")]
     public TrackArea targetArea;
@@ -132,4 +137,15 @@ public class GameManager : MonoBehaviour
         currentState.EnterState(this);
     }
 
+    public void FadeToMorning()
+    {
+        StartCoroutine(FadeToMorn());
+    }
+
+    private IEnumerator FadeToMorn() 
+    {
+        fadePanel.GetComponent<Animator>().SetBool("fadeIn", false);
+        yield return new WaitForSeconds(3);
+        SwitchState(MorningState);
+    }
 }
