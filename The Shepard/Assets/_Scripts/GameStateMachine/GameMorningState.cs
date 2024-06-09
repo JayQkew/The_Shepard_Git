@@ -7,6 +7,7 @@ public class GameMorningState : GameBaseState
     public override void EnterState(GameManager manager)
     {
         Debug.Log("Morning");
+        MusicManager.Instance.FadeMusicIn();
         manager.fadePanel.GetComponent<Animator>().SetBool("fadeIn", true);
         BirdManager.Instance.FindSpawnArea();
         SetSheepAmount(manager);
@@ -19,7 +20,15 @@ public class GameMorningState : GameBaseState
     public override void UpdateState(GameManager manager)
     {
         //if (SheepTrackerManager.Instance.AtRequiredPlace(manager.currentArea)) manager.SwitchState(manager.MiddayState);
-        if (SheepTracker.Instance.AtRequiredPlace(manager.targetArea)) manager.atTargetArea = true;
+        if (SheepTracker.Instance.AtRequiredPlace(manager.targetArea))
+        {
+            manager.atTargetArea = true;
+            //if (!manager.morningMusicStopped)
+            //{
+            //    MusicManager.Instance.FadeMusicOut();
+            //    manager.morningMusicStopped = true;
+            //}
+        }
 
         if (manager.currentTime >= manager.morningEnd)
         {
@@ -29,6 +38,7 @@ public class GameMorningState : GameBaseState
 
     public override void ExitState(GameManager manager)
     {
+        MusicManager.Instance.FadeMusicOut();
     }
 
     public void SelectPasture(GameManager manager)
