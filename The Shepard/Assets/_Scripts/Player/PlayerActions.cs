@@ -78,15 +78,8 @@ public class PlayerActions : MonoBehaviour
                 {
                     if (!PlayerController.Instance.followingDuckens.Contains(agent))
                     {
-                        if (PlayerController.Instance.followingDuckens.Count > 0)
-                        {
-                            agent.GetComponent<DuckenManager>().followAgent = PlayerController.Instance.followingDuckens[PlayerController.Instance.followingDuckens.Count - 1];
-                        }
-                        else
-                        {
-                            agent.GetComponent<DuckenManager>().followAgent = gameObject;
-                        }
-
+                        agent.GetComponent<DuckenManager>().followAgent = gameObject;
+                        agent.GetComponent<AudioLogic>().Play();
                         agent.GetComponent<DuckenManager>().SwitchState(agent.GetComponent<DuckenManager>().DuckenFollowState);
                         PlayerController.Instance.followingDuckens.Add(agent);
                         MissionManager.Instance.BarkAtDuckens();
