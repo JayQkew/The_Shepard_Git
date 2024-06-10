@@ -7,6 +7,7 @@ public class FrogChillState : FrogBaseState
     public override void EnterState(FrogManager manager)
     {
         DetermineChillTime(manager);
+        PlayAudio(manager);
     }
 
     public override void UpdateState(FrogManager manager)
@@ -20,10 +21,20 @@ public class FrogChillState : FrogBaseState
 
     public override void ExitState(FrogManager manager)
     {
+        PlayAudio(manager);
     }
 
     public void DetermineChillTime(FrogManager manager)
     {
         manager.frogChillTime = Random.Range(manager.frogChillTimeRange.x, manager.frogChillTimeRange.y);
     }
+
+    private void PlayAudio(FrogManager manager)
+    {
+        if (Random.value > 0.8f)
+        {
+            manager.gameObject.GetComponent<AudioLogic>().RandomPlay();
+        }
+    }
+
 }

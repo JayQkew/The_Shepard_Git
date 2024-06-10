@@ -11,13 +11,14 @@ public class FarmerShearingState : FarmerBaseState
         manager.farmerTarget = SheepPastureArea(manager);
         manager.openGate = true;
         manager.SetFarmerTarget(manager.farmerTarget); //where the sheep are currently
+        manager.farmer.GetComponentInChildren<AudioLogic>().Play();
     }
     public override void UpgradeState(FarmerManager manager)
     {
         AreaOfEffect(manager);
         GameObject closestSheep = ClosestSheep(manager);
 
-        if(manager.farmerNavAgent.remainingDistance <= 0.25f && SheepTracker.Instance.AtRequiredPlace(TrackArea.Pen))
+        if(manager.farmerNavAgent.remainingDistance <= 0.25f &&   SheepTracker.Instance.AtRequiredPlace(TrackArea.Pen))
         {
             manager.openGate = false;
             manager.SetFarmerTarget(manager.shearPosition);

@@ -12,6 +12,7 @@ public class SheepGrazingState : SheepBaseState
         manager.nextState = ChooseNextState();
         manager.rb.drag = 10f;
         manager.rb.angularDrag = 10f;
+        PlayAudio(manager);
     }
 
     public override void UpdateState(SheepBehaviour manager)
@@ -37,6 +38,7 @@ public class SheepGrazingState : SheepBaseState
         manager.currentTime = 0; 
         manager.rb.drag = 0;
         manager.rb.angularDrag = 0;
+        PlayAudio(manager);
 
     }
 
@@ -47,4 +49,11 @@ public class SheepGrazingState : SheepBaseState
         else return SheepState.Idle;
     }
 
+    private void PlayAudio(SheepBehaviour manager)
+    {
+        if(Random.value > 0.7f)
+        {
+            manager.gameObject.GetComponent<AudioLogic>().RandomPlay();
+        }
+    }
 }
