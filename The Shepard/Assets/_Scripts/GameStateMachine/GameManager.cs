@@ -95,11 +95,6 @@ public class GameManager : MonoBehaviour
         if (currentTime >= bringSheepBack)
         {
             FarmerGuideBack();
-            if (!eveningMusicStarted)
-            {
-                MusicManager.Instance.FadeMusicIn();
-                eveningMusicStarted = true;
-            }
         }
 
         if (currentTime >= herdOutNotification && !n_herdOut)

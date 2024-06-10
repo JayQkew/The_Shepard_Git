@@ -46,6 +46,7 @@ public class GameEveningState : GameBaseState
         }
         PlayerController.Instance.followingDuckens.Clear();
         PlayerController.Instance.gameObject.transform.position = PlayerController.Instance.startPos;
+        FarmerManager.Instance.whistle = false;
         manager.taskComplete = false;
         manager.currentTime = 0;
         manager.atTargetArea = false;

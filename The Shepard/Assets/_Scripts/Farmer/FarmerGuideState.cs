@@ -14,6 +14,24 @@ public class FarmerGuideState : FarmerBaseState
 
     public override void UpgradeState(FarmerManager manager)
     {
+        if(GameManager.Instance.currentTime >= GameManager.Instance.bringSheepBack)
+        {
+            if (manager.farmerNavAgent.remainingDistance <= 1f)
+            {
+                if (!manager.whistle)
+                {
+                    manager.farmer.GetComponentInChildren<AudioLogic>().Play();
+                    manager.whistle = true;
+                }
+                if (!GameManager.Instance.eveningMusicStarted)
+                {
+                    MusicManager.Instance.FadeMusicIn();
+                    GameManager.Instance.eveningMusicStarted = true;
+                }
+            }
+        }
+
+
         if (SheepTracker.Instance.AtRequiredPlace(GameManager.Instance.targetArea))
         {
             manager.openGate = false;
