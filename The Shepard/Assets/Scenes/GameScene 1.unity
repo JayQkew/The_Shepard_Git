@@ -20717,7 +20717,6 @@ MonoBehaviour:
   barkSounds:
   - {fileID: 8300000, guid: 79f88baf02fe4644dbeed4b2164d89bf, type: 3}
   - {fileID: 8300000, guid: 1582a2763d00f74408955515b429bb6e, type: 3}
-  - {fileID: 8300000, guid: 79ad22162bdc42e4ba873a3262ae3d34, type: 3}
   interactSounds: []
   effectedAgents:
     serializedVersion: 2

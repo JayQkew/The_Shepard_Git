@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using static UnityEditor.Experimental.GraphView.GraphView;
-
 public class PlayerActions : MonoBehaviour
 {
     public static PlayerActions Instance { get; private set; }
