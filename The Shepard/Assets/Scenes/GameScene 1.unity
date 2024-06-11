@@ -14944,7 +14944,7 @@ PrefabInstance:
       objectReference: {fileID: 21300000, guid: 9a428a860abd5d549bbf1adf06c0fe8a, type: 3}
     - target: {fileID: 1562173193978141039, guid: f668713569ddd524a81e687e7609e666, type: 3}
       propertyPath: missionDescription
-      value: get 5 ducks to follow you
+      value: get 3 ducks to follow you
       objectReference: {fileID: 0}
     - target: {fileID: 1562173193978141039, guid: f668713569ddd524a81e687e7609e666, type: 3}
       propertyPath: cosmeticDescription
@@ -18281,7 +18281,7 @@ PrefabInstance:
       objectReference: {fileID: 21300000, guid: 5339c97930025db4f98405c0725756a0, type: 3}
     - target: {fileID: 1562173193978141039, guid: f668713569ddd524a81e687e7609e666, type: 3}
       propertyPath: missionDescription
-      value: bark at 10 birds
+      value: scare 25 birds
       objectReference: {fileID: 0}
     - target: {fileID: 1562173193978141039, guid: f668713569ddd524a81e687e7609e666, type: 3}
       propertyPath: cosmeticDescription
@@ -19820,7 +19820,7 @@ PrefabInstance:
       objectReference: {fileID: 21300000, guid: e77b4537e2a0143498b11be196ec3e6f, type: 3}
     - target: {fileID: 1562173193978141039, guid: f668713569ddd524a81e687e7609e666, type: 3}
       propertyPath: missionDescription
-      value: Find 3 frogs
+      value: Find 6 frogs
       objectReference: {fileID: 0}
     - target: {fileID: 1562173193978141039, guid: f668713569ddd524a81e687e7609e666, type: 3}
       propertyPath: cosmeticDescription
@@ -21397,7 +21397,7 @@ MonoBehaviour:
   m_LayerMask:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_UseGeometry: 0
+  m_UseGeometry: 1
   m_DefaultArea: 0
   m_GenerateLinks: 1
   m_IgnoreNavMeshAgent: 1
@@ -22832,7 +22832,7 @@ MonoBehaviour:
   musicFadeIn:
     serializedVersion: 2
     key0: {r: 1, g: 1, b: 1, a: 0}
-    key1: {r: 1, g: 1, b: 1, a: 0.5019608}
+    key1: {r: 1, g: 1, b: 1, a: 0.19607843}
     key2: {r: 0, g: 0, b: 0, a: 0}
     key3: {r: 0, g: 0, b: 0, a: 0}
     key4: {r: 0, g: 0, b: 0, a: 0}
@@ -22861,7 +22861,7 @@ MonoBehaviour:
     m_NumAlphaKeys: 2
   musicFadeOut:
     serializedVersion: 2
-    key0: {r: 1, g: 1, b: 1, a: 0.5019608}
+    key0: {r: 1, g: 1, b: 1, a: 0.19607843}
     key1: {r: 1, g: 1, b: 1, a: 0}
     key2: {r: 0, g: 0, b: 0, a: 0}
     key3: {r: 0, g: 0, b: 0, a: 0}
