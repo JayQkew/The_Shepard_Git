@@ -139,9 +139,19 @@ public class FarmerShearingState : FarmerBaseState
                 GameManager.Instance.longWoolCount--;
 
                 MissionManager.Instance.SheepSheared();
+
+                //play shear sound
+                PlayShearSound(hit[i].transform.GetComponent<AudioSource>(), manager);
             }
         }
     }
+
+    public void PlayShearSound(AudioSource sound, FarmerManager manager)
+    {
+        sound.clip = manager.shearSounds[Random.Range(0, manager.shearSounds.Length)];
+        sound.Play();
+    }
+
     private Transform SheepPastureArea(FarmerManager manager)
     {
         int allSheepLength = SheepTracker.Instance.allSheep.Length;

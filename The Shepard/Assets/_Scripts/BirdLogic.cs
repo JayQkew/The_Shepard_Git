@@ -47,6 +47,7 @@ public class BirdLogic : MonoBehaviour
         if (hit.Length > 0 )
         {
             scared = true;
+            GetComponentInChildren<AudioSource>().Play();
             scareAgent = hit[0].transform.gameObject;
             if(scareAgent.tag == "Player")
             {

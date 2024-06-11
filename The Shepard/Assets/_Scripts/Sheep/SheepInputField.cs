@@ -13,6 +13,7 @@ public class SheepInputField : MonoBehaviour, IPointerEnterHandler, IPointerExit
     public void OnPointerExit(PointerEventData eventData)
     {
         PlayerActions.Instance.hoverOverUI = false;
+        PlayerActions.Instance.canBark = true;
     }
 
     

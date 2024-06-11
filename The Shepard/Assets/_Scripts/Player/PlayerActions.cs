@@ -22,6 +22,11 @@ public class PlayerActions : MonoBehaviour
     [SerializeField]
     private Transform box;
 
+    [Header("Audio")]
+    public AudioSource actionAudio;
+    public AudioClip[] barkSounds;
+    public AudioClip[] interactSounds;
+
     [Space(10)]
     [SerializeField]
     private LayerMask effectedAgents;
@@ -47,10 +52,6 @@ public class PlayerActions : MonoBehaviour
         {
             Debug.Log("over a inputField");
             PlayerController.Instance.PlayerActions.canBark = false;
-        }
-        else
-        {
-            PlayerController.Instance.PlayerActions.canBark = true;
         }
 
         ShootRay();
@@ -88,10 +89,14 @@ public class PlayerActions : MonoBehaviour
                 else if (agent.tag == "bird")
                 {
                     agent.GetComponent<BirdLogic>().scared = true;
+                    agent.GetComponentInChildren<AudioSource>().Play();
                     agent.GetComponent<BirdLogic>().scareAgent = gameObject;
                     MissionManager.Instance.BarkAtBird();
                 }
             }
+
+            BarkAudioAndCooldown();
+            PlayerController.Instance.PlayerGUI.BarkAnim();
         }
     }
 
@@ -140,6 +145,22 @@ public class PlayerActions : MonoBehaviour
         Vector3 direction = mousePosition - playerPosition;
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         boxPivot.transform.rotation = Quaternion.Euler(new Vector3(0, -angle, 0));
+    }
+
+    public IEnumerator BarkCooldown(float cooldown)
+    {
+        canBark = false;
+        yield return new WaitForSeconds(cooldown);
+        canBark = true;
+    }
+
+    public void BarkAudioAndCooldown()
+    {
+        AudioClip bark = barkSounds[Random.Range(0, barkSounds.Length)];
+        actionAudio.clip = bark;
+        actionAudio.Play();
+
+        StartCoroutine(BarkCooldown(bark.length));
     }
     #endregion
 
@@ -202,6 +223,7 @@ public class PlayerActions : MonoBehaviour
             {
                 if (!agent.GetComponent<FrogManager>().found) MissionManager.Instance.FrogFound();
                 agent.GetComponent<FrogManager>().found = true;
+                agent.GetComponentInChildren<AudioLogic>().RandomPlay();
             }
             else if (agent.tag == "farmer")
             {
@@ -210,6 +232,7 @@ public class PlayerActions : MonoBehaviour
                     MissionManager.Instance.FarmerInteract();
                     FarmerManager.Instance.interacted = true;
                 }
+                FarmerManager.Instance.PlayHmmSound();
             }
 
             if (GameManager.Instance.currentState == GameManager.Instance.TutorialState &&

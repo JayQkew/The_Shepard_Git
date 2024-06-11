@@ -40,6 +40,10 @@ public class FarmerManager : MonoBehaviour
     public Transform barnOut;
     #endregion
 
+    [Header("Audio")]
+    public AudioClip[] shearSounds;
+    public AudioClip[] hmmSounds;
+
     private void Awake()
     {
         Instance = this;
@@ -72,6 +76,12 @@ public class FarmerManager : MonoBehaviour
     public void SetFarmerTarget(Transform target)
     {
         farmerNavAgent.SetDestination(target.position);
+    }
+
+    public void PlayHmmSound()
+    {
+        farmer.GetComponent<AudioSource>().clip = hmmSounds[Random.Range(0, hmmSounds.Length)];
+        farmer.GetComponent<AudioSource>().Play();
     }
 
     private void OnDrawGizmos()

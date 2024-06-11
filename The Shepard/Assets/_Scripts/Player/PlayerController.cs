@@ -68,7 +68,6 @@ public class PlayerController : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             PlayerActions.Bark();
-            PlayerGUI.BarkAnim();
         }
         if (Input.GetMouseButtonDown(1)) PlayerActions.Interact();
 
